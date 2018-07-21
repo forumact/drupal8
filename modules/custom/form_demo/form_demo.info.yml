@@ -1,0 +1,8 @@
+name: Form Demo
+type: module
+description: Demonstrates how a module can handle Form API.
+package: Arulraj modules
+core: 8.x
+#configure: form_api_example.description
+dependencies:
+  - drupal:node

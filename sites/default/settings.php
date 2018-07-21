@@ -809,4 +809,4 @@ $config_directories['sync'] = 'sites/default/files/config_C2PMS3pp-uHzPlG3g6S3gb
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
    //include $app_root . '/' . $site_path . '/settings.local.php';
 }
-$config['system.logging']['error_level'] = 'verbose';
+$config['system.logging']['error_level'] = 'all';

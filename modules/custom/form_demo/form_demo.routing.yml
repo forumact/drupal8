@@ -1,0 +1,49 @@
+form_demo.first:
+  path: '/demo/form-demo/first'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\FormDemo'
+    _title: 'Common input elements'
+  requirements:
+    _permission: 'access content'
+form_demo.ajax_addmore:
+  path: '/demo/form-demo/ajax-add-more'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\AjaxAddMore'
+    _title: 'Add-more button'
+  requirements:
+    _permission: 'access content'
+form_demo.sample_form:
+  path: '/demo/form-demo/sample-form'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\SimpleForm'
+    _title: 'Sample Form'
+  requirements:
+    _permission: 'access content'
+form_demo.container_form:
+  path: '/demo/form-demo/container-form'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\ContainerDemo'
+    _title: 'Container Demo Form'
+  requirements:
+    _permission: 'access content'
+form_demo.state_form:
+  path: '/demo/form-demo/state-form'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\StateDemo'
+    _title: 'State Demo Form'
+  requirements:
+    _permission: 'access content'
+form_demo.multistep_form:
+  path: '/demo/form-demo/multistep-form'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\MultistepForm'
+    _title: 'State Demo Form'
+  requirements:
+    _permission: 'access content'
+form_demo.vertical_tabs_form:
+  path: '/demo/form-demo/vertical-tabs-form'
+  defaults:
+    _form:  '\Drupal\form_demo\Form\VerticalTabsDemo'
+    _title: 'State Demo Form'
+  requirements:
+    _permission: 'access content'
