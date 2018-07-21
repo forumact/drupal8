@@ -1,0 +1,45 @@
+id: custom_comment
+label: Custom Comment migration
+migration_group: custom
+source:
+  plugin: custom_comment
+destination:
+  plugin: entity:comment
+process:
+  pid:
+    plugin: migration_lookup
+    migration: custom_comment
+    source: cid_parent
+  entity_id:
+    plugin: migration_lookup
+    migration: custom_node
+    source: bid
+  entity_type:
+    plugin: default_value
+    default_value: node
+  field_name:
+    plugin: default_value
+    default_value: comment
+  comment_type:
+    plugin: default_value
+    default_value: comment
+  subject: subject
+  uid:
+    plugin: migration_lookup
+    migration: custom_user
+    source: aid
+  name: name
+  mail: mail
+  cid: cid
+  status:
+    plugin: default_value
+    default_value: 1
+  'comment_body/value': body
+migration_dependencies:
+  required:
+    - beer_node
+    - beer_user
+dependencies:
+  enforced:
+    module:
+      - migratedata

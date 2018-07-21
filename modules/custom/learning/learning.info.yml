@@ -1,0 +1,6 @@
+name: 'Learning'
+type: module
+description: 'I have started new module to learn drupal 8'
+core: 8.x
+package: 'Learning'
+version: VERSION

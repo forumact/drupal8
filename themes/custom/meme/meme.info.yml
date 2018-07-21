@@ -1,0 +1,19 @@
+name: meme
+type: theme
+description: 'My Awesome theme'
+package: meme
+core: 8.x
+libraries:
+  - meme/global-styling
+  - meme/meme
+  - meme/arulraj
+ 
+base theme: false
+
+regions:
+  content: Content
+  header: Header
+  sidebarfirst: SideBarFirst
+  sidebarsecond: SidebarSecond
+  footer: Footer
+  help: Help

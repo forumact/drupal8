@@ -1,0 +1,8 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function learning_uninstall()
+{
+    \Drupal::configFactory()->getEditable('learning.samplesettings')->delete();
+}

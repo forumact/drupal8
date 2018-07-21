@@ -1,0 +1,39 @@
+learning.first:
+  path: '/first'
+  defaults:
+    _controller: \Drupal\learning\Controller\LearningController::first_page
+    _title: 'Welcome Arulraj'
+  requirements:
+    _permission: 'view learning page'
+
+learning.sampleform:
+  path: '/sample-form'
+  defaults:
+    _form: \Drupal\learning\Form\SampleForm
+    _title: 'Sample Form'
+  requirements:
+    _permission: 'access content'
+
+learning.samplesettingform:
+  path: '/sample-setting-form'
+  defaults:
+    _form: \Drupal\learning\Form\SampleSettingForm
+    _title: 'Sample Setting Form'
+  requirements:
+    _permission: 'access content'
+
+learning.dynamic_data:
+  path: '/dynamic-data'
+  defaults:
+    _controller: \Drupal\learning\Controller\LearningController::dynamic_data
+    _title: 'Welcome to Dynamic Page'
+  requirements:
+    _permission: 'view learning page'
+
+learning.servicecall:
+  path: '/sample-service-call'
+  defaults:
+    _controller: \Drupal\learning\Controller\LearningController::service_call
+    _title: 'Sample Service Call'
+  requirements:
+    _permission: 'access content'

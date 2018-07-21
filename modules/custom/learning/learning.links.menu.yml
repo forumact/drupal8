@@ -1,0 +1,26 @@
+learning.demo:
+  title: 'Sample Form'
+  description: 'Sample Form Page'
+  parent: menu
+  menu_name: main
+  route_name: learning.sampleform
+
+learning.first:
+  title: 'First Page'
+  description: 'First Sample Page'
+  parent: menu
+  menu_name: main
+  route_name: learning.first
+
+learning.admin:
+  title: 'Sample Settings Form'
+  description: 'Sample Settings Form'
+  parent: system.admin_config_development
+  route_name: learning.samplesettingform
+
+learning.submenu:
+   title: 'Dynamic Page'
+   description: 'Sample Sub Menu'
+   parent: standard.front_page
+   menu_name: main
+   route_name: learning.dynamic_data

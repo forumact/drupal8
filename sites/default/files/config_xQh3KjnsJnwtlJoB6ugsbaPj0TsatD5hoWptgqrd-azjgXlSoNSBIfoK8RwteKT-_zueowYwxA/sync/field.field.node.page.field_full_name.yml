@@ -1,0 +1,21 @@
+uuid: 55b10670-278f-41fa-9ac5-5c881b932ad2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_full_name
+    - node.type.page
+  module:
+    - learning
+id: node.page.field_full_name
+field_name: field_full_name
+entity_type: node
+bundle: page
+label: 'Full Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: fullname

@@ -1,0 +1,19 @@
+uuid: f06ec50a-8629-4d4e-9ec6-f93b998eeec7
+langcode: en
+status: true
+dependencies:
+  module:
+    - learning
+    - node
+id: node.field_full_name
+field_name: field_full_name
+entity_type: node
+type: fullname
+settings: {  }
+module: learning
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

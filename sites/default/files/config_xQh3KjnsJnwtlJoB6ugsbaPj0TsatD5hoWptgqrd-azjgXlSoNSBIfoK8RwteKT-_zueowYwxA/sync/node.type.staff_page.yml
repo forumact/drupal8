@@ -1,0 +1,18 @@
+uuid: f5a569ff-1991-41fe-b149-70cf71bfcf51
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Staff Page'
+type: staff_page
+description: 'To check configuration management'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

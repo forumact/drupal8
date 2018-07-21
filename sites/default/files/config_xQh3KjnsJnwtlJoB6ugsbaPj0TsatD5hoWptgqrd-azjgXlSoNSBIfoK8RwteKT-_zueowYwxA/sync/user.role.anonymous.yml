@@ -1,0 +1,14 @@
+uuid: 714ef8f8-72ad-4788-957a-e4779a1e68aa
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'use text format filtered_html'
+  - 'view learning page'

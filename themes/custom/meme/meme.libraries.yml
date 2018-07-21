@@ -1,0 +1,21 @@
+global-styling:
+   version: 1.0
+   css:
+    theme:
+      #css/your_style_sheet.css : {}
+   js:
+     #js/your_js.js : {}
+meme:
+   version: 1.0
+   css:
+    theme:
+      #css/your_style_sheet.css : {}
+   js:
+     #js/your_js.js : {}
+arulraj:
+  version: 1.0
+  css:
+    theme:
+      #js/your_js.js : {}
+  js:
+      #js/your_js.js : {}

@@ -1,0 +1,38 @@
+id: custom_user
+label: Custom user migration
+migration_group: custom
+
+source:
+  plugin: custom_user
+destination:
+  plugin: entity:user
+
+process:
+  uid: aid
+  pass: password
+  mail: email
+  init: email
+  status: status
+  roles:
+    plugin: default_value
+    default_value: 2
+  name:
+    plugin: dedupe_entity
+    source: username
+    entity_type: user
+    field: name
+    postfix: _
+  created:
+    plugin: callback
+    source: registered
+    callable: strtotime
+  changed: '@created'
+  access: '@created'
+  login: '@created'
+
+migration_dependencies: {}
+
+dependencies:
+  enforced:
+    module:
+      - migratedata

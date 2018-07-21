@@ -1,0 +1,26 @@
+uuid: 41174a50-1d88-4183-a141-0a240b185f05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.staff_page.body
+    - node.type.staff_page
+  module:
+    - text
+    - user
+id: node.staff_page.default
+targetEntityType: node
+bundle: staff_page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

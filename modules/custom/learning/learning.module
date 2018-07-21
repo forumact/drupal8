@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Contains learning.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Block\BlockPluginInterface;
+
+/**
+ * Implements hook_help().
+ */
+function learning_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the learning module.
+    case 'help.page.learning':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('I have started new module to learn drupal 8') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function learning_theme() {
+  return [
+    'learning' => [
+      'render element' => 'children',
+      'variables' => ['test_var' => NULL],
+    ],
+  ];
+}
+
+
+function learning_block_alter(&$definitions) {
+  $definitions['custom_block']['admin_label'] = t('Custom Block Updates');
+}
+
+/**
+ * Implements hook_block_build_alter().
+ */
+function learning_block_build_alter(array &$build, BlockPluginInterface $block) {
+
+  if ($block->getBaseId() == 'custom_block') {
+    $build['#cache']['contexts'][] = 'user';
+  }
+}
+
+/**
+ * Implements hook_block_build_BASE_BLOCK_ID_alter().
+ */
+function learning_block_build_custom_block_alter(array &$build, BlockPluginInterface $block) {
+  drupal_set_message($block->getPluginId());
+}
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function learning_block_view_alter(array &$build, BlockPluginInterface $block) {
+  if (isset($build['#contextual_links'])) {
+    //unset($build['#contextual_links']); if we enabled it will remove the Edit links
+  }
+}
+
+/**
+ * Implements hook_block_access().
+ */
+function learning_block_access(\Drupal\block\Entity\Block $block, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  if ($block->getPluginId() == 'learning_config_block') {
+    //return \Drupal\Core\Access\AccessResult::forbidden();
+  }
+
+}
