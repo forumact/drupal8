@@ -1,7 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a15c734-9b9c-40d2-95a3-28650cfa3d27" name="Default" comment="" />
+    <list default="true" id="3a15c734-9b9c-40d2-95a3-28650cfa3d27" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--local-tasks-block._HdzB3j_54KRXCC6CDQPwRGNSa/hzcXe4CEsSjqjv5sPjIqB1CvzzprJjGWrg0sP-poNKU.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--search-form-block._MtlvBgirhCAKYLDAmI6oAbvZ6/6kSn9U1GQce-A53ipJaclkpkKExquB5kjpqYDmTi48s.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--search-form-block._T_iBAX8LjcVzod_nDjFbozRcl/lpuH4J_Rx4rFIp2oIQ7hjfWAxEZ4Wv0TBUqgxsPa36w.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--system-branding-bl_mc4GrpEV4moZ5GClHtIT5wRrJ/k9iOcnFcmd0BLUs_ojIsZAr3TBbSULkpogPtUkGFbLI.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--system-menu-block._AW58AjQwJbqumnm8T4Izl85kz/oH_uN8VQGiGA7jZZgaMUA8Q6NZ6mVy7QqDS4zfAhYIU.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--system-menu-block._Dw9LdT8USM9vLCZPmnG7tEIBz/PB3LdvnDqhCuYrHh32wmI-XO1LeVD6NPiIb4w8ZJX8s.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block--system-messages-bl_daLFAcAdSpYr16f5L5sXutqOw/qA0JYC10s3bm3mR2Y68Lw2KO_1jK8vzk-RP4_i8Zp9o.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block.html.twig_-Y9lQeLcUj9C-USM59Nr5K0ol/IIe5WoNjranFw7hEVfNTP4gGiR-_JcuxtkxzxF0Pppc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block.html.twig_NJ8S4QqIhiqAiD3IV7bDf1Kr1/Dl8xcI1gKyh1qs3odNI-aNNUOxfeN9oAZgujGz4NSgU.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block.html.twig_SPyKCXAOAP3fcdrOgkAHxAZj_/DZieaxZjCm78vrgOIie6nVpuI4QlBp_3pB1xvxz39_c.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_block.html.twig_dLX_DS9yC5raDwT5JZ8KQaOpV/wCq9ArAdqon9RFPv5nksS9bkporPbqYLG545NaX3W3s.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_breadcrumb.html.twig_bpT9qXxQz_4B9K3QemSggcJmT/3FYlxLTHs-ui_dBJnC0miaSXhV6VXJY4pr76d4xoDZI.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_checkboxes.html.twig_AHSgvBLrFE1jY3i74nNf5JfpT/EbcjWB3hPCiS5G7lQpHWe-7ddFnCQ9XoIGOqIsQVuOM.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_container.html.twig_rfHnd6nh4j6DURSSJWeHq0DMj/qVasbXqSd2FbbfBynnNjjpIMk2EWIsQ2kAR29PfjtW0.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_details.html.twig_qk59SvjVh1OLtB68-pRRd7aav/uz9G7q5_BcOPL7aES7Jfk_bdHFkzv42Q8hi9HPILlq4.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_dropbutton-wrapper.html.t_3FqPs_TnF36HgGeFr4JSNcLyn/yr6aX01oyWk2uKg2eQpO9l28o53ClOxSFO4uxfGoO7M.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_fieldset.html.twig_AvqxzIZj8YNmuwbej5Gf0qZtT/PLZ860QOB6SWqOUc0tdl3FQa1DiPd0g86mZZyiRVrjw.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_form--search-block-form.h_TU7cE3v11LATPcsguVEAfl30X/vh4c5RoU3dkaz8KHulhtDqr6j4hZ9aRisQNJLd-IJfk.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_form-element-label.html.t_vLWSBbP1-XxgiB-qpDML0FKQJ/vfBkXV9oRXbMoudG67bDhjjZj8hTcGCOQe2r_TWQ3iU.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_form-element.html.twig_O6NoU0EoFmDoj37tBbSjbrzAd/Bj5EtInPoV3YAI_csYZm78HFKs1oy07y4Gz4T6rbbYI.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_form.html.twig__9ONbSgL_92LWBHfEVHJ3Wg-r/gPELY5XKZJbngVcrIYJ-90CyKiEKcjIr4RgYQPY8mA0.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_html.html.twig_TcTIri8hSgVVCDHkn8loJzo9g/66qDA1i3AqcCrWafg8NYzodCHGTof0IEWo8yZUc0A7E.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_inline-template_ZhAG0kBUKpAs-46iHY1aVRqZS/E5CVNK7NmltYHgPH7EKKYV4GaLsBXSxG4AN_NGPcT6o.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_input.html.twig_TJmn2HijHq6df7GKtNmqpfmlx/8ab70foqO_WZNiCp2WhO3hdtxuc4gq7SM4-Ag2Rw8FY.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_links.html.twig_Y7DcQWYMt5GReuPPJ1NT-Td1K/8jkYRp7DNT-WX55mQHMy8SuBIlZ0foQBEsbUwn8UFw0.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu--toolbar.html.twig_BdXXQv3E4oQsu6xdPmLk6W33q/ZdyD7aNNoOjc-UsR1meLj9EHTGiw8lGHHmjXHs6Pyso.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu-local-action.html.tw_2HXwX-AgX36w5CNmRrdCnnckV/VdEgRal6VTcHmpYn65qGUZGVvMhznDmQpnTD5lqACuQ.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu-local-task.html.twig_Ccb-WV4d8OlqQdNTnrY6ZrCNW/kt6d3WxuhG6TksK3Hfgpql8ZFUzdPvFJtACWK68MtsA.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu-local-tasks.html.twi_3xMsfbobaFThyvR4-5_xxyx4t/ojfYUDCuRoKgq15j5qVlgpFcDpAa5Y3Zt1O_7k5T11g.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu-local-tasks.html.twi_kckCnulnkLm4VEgr-fnqngZXG/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu-local-tasks.html.twi_kckCnulnkLm4VEgr-fnqngZXG/belT7kdWtMjwycRXyAn_EySgjoRNsrZtXr1EZAEpEWY.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_menu.html.twig_7gHdUG0dSGMDi2-jC5-_hcxa3/ZKnDhomcwKNTPgZBA338XvCVhxLeCBMBrnvgQEHV9AU.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_off-canvas-page-wrapper.h_6TsWv58wDFX-5vCJpKADMcCS-/Un-mE1d0g2c_Uls66ZVcLI8ebGcdFCt3tjF7KX-iVtk.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_page-title.html.twig_Bge8UrkreLB-XNBWLglYKdiaB/gCSBub55EjAk9dCWEMpZttxzYJd6bSXCVP1hG-yWgSA.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_page-title.html.twig_nOX2MziVNqMSxF7ZhwsZXUmni/JqxnYqwMq7z23nDPoUFggf-6WBG3Mpuk05KdXmyfwNw.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_page.html.twig_5hMjB19CwTb0nWUt_WbG4tYqu/QNF9qXdXVT22My9nhit3OmWai43JJQXiHxdIiXdyNYs.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_page.html.twig_UafSlBI4lVL3MHVxPzWfkpZVN/_u2p4aBGUE7KobM0zaWtxbUCeJagFBFAOikDraT426o.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_radios.html.twig_HiAGwBq2a99M166aNZzNJNp7f/0mxl8eiYMB12IFeA1F5K_2DsPUS2ToF-KZXObpv_CXo.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_region--header.html.twig_cBeD_LT2JxK9J4ecIEh3DPxEv/2NK_NwdoGQEpGSiGnOt7xhf4AeZlWH_w08suzE2dXqA.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_region.html.twig_MR3fMmw95qbpuDFvbyuI9QHlG/ZPp9fTsaNcBVseKPC2hjK5sN-YYGgrR4r5S-3-lCc9M.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_region.html.twig_thpT6ZawWH98HPnWXVwj4opVl/KoOtvbUUhW00abGcwGwj7JeA9tDtxvTqITBrdhLcoEw.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_select.html.twig_nzxoPZ9BAboCpITxa-GDl-nWi/vNdG1_CVTA63pfX5ZYQ8W34ddqzQA9myIA3M9fnvRQw.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_status-messages.html.twig_SNKvWeJgBvkgY7WatdoplFk0-/7Am2dC8Tn7udrGY8eDacqufuBujpKVpwKkX_pYvvY-0.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_table.html.twig_MLgNHrxNUNqyurS253e4ubj4X/gdBA-XOUJzgMUB-pZ-jGt-nrUkBXagS-chHU9FxD9TA.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_textarea.html.twig_6TlljzWtIylUQzZgauhyNpS1H/99MaGr7BGfYJ5LIm5NfAnIuwnfk8TvE6PJdSs-IgSd8.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_toolbar.html.twig_QEecfLCN-qHxLbkjFkEtbaph_/u6XodZLa9gXbL7LmVijSdXiIUgjV8nNVB_cD6dMyTS0.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_user.html.twig_OTUpg2kb_fL0XMWZUTS7SGHXX/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_user.html.twig_OTUpg2kb_fL0XMWZUTS7SGHXX/oM78qcXO-MxctrDYsvKTMoNv_XjJjiVIlvejfMHp1xQ.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/default/files/php/twig/5b42d5b968898_vertical-tabs.html.twig_D-IZgCGlhkzfX6RXxhyzZfNZM/Ac1sNZbRu00T5tzPqd42GA5NxCCJui-D2CvNyjhUSYw.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/behat/mink" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/behat/mink" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/drupal/coder" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/drupal/coder" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,87 +70,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LearningBlock.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Plugin/Block/LearningBlock.php">
+      <file leaf-file-name="block_demo.module" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/block_demo.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+            <state relative-caret-position="180">
+              <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LearningConfigBlock.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Plugin/Block/LearningConfigBlock.php">
+      <file leaf-file-name="block_demo.info.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/block_demo.info.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SampleForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Form/SampleForm.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NodeInsertSubscriber.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/EventSubscriber/NodeInsertSubscriber.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="migrate_plus.migration.custom_comment.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/config/install/migrate_plus.migration.custom_comment.yml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="Node.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/src/Plugin/migrate/source/Node.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="26" column="20" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="20" />
-              <folding>
-                <element signature="e#60#106#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="migrate_plus.migration.custom_node.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/config/install/migrate_plus.migration.custom_node.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Comment.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/src/Plugin/migrate/source/Comment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SqlBase.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/modules/migrate/src/Plugin/migrate/source/SqlBase.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5893">
-              <caret line="62" column="15" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NodeInsertEvent.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Event/NodeInsertEvent.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="16" column="26" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="26" />
+            <state>
+              <caret column="16" selection-start-column="16" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -116,7 +102,11 @@
     <findStrings>
       <find>scheckboxes</find>
       <find>template_preprocess</find>
+      <find>learning</find>
     </findStrings>
+    <replaceStrings>
+      <replace>block_demo</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -155,6 +145,12 @@
         <option value="$PROJECT_DIR$/modules/custom/learning/learning.links.menu.yml" />
         <option value="$PROJECT_DIR$/modules/custom/learning/src/Controller/LearningController.php" />
         <option value="$PROJECT_DIR$/modules/custom/learning/learning.module" />
+        <option value="$PROJECT_DIR$/modules/custom/block_example/block_example.info.yml" />
+        <option value="$PROJECT_DIR$/modules/custom/block_demo/block_demo.info.yml" />
+        <option value="$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/ConfigBlockDemo.php" />
+        <option value="$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/CustomBlockDemo.php" />
+        <option value="$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/ConfigBlockDemoTwo.php" />
+        <option value="$PROJECT_DIR$/modules/custom/block_demo/block_demo.module" />
       </list>
     </option>
   </component>
@@ -288,6 +284,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -311,31 +308,14 @@
               <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
+              <item name="block_demo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="drupal-8.5.1" type="b2602c69:ProjectViewProjectNode" />
               <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="drupal-8.5.1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="install" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="drupal-8.5.1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
+              <item name="block_demo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -343,7 +323,7 @@
               <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
+              <item name="block_demo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Plugin" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -352,27 +332,15 @@
               <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
+              <item name="block_demo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="migrate" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="drupal-8.5.1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="drupal-8.5.1" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="migratedata" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="migrate" type="462c0819:PsiDirectoryNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="Block" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -420,17 +388,18 @@
       <workItem from="1531973583401" duration="342000" />
       <workItem from="1531975058585" duration="259000" />
       <workItem from="1531975392487" duration="51000" />
+      <workItem from="1532172850053" duration="4214000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86889000" />
+    <option name="totallyTimeSpent" value="91103000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2484375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2484375" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32934132" />
@@ -463,49 +432,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/custom/demo_config/src/Form/AdvanceSettingsForm.php" />
-    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Form/SampleSettingForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/lib/Drupal/Core/Session/UserSession.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="171" column="9" selection-start-line="171" selection-start-column="4" selection-end-line="171" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/user/config/install/user.settings.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="13" selection-start-line="12" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/user/config/install/user.mail.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/user/user.libraries.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/user/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2120" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/user/src/UserAuth.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/user/src/UserData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/modules/user/user.services.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -641,13 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/learning/learning.info.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Routing/RouteSubscriber.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -700,27 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Plugin/Block/LearningBlock.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Plugin/Block/LearningConfigBlock.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Form/SampleForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Event/NodeInsertEvent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -728,11 +626,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/EventSubscriber/NodeInsertSubscriber.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/config/install/migrate_plus.migration.custom_comment.yml">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/config/install/migrate_plus.migration.custom_node.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/src/Plugin/migrate/source/Node.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -744,13 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/config/install/migrate_plus.migration.custom_node.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/src/Plugin/migrate/source/Comment.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -758,10 +650,99 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/migratedata/config/install/migrate_plus.migration.custom_comment.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/EventSubscriber/NodeInsertSubscriber.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/modules/migrate/src/Plugin/migrate/source/SqlBase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5893">
+        <state relative-caret-position="17">
           <caret line="62" column="15" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Form/SampleForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Plugin/Block/LearningConfigBlock.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_example/block_example.info.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/CustomBlock.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/LearningBlock.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/LearningConfigBlock.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/learning/learning.info.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="8" selection-start-column="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/learning/src/Plugin/Block/LearningBlock.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/ConfigBlockDemoTwo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/block_demo.info.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/ConfigBlockDemo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/src/Plugin/Block/CustomBlockDemo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/custom/block_demo/block_demo.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
         </state>
       </provider>
     </entry>

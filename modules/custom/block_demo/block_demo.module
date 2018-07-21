@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Contains learning.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Block\BlockPluginInterface;
+
+/**
+ * Implements hook_help().
+ */
+function block_demo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the learning module.
+    case 'help.page.block_demo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This is a demo modue how can we customize drupal Block') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+function learning_block_alter(&$definitions) {
+  $definitions['custom_block']['admin_label'] = t('Custom Block Updates');
+}
+
+/**
+ * Implements hook_block_build_alter().
+ */
+function block_demo_block_build_alter(array &$build, BlockPluginInterface $block) {
+  //drupal_set_message($block->getPluginId());
+  if ($block->getBaseId() == 'custom_block_demo') {
+    $build['#cache']['contexts'][] = 'user';
+  }
+}
+
+/**
+ * Implements hook_block_build_BASE_BLOCK_ID_alter().
+ */
+function block_demo_block_build_custom_block_demo_alter(array &$build, BlockPluginInterface $block) {
+  drupal_set_message($block->getPluginId());
+}
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function block_demo_block_view_alter(array &$build, BlockPluginInterface $block) {
+  if (isset($build['#contextual_links'])) {
+    //unset($build['#contextual_links']); if we enabled it will remove the Edit links
+  }
+}
+
+/**
+ * Implements hook_block_access().
+ */
+function block_demo_block_access(\Drupal\block\Entity\Block $block, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  if ($block->getPluginId() == 'config_block_demo_two') {
+    //return \Drupal\Core\Access\AccessResult::forbidden();
+  }
+
+}

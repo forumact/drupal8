@@ -1,0 +1,8 @@
+name: Block Demo
+type: module
+description: Demonstrates how a module can define custom blocks.
+package: Arulraj modules
+core: 8.x
+dependencies:
+  - drupal:block
+  - drupal:node
