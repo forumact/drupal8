@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,37 +32,36 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
  * Limitations:
  *
  * 1. All persistent objects have to be associated with a single ObjectManager, multiple
- * ObjectManagers are not supported. You can set the ObjectManager with `PersistentObject#setObjectManager()`.
+ *    ObjectManagers are not supported. You can set the ObjectManager with `PersistentObject#setObjectManager()`.
  * 2. Setters and getters only work if a ClassMetadata instance was injected into the PersistentObject.
- * This is either done on `postLoad` of an object or by accessing the global object manager.
+ *    This is either done on `postLoad` of an object or by accessing the global object manager.
  * 3. There are no hooks for setters/getters. Just implement the method yourself instead of relying on __call().
  * 4. Slower than handcoded implementations: An average of 7 method calls per access to a field and 11 for an association.
  * 5. Only the inverse side associations get autoset on the owning side as well. Setting objects on the owning side
- * will not set the inverse side associations.
+ *    will not set the inverse side associations.
  *
- * @example PersistentObject::setObjectManager($em);
- *         
- *          class Foo extends PersistentObject
- *          {
- *          private $id;
- *          }
- *         
- *          $foo = new Foo();
- *          $foo->getId(); // method exists through __call
- *         
+ * @example
+ *
+ *  PersistentObject::setObjectManager($em);
+ *
+ *  class Foo extends PersistentObject
+ *  {
+ *      private $id;
+ *  }
+ *
+ *  $foo = new Foo();
+ *  $foo->getId(); // method exists through __call
+ *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 abstract class PersistentObject implements ObjectManagerAware
 {
-
     /**
-     *
      * @var ObjectManager|null
      */
     private static $objectManager = null;
 
     /**
-     *
      * @var ClassMetadata|null
      */
     private $cm = null;
@@ -79,7 +79,6 @@ abstract class PersistentObject implements ObjectManagerAware
     }
 
     /**
-     *
      * @return ObjectManager|null
      */
     static public function getObjectManager()
@@ -100,9 +99,10 @@ abstract class PersistentObject implements ObjectManagerAware
     public function injectObjectManager(ObjectManager $objectManager, ClassMetadata $classMetadata)
     {
         if ($objectManager !== self::$objectManager) {
-            throw new \RuntimeException("Trying to use PersistentObject with different ObjectManager instances. " . "Was PersistentObject::setObjectManager() called?");
+            throw new \RuntimeException("Trying to use PersistentObject with different ObjectManager instances. " .
+                "Was PersistentObject::setObjectManager() called?");
         }
-        
+
         $this->cm = $classMetadata;
     }
 
@@ -110,28 +110,28 @@ abstract class PersistentObject implements ObjectManagerAware
      * Sets a persistent fields value.
      *
      * @param string $field
-     * @param array $args
+     * @param array  $args
      *
      * @return void
      *
-     * @throws \BadMethodCallException When no persistent field exists by that name.
+     * @throws \BadMethodCallException   When no persistent field exists by that name.
      * @throws \InvalidArgumentException When the wrong target object type is passed to an association.
      */
     private function set($field, $args)
     {
         $this->initializeDoctrine();
-        
-        if ($this->cm->hasField($field) && ! $this->cm->isIdentifier($field)) {
+
+        if ($this->cm->hasField($field) && !$this->cm->isIdentifier($field)) {
             $this->$field = $args[0];
         } else if ($this->cm->hasAssociation($field) && $this->cm->isSingleValuedAssociation($field)) {
             $targetClass = $this->cm->getAssociationTargetClass($field);
-            if (! ($args[0] instanceof $targetClass) && $args[0] !== null) {
-                throw new \InvalidArgumentException("Expected persistent object of type '" . $targetClass . "'");
+            if (!($args[0] instanceof $targetClass) && $args[0] !== null) {
+                throw new \InvalidArgumentException("Expected persistent object of type '".$targetClass."'");
             }
             $this->$field = $args[0];
             $this->completeOwningSide($field, $targetClass, $args[0]);
         } else {
-            throw new \BadMethodCallException("no field with name '" . $field . "' exists on '" . $this->cm->getName() . "'");
+            throw new \BadMethodCallException("no field with name '".$field."' exists on '".$this->cm->getName()."'");
         }
     }
 
@@ -147,20 +147,20 @@ abstract class PersistentObject implements ObjectManagerAware
     private function get($field)
     {
         $this->initializeDoctrine();
-        
-        if ($this->cm->hasField($field) || $this->cm->hasAssociation($field)) {
+
+        if ( $this->cm->hasField($field) || $this->cm->hasAssociation($field) ) {
             return $this->$field;
         } else {
-            throw new \BadMethodCallException("no field with name '" . $field . "' exists on '" . $this->cm->getName() . "'");
+            throw new \BadMethodCallException("no field with name '".$field."' exists on '".$this->cm->getName()."'");
         }
     }
 
     /**
      * If this is an inverse side association, completes the owning side.
      *
-     * @param string $field
+     * @param string        $field
      * @param ClassMetadata $targetClass
-     * @param object $targetObject
+     * @param object        $targetObject
      *
      * @return void
      */
@@ -171,8 +171,8 @@ abstract class PersistentObject implements ObjectManagerAware
         if ($this->cm->isAssociationInverseSide($field)) {
             $mappedByField = $this->cm->getAssociationMappedByTargetField($field);
             $targetMetadata = self::$objectManager->getClassMetadata($targetClass);
-            
-            $setter = ($targetMetadata->isCollectionValuedAssociation($mappedByField) ? "add" : "set") . $mappedByField;
+
+            $setter = ($targetMetadata->isCollectionValuedAssociation($mappedByField) ? "add" : "set").$mappedByField;
             $targetObject->$setter($this);
         }
     }
@@ -181,7 +181,7 @@ abstract class PersistentObject implements ObjectManagerAware
      * Adds an object to a collection.
      *
      * @param string $field
-     * @param array $args
+     * @param array  $args
      *
      * @return void
      *
@@ -191,19 +191,19 @@ abstract class PersistentObject implements ObjectManagerAware
     private function add($field, $args)
     {
         $this->initializeDoctrine();
-        
+
         if ($this->cm->hasAssociation($field) && $this->cm->isCollectionValuedAssociation($field)) {
             $targetClass = $this->cm->getAssociationTargetClass($field);
-            if (! ($args[0] instanceof $targetClass)) {
-                throw new \InvalidArgumentException("Expected persistent object of type '" . $targetClass . "'");
+            if (!($args[0] instanceof $targetClass)) {
+                throw new \InvalidArgumentException("Expected persistent object of type '".$targetClass."'");
             }
-            if (! ($this->$field instanceof Collection)) {
+            if (!($this->$field instanceof Collection)) {
                 $this->$field = new ArrayCollection($this->$field ?: []);
             }
             $this->$field->add($args[0]);
             $this->completeOwningSide($field, $targetClass, $args[0]);
         } else {
-            throw new \BadMethodCallException("There is no method add" . $field . "() on " . $this->cm->getName());
+            throw new \BadMethodCallException("There is no method add".$field."() on ".$this->cm->getName());
         }
     }
 
@@ -219,11 +219,11 @@ abstract class PersistentObject implements ObjectManagerAware
         if ($this->cm !== null) {
             return;
         }
-        
-        if (! self::$objectManager) {
+
+        if (!self::$objectManager) {
             throw new \RuntimeException("No runtime object manager set. Call PersistentObject#setObjectManager().");
         }
-        
+
         $this->cm = self::$objectManager->getClassMetadata(get_class($this));
     }
 
@@ -231,7 +231,7 @@ abstract class PersistentObject implements ObjectManagerAware
      * Magic methods.
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      *
      * @return mixed
      *
@@ -248,7 +248,7 @@ abstract class PersistentObject implements ObjectManagerAware
         } else if ($command == "add") {
             $this->add($field, $args);
         } else {
-            throw new \BadMethodCallException("There is no method " . $method . " on " . $this->cm->getName());
+            throw new \BadMethodCallException("There is no method ".$method." on ".$this->cm->getName());
         }
     }
 }

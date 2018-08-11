@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
 namespace Composer\Semver\Constraint;
 
 /**
@@ -15,7 +16,6 @@ namespace Composer\Semver\Constraint;
  */
 class MultiConstraint implements ConstraintInterface
 {
-
     /** @var ConstraintInterface[] */
     protected $constraints;
 
@@ -26,11 +26,8 @@ class MultiConstraint implements ConstraintInterface
     protected $conjunctive;
 
     /**
-     *
-     * @param ConstraintInterface[] $constraints
-     *            A set of constraints
-     * @param bool $conjunctive
-     *            Whether the constraints should be treated as conjunctive or disjunctive
+     * @param ConstraintInterface[] $constraints A set of constraints
+     * @param bool $conjunctive Whether the constraints should be treated as conjunctive or disjunctive
      */
     public function __construct(array $constraints, $conjunctive = true)
     {
@@ -39,7 +36,6 @@ class MultiConstraint implements ConstraintInterface
     }
 
     /**
-     *
      * @return ConstraintInterface[]
      */
     public function getConstraints()
@@ -48,7 +44,6 @@ class MultiConstraint implements ConstraintInterface
     }
 
     /**
-     *
      * @return bool
      */
     public function isConjunctive()
@@ -57,16 +52,14 @@ class MultiConstraint implements ConstraintInterface
     }
 
     /**
-     *
      * @return bool
      */
     public function isDisjunctive()
     {
-        return ! $this->conjunctive;
+        return !$this->conjunctive;
     }
 
     /**
-     *
      * @param ConstraintInterface $provider
      *
      * @return bool
@@ -79,21 +72,20 @@ class MultiConstraint implements ConstraintInterface
                     return true;
                 }
             }
-            
+
             return false;
         }
-        
+
         foreach ($this->constraints as $constraint) {
-            if (! $constraint->matches($provider)) {
+            if (!$constraint->matches($provider)) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
     /**
-     *
      * @param string $prettyString
      */
     public function setPrettyString($prettyString)
@@ -102,7 +94,6 @@ class MultiConstraint implements ConstraintInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getPrettyString()
@@ -110,12 +101,11 @@ class MultiConstraint implements ConstraintInterface
         if ($this->prettyString) {
             return $this->prettyString;
         }
-        
+
         return $this->__toString();
     }
 
     /**
-     *
      * @return string
      */
     public function __toString()
@@ -124,7 +114,7 @@ class MultiConstraint implements ConstraintInterface
         foreach ($this->constraints as $constraint) {
             $constraints[] = (string) $constraint;
         }
-        
+
         return '[' . implode($this->conjunctive ? ' ' : ' || ', $constraints) . ']';
     }
 }

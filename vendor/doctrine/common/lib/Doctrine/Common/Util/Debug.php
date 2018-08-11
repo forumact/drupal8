@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Util;
 
 use Doctrine\Common\Collections\Collection;
@@ -24,8 +25,8 @@ use Doctrine\Common\Persistence\Proxy;
 /**
  * Static class containing most used debug methods.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
  * @author Roman Borschel <roman@code-factory.org>
@@ -33,52 +34,48 @@ use Doctrine\Common\Persistence\Proxy;
  */
 final class Debug
 {
-
     /**
      * Private constructor (prevents instantiation).
      */
     private function __construct()
-    {}
+    {
+    }
 
     /**
      * Prints a dump of the public, protected and private properties of $var.
      *
      * @link http://xdebug.org/
-     *      
-     * @param mixed $var
-     *            The variable to dump.
-     * @param integer $maxDepth
-     *            The maximum nesting level for object properties.
-     * @param boolean $stripTags
-     *            Whether output should strip HTML tags.
-     * @param boolean $echo
-     *            Send the dumped value to the output buffer
-     *            
+     *
+     * @param mixed   $var       The variable to dump.
+     * @param integer $maxDepth  The maximum nesting level for object properties.
+     * @param boolean $stripTags Whether output should strip HTML tags.
+     * @param boolean $echo      Send the dumped value to the output buffer
+     *
      * @return string
      */
     public static function dump($var, $maxDepth = 2, $stripTags = true, $echo = true)
     {
         $html = ini_get('html_errors');
-        
+
         if ($html !== true) {
             ini_set('html_errors', true);
         }
-        
+
         if (extension_loaded('xdebug')) {
             ini_set('xdebug.var_display_max_depth', $maxDepth);
         }
-        
-        $var = self::export($var, $maxDepth ++);
-        
+
+        $var = self::export($var, $maxDepth++);
+
         ob_start();
         var_dump($var);
-        
+
         $dump = ob_get_contents();
-        
+
         ob_end_clean();
-        
+
         $dumpText = ($stripTags ? strip_tags(html_entity_decode($dump)) : $dump);
-        
+
         ini_set('html_errors', $html);
         
         if ($echo) {
@@ -89,9 +86,8 @@ final class Debug
     }
 
     /**
-     *
      * @param mixed $var
-     * @param int $maxDepth
+     * @param int   $maxDepth
      *
      * @return mixed
      */
@@ -99,15 +95,15 @@ final class Debug
     {
         $return = null;
         $isObj = is_object($var);
-        
+
         if ($var instanceof Collection) {
             $var = $var->toArray();
         }
-        
+
         if ($maxDepth) {
             if (is_array($var)) {
                 $return = [];
-                
+
                 foreach ($var as $k => $v) {
                     $return[$k] = self::export($v, $maxDepth - 1);
                 }
@@ -120,19 +116,19 @@ final class Debug
                 } else {
                     $reflClass = ClassUtils::newReflectionObject($var);
                     $return->__CLASS__ = ClassUtils::getClass($var);
-                    
+
                     if ($var instanceof Proxy) {
                         $return->__IS_PROXY__ = true;
                         $return->__PROXY_INITIALIZED__ = $var->__isInitialized();
                     }
-                    
+
                     if ($var instanceof \ArrayObject || $var instanceof \ArrayIterator) {
                         $return->__STORAGE__ = self::export($var->getArrayCopy(), $maxDepth - 1);
                     }
-                    
+
                     foreach ($reflClass->getProperties() as $reflProperty) {
-                        $name = $reflProperty->getName();
-                        
+                        $name  = $reflProperty->getName();
+
                         $reflProperty->setAccessible(true);
                         $return->$name = self::export($reflProperty->getValue($var), $maxDepth - 1);
                     }
@@ -141,9 +137,10 @@ final class Debug
                 $return = $var;
             }
         } else {
-            $return = is_object($var) ? get_class($var) : (is_array($var) ? 'Array(' . count($var) . ')' : $var);
+            $return = is_object($var) ? get_class($var)
+                : (is_array($var) ? 'Array(' . count($var) . ')' : $var);
         }
-        
+
         return $return;
     }
 

@@ -16,25 +16,24 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
  * Interface for cache drivers that allows to get many items at once.
  *
- * @link www.doctrine-project.org
- * @since 1.4
+ * @link   www.doctrine-project.org
+ * @since  1.4
  * @author Asmir Mustafic <goetas@gmail.com>
  */
 interface MultiGetCache
 {
-
     /**
      * Returns an associative array of values for keys is found in cache.
      *
-     * @param string[] $keys
-     *            Array of keys to retrieve from cache
+     * @param string[] $keys Array of keys to retrieve from cache
      * @return mixed[] Array of retrieved values, indexed by the specified keys.
-     *         Values that couldn't be retrieved are not contained in this array.
+     *                 Values that couldn't be retrieved are not contained in this array.
      */
     function fetchMultiple(array $keys);
 }

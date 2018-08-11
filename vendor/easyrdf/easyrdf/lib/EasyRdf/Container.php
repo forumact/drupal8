@@ -41,18 +41,16 @@
  *
  * This class can be used to iterate through a list of items.
  *
- * @package EasyRdf
- * @link http://www.w3.org/TR/xmlschema-2/#date
- * @copyright Copyright (c) 2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @link       http://www.w3.org/TR/xmlschema-2/#date
+ * @copyright  Copyright (c) 2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Container extends EasyRdf_Resource implements ArrayAccess, Countable, SeekableIterator
 {
-
     private $position;
 
-    /**
-     * Create a new container - do not use this directly
+    /** Create a new container - do not use this directly
      *
      * @ignore
      */
@@ -62,48 +60,48 @@ class EasyRdf_Container extends EasyRdf_Resource implements ArrayAccess, Countab
         parent::__construct($uri, $graph);
     }
 
-    /**
-     * Seek to a specific position in the container
+    /** Seek to a specific position in the container
      *
      * The first item is postion 1
      *
-     * @param integer $position
-     *            The position in the container to seek to
+     * @param  integer  $position     The position in the container to seek to
      * @throws OutOfBoundsException
      */
     public function seek($position)
     {
         if (is_int($position) and $position > 0) {
-            if ($this->hasProperty('rdf:_' . $position)) {
+            if ($this->hasProperty('rdf:_'.$position)) {
                 $this->position = $position;
             } else {
-                throw new OutOfBoundsException("Unable to seek to position $position in the container");
+                throw new OutOfBoundsException(
+                    "Unable to seek to position $position in the container"
+                );
             }
         } else {
-            throw new InvalidArgumentException("Container position must be a positive integer");
+            throw new InvalidArgumentException(
+                "Container position must be a positive integer"
+            );
         }
     }
 
-    /**
-     * Rewind the iterator back to the start of the container (item 1)
+    /** Rewind the iterator back to the start of the container (item 1)
+     *
      */
     public function rewind()
     {
         $this->position = 1;
     }
 
-    /**
-     * Return the current item in the container
+    /** Return the current item in the container
      *
      * @return mixed The current item
      */
     public function current()
     {
-        return $this->get('rdf:_' . $this->position);
+        return $this->get('rdf:_'.$this->position);
     }
 
-    /**
-     * Return the key / current position in the container
+    /** Return the key / current position in the container
      *
      * @return int The current position
      */
@@ -112,26 +110,24 @@ class EasyRdf_Container extends EasyRdf_Resource implements ArrayAccess, Countab
         return $this->position;
     }
 
-    /**
-     * Move forward to next item in the container
+    /** Move forward to next item in the container
+     *
      */
     public function next()
     {
-        $this->position ++;
+        $this->position++;
     }
 
-    /**
-     * Checks if current position is valid
+    /** Checks if current position is valid
      *
      * @return bool True if the current position is valid
      */
     public function valid()
     {
-        return $this->hasProperty('rdf:_' . $this->position);
+        return $this->hasProperty('rdf:_'.$this->position);
     }
 
-    /**
-     * Counts the number of items in the container
+    /** Counts the number of items in the container
      *
      * Note that this is an slow method - it is more efficient to use
      * the iterator interface, if you can.
@@ -141,56 +137,56 @@ class EasyRdf_Container extends EasyRdf_Resource implements ArrayAccess, Countab
     public function count()
     {
         $pos = 1;
-        while ($this->hasProperty('rdf:_' . $pos)) {
-            $pos ++;
+        while ($this->hasProperty('rdf:_'.$pos)) {
+            $pos++;
         }
         return $pos - 1;
     }
 
-    /**
-     * Append an item to the end of the container
+    /** Append an item to the end of the container
      *
-     * @param mixed $value
-     *            The value to append
-     * @return integer The number of values appended (1 or 0)
+     * @param  mixed $value      The value to append
+     * @return integer           The number of values appended (1 or 0)
      */
     public function append($value)
     {
         // Find the end of the list
         $pos = 1;
-        while ($this->hasProperty('rdf:_' . $pos)) {
-            $pos ++;
+        while ($this->hasProperty('rdf:_'.$pos)) {
+            $pos++;
         }
-        
+
         // Add the item
-        return $this->add('rdf:_' . $pos, $value);
+        return $this->add('rdf:_'.$pos, $value);
     }
 
-    /**
-     * Array Access: check if a position exists in container using array syntax
+    /** Array Access: check if a position exists in container using array syntax
      *
      * Example: isset($seq[2])
      */
     public function offsetExists($offset)
     {
         if (is_int($offset) and $offset > 0) {
-            return $this->hasProperty('rdf:_' . $offset);
+            return $this->hasProperty('rdf:_'.$offset);
         } else {
-            throw new InvalidArgumentException("Container position must be a positive integer");
+            throw new InvalidArgumentException(
+                "Container position must be a positive integer"
+            );
         }
     }
 
-    /**
-     * Array Access: get an item at a specified position in container using array syntax
+    /** Array Access: get an item at a specified position in container using array syntax
      *
      * Example: $item = $seq[2];
      */
     public function offsetGet($offset)
     {
         if (is_int($offset) and $offset > 0) {
-            return $this->get('rdf:_' . $offset);
+            return $this->get('rdf:_'.$offset);
         } else {
-            throw new InvalidArgumentException("Container position must be a positive integer");
+            throw new InvalidArgumentException(
+                "Container position must be a positive integer"
+            );
         }
     }
 
@@ -204,11 +200,13 @@ class EasyRdf_Container extends EasyRdf_Resource implements ArrayAccess, Countab
     public function offsetSet($offset, $value)
     {
         if (is_int($offset) and $offset > 0) {
-            return $this->set('rdf:_' . $offset, $value);
+            return $this->set('rdf:_'.$offset, $value);
         } elseif (is_null($offset)) {
             return $this->append($value);
         } else {
-            throw new InvalidArgumentException("Container position must be a positive integer");
+            throw new InvalidArgumentException(
+                "Container position must be a positive integer"
+            );
         }
     }
 
@@ -222,9 +220,11 @@ class EasyRdf_Container extends EasyRdf_Resource implements ArrayAccess, Countab
     public function offsetUnset($offset)
     {
         if (is_int($offset) and $offset > 0) {
-            return $this->delete('rdf:_' . $offset);
+            return $this->delete('rdf:_'.$offset);
         } else {
-            throw new InvalidArgumentException("Container position must be a positive integer");
+            throw new InvalidArgumentException(
+                "Container position must be a positive integer"
+            );
         }
     }
 }

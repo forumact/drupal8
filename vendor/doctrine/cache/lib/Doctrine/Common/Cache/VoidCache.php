@@ -16,22 +16,20 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
- * Void cache driver.
- * The cache could be of use in tests where you don`t need to cache anything.
+ * Void cache driver. The cache could be of use in tests where you don`t need to cache anything.
  *
- * @link www.doctrine-project.org
- * @since 1.5
+ * @link   www.doctrine-project.org
+ * @since  1.5
  * @author Kotlyar Maksim <kotlyar.maksim@gmail.com>
  */
 class VoidCache extends CacheProvider
 {
-
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doFetch($id)
     {
@@ -39,8 +37,7 @@ class VoidCache extends CacheProvider
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doContains($id)
     {
@@ -48,8 +45,7 @@ class VoidCache extends CacheProvider
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
@@ -57,8 +53,7 @@ class VoidCache extends CacheProvider
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doDelete($id)
     {
@@ -66,8 +61,7 @@ class VoidCache extends CacheProvider
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doFlush()
     {
@@ -75,8 +69,7 @@ class VoidCache extends CacheProvider
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doGetStats()
     {

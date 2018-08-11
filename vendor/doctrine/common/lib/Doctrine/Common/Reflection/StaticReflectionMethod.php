@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 use ReflectionException;
@@ -23,7 +24,6 @@ use ReflectionMethod;
 
 class StaticReflectionMethod extends ReflectionMethod
 {
-
     /**
      * The PSR-0 parser object.
      *
@@ -39,9 +39,8 @@ class StaticReflectionMethod extends ReflectionMethod
     protected $methodName;
 
     /**
-     *
      * @param StaticReflectionParser $staticReflectionParser
-     * @param string $methodName
+     * @param string                 $methodName
      */
     public function __construct(StaticReflectionParser $staticReflectionParser, $methodName)
     {
@@ -50,8 +49,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -59,7 +57,6 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
      * @return StaticReflectionParser
      */
     protected function getStaticReflectionParser()
@@ -68,8 +65,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDeclaringClass()
     {
@@ -77,8 +73,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getNamespaceName()
     {
@@ -86,8 +81,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDocComment()
     {
@@ -95,7 +89,6 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
      * @return array
      */
     public function getUseStatements()
@@ -104,8 +97,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function export($class, $name, $return = false)
     {
@@ -113,8 +105,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClosure($object)
     {
@@ -122,8 +113,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getModifiers()
     {
@@ -131,8 +121,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPrototype()
     {
@@ -140,8 +129,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function invoke($object, $parameter = null)
     {
@@ -149,8 +137,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function invokeArgs($object, array $args)
     {
@@ -158,8 +145,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isAbstract()
     {
@@ -167,8 +153,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isConstructor()
     {
@@ -176,8 +161,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isDestructor()
     {
@@ -185,8 +169,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isFinal()
     {
@@ -194,8 +177,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isPrivate()
     {
@@ -203,8 +185,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isProtected()
     {
@@ -212,8 +193,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isPublic()
     {
@@ -221,8 +201,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isStatic()
     {
@@ -230,8 +209,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setAccessible($accessible)
     {
@@ -239,8 +217,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __toString()
     {
@@ -248,8 +225,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClosureThis()
     {
@@ -257,8 +233,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getEndLine()
     {
@@ -266,8 +241,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getExtension()
     {
@@ -275,8 +249,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getExtensionName()
     {
@@ -284,8 +257,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getFileName()
     {
@@ -293,8 +265,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getNumberOfParameters()
     {
@@ -302,8 +273,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getNumberOfRequiredParameters()
     {
@@ -311,8 +281,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getParameters()
     {
@@ -320,8 +289,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getShortName()
     {
@@ -329,8 +297,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getStartLine()
     {
@@ -338,8 +305,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getStaticVariables()
     {
@@ -347,8 +313,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function inNamespace()
     {
@@ -356,8 +321,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isClosure()
     {
@@ -365,8 +329,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isDeprecated()
     {
@@ -374,8 +337,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isInternal()
     {
@@ -383,8 +345,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isUserDefined()
     {
@@ -392,8 +353,7 @@ class StaticReflectionMethod extends ReflectionMethod
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function returnsReference()
     {

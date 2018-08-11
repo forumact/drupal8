@@ -16,15 +16,16 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
-use Memcached;
+use \Memcached;
 
 /**
  * Memcached cache provider.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
@@ -33,9 +34,7 @@ use Memcached;
  */
 class MemcachedCache extends CacheProvider
 {
-
     /**
-     *
      * @var Memcached|null
      */
     private $memcached;
@@ -63,7 +62,6 @@ class MemcachedCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -72,7 +70,6 @@ class MemcachedCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetchMultiple(array $keys)
@@ -81,7 +78,6 @@ class MemcachedCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0)
@@ -89,21 +85,20 @@ class MemcachedCache extends CacheProvider
         if ($lifetime > 30 * 24 * 3600) {
             $lifetime = time() + $lifetime;
         }
-        
+
         return $this->memcached->setMulti($keysAndValues, $lifetime);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
     {
-        return false !== $this->memcached->get($id) || $this->memcached->getResultCode() !== Memcached::RES_NOTFOUND;
+        return false !== $this->memcached->get($id)
+            || $this->memcached->getResultCode() !== Memcached::RES_NOTFOUND;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -115,16 +110,15 @@ class MemcachedCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
     {
-        return $this->memcached->delete($id) || $this->memcached->getResultCode() === Memcached::RES_NOTFOUND;
+        return $this->memcached->delete($id)
+            || $this->memcached->getResultCode() === Memcached::RES_NOTFOUND;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
@@ -133,21 +127,20 @@ class MemcachedCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
-        $stats = $this->memcached->getStats();
+        $stats   = $this->memcached->getStats();
         $servers = $this->memcached->getServerList();
-        $key = $servers[0]['host'] . ':' . $servers[0]['port'];
-        $stats = $stats[$key];
+        $key     = $servers[0]['host'] . ':' . $servers[0]['port'];
+        $stats   = $stats[$key];
         return array(
-            Cache::STATS_HITS => $stats['get_hits'],
+            Cache::STATS_HITS   => $stats['get_hits'],
             Cache::STATS_MISSES => $stats['get_misses'],
             Cache::STATS_UPTIME => $stats['uptime'],
-            Cache::STATS_MEMORY_USAGE => $stats['bytes'],
-            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes']
+            Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
+            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],
         );
     }
 }

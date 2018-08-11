@@ -38,18 +38,17 @@
 /**
  * Class to parse RDF using the ARC2 library.
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Parser_Arc extends EasyRdf_Parser_RdfPhp
 {
-
     private static $supportedTypes = array(
         'rdfxml' => 'RDFXML',
         'turtle' => 'Turtle',
         'ntriples' => 'Turtle',
-        'rdfa' => 'SemHTML'
+        'rdfa' => 'SemHTML',
     );
 
     /**
@@ -63,35 +62,35 @@ class EasyRdf_Parser_Arc extends EasyRdf_Parser_RdfPhp
     }
 
     /**
-     * Parse an RDF document into an EasyRdf_Graph
-     *
-     * @param
-     *            object EasyRdf_Graph $graph the graph to load the data into
-     * @param string $data
-     *            the RDF document data
-     * @param string $format
-     *            the format of the input data
-     * @param string $baseUri
-     *            the base URI of the data being parsed
-     * @return integer The number of triples added to the graph
-     */
+      * Parse an RDF document into an EasyRdf_Graph
+      *
+      * @param object EasyRdf_Graph $graph   the graph to load the data into
+      * @param string               $data    the RDF document data
+      * @param string               $format  the format of the input data
+      * @param string               $baseUri the base URI of the data being parsed
+      * @return integer             The number of triples added to the graph
+      */
     public function parse($graph, $data, $format, $baseUri)
     {
         parent::checkParseParams($graph, $data, $format, $baseUri);
-        
+
         if (array_key_exists($format, self::$supportedTypes)) {
             $className = self::$supportedTypes[$format];
         } else {
-            throw new EasyRdf_Exception("EasyRdf_Parser_Arc does not support: $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Parser_Arc does not support: $format"
+            );
         }
-        
+
         $parser = ARC2::getParser($className);
         if ($parser) {
             $parser->parse($baseUri, $data);
             $rdfphp = $parser->getSimpleIndex(false);
             return parent::parse($graph, $rdfphp, 'php', $baseUri);
         } else {
-            throw new EasyRdf_Exception("ARC2 failed to get a $className parser.");
+            throw new EasyRdf_Exception(
+                "ARC2 failed to get a $className parser."
+            );
         }
     }
 }

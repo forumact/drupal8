@@ -38,29 +38,24 @@
 /**
  * Class that represents an RDF Literal of datatype xsd:decimal
  *
- * @package EasyRdf
- * @link http://www.w3.org/TR/xmlschema-2/#decimal
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @link       http://www.w3.org/TR/xmlschema-2/#decimal
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Literal_Decimal extends EasyRdf_Literal
 {
-
     /**
      * written according to http://www.w3.org/TR/xmlschema-2/#decimal
      */
     const DECIMAL_REGEX = '^([+\-]?)(((\d+)?\.(\d+))|((\d+)\.?))$';
 
-    /**
-     * Constructor for creating a new decimal literal
+    /** Constructor for creating a new decimal literal
      *
-     * @param double|int|string $value
-     *            The value of the literal
-     * @param string $lang
-     *            Should be null (literals with a datatype can't have a language)
-     * @param string $datatype
-     *            Optional datatype (default 'xsd:decimal')
-     *            
+     * @param  double|int|string $value    The value of the literal
+     * @param  string            $lang     Should be null (literals with a datatype can't have a language)
+     * @param  string            $datatype Optional datatype (default 'xsd:decimal')
+     *
      * @throws UnexpectedValueException
      * @return EasyRdf_Literal_Decimal
      */
@@ -74,14 +69,13 @@ class EasyRdf_Literal_Decimal extends EasyRdf_Literal
         } else {
             throw new UnexpectedValueException('EasyRdf_Literal_Decimal expects int/float/string as value');
         }
-        
+
         $value = self::canonicalise($value);
-        
+
         parent::__construct($value, null, $datatype);
     }
 
-    /**
-     * Return the value of the literal cast to a PHP string
+    /** Return the value of the literal cast to a PHP string
      *
      * @return string
      */
@@ -91,14 +85,13 @@ class EasyRdf_Literal_Decimal extends EasyRdf_Literal
     }
 
     /**
-     *
      * @param string $value
      *
      * @throws UnexpectedValueException
      */
     public static function validate($value)
     {
-        if (! mb_ereg_match(self::DECIMAL_REGEX, $value)) {
+        if (!mb_ereg_match(self::DECIMAL_REGEX, $value)) {
             throw new UnexpectedValueException("'{$value}' doesn't look like a valid decimal");
         }
     }
@@ -107,28 +100,27 @@ class EasyRdf_Literal_Decimal extends EasyRdf_Literal
      * Converts valid xsd:decimal literal to Canonical representation
      * see http://www.w3.org/TR/xmlschema-2/#decimal
      *
-     * @param string $value
-     *            Valid xsd:decimal literal
-     *            
+     * @param string $value Valid xsd:decimal literal
+     *
      * @return string
      */
     public static function canonicalise($value)
     {
         $pieces = array();
         mb_ereg(self::DECIMAL_REGEX, $value, $pieces);
-        
-        $sign = $pieces[1] === '-' ? '-' : ''; // '+' is not allowed
-        $integer = ltrim(($pieces[4] !== false) ? $pieces[4] : $pieces[7], '0');
+
+        $sign       = $pieces[1] === '-' ? '-' : '';  // '+' is not allowed
+        $integer    = ltrim(($pieces[4] !== false) ? $pieces[4] : $pieces[7], '0');
         $fractional = rtrim($pieces[5], '0');
-        
+
         if (empty($integer)) {
             $integer = '0';
         }
-        
+
         if (empty($fractional)) {
             $fractional = '0';
         }
-        
+
         return "{$sign}{$integer}.{$fractional}";
     }
 }

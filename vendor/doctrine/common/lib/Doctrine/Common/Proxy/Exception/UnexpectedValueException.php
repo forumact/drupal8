@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Proxy\Exception;
 
 use UnexpectedValueException as BaseUnexpectedValueException;
@@ -23,15 +24,13 @@ use UnexpectedValueException as BaseUnexpectedValueException;
 /**
  * Proxy Unexpected Value Exception.
  *
- * @link www.doctrine-project.org
- * @since 2.4
+ * @link   www.doctrine-project.org
+ * @since  2.4
  * @author Marco Pivetta <ocramius@gmail.com>
  */
 class UnexpectedValueException extends BaseUnexpectedValueException implements ProxyException
 {
-
     /**
-     *
      * @param string $proxyDirectory
      *
      * @return self
@@ -42,16 +41,24 @@ class UnexpectedValueException extends BaseUnexpectedValueException implements P
     }
 
     /**
-     *
-     * @param string $className
-     * @param string $methodName
-     * @param string $parameterName
+     * @param string     $className
+     * @param string     $methodName
+     * @param string     $parameterName
      * @param \Exception $previous
      *
      * @return self
      */
     public static function invalidParameterTypeHint($className, $methodName, $parameterName, \Exception $previous)
     {
-        return new self(sprintf('The type hint of parameter "%s" in method "%s" in class "%s" is invalid.', $parameterName, $methodName, $className), 0, $previous);
+        return new self(
+            sprintf(
+                'The type hint of parameter "%s" in method "%s" in class "%s" is invalid.',
+                $parameterName,
+                $methodName,
+                $className
+            ),
+            0,
+            $previous
+        );
     }
 }

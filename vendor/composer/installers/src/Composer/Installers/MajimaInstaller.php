@@ -3,20 +3,17 @@ namespace Composer\Installers;
 
 /**
  * Plugin/theme installer for majima
- *
  * @author David Neustadt
  */
 class MajimaInstaller extends BaseInstaller
 {
-
     protected $locations = array(
-        'plugin' => 'plugins/{$name}/'
+        'plugin' => 'plugins/{$name}/',
     );
 
     /**
      * Transforms the names
-     *
-     * @param array $vars
+     * @param  array $vars
      * @return array
      */
     public function inflectPackageVars($vars)
@@ -26,8 +23,7 @@ class MajimaInstaller extends BaseInstaller
 
     /**
      * Change hyphenated names to camelcase
-     *
-     * @param array $vars
+     * @param  array $vars
      * @return array
      */
     private function correctPluginName($vars)

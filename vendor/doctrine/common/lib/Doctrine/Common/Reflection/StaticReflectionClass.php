@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 use ReflectionClass;
@@ -23,7 +24,6 @@ use ReflectionException;
 
 class StaticReflectionClass extends ReflectionClass
 {
-
     /**
      * The static reflection parser object.
      *
@@ -32,7 +32,6 @@ class StaticReflectionClass extends ReflectionClass
     private $staticReflectionParser;
 
     /**
-     *
      * @param StaticReflectionParser $staticReflectionParser
      */
     public function __construct(StaticReflectionParser $staticReflectionParser)
@@ -41,8 +40,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -50,8 +48,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDocComment()
     {
@@ -59,8 +56,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getNamespaceName()
     {
@@ -68,7 +64,6 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
      * @return array
      */
     public function getUseStatements()
@@ -77,8 +72,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getMethod($name)
     {
@@ -86,8 +80,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getProperty($name)
     {
@@ -95,8 +88,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function export($argument, $return = false)
     {
@@ -104,8 +96,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getConstant($name)
     {
@@ -113,8 +104,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getConstants()
     {
@@ -122,8 +112,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getConstructor()
     {
@@ -131,8 +120,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDefaultProperties()
     {
@@ -140,8 +128,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getEndLine()
     {
@@ -149,8 +136,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getExtension()
     {
@@ -158,8 +144,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getExtensionName()
     {
@@ -167,8 +152,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getFileName()
     {
@@ -176,8 +160,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getInterfaceNames()
     {
@@ -185,8 +168,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getInterfaces()
     {
@@ -194,8 +176,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getMethods($filter = null)
     {
@@ -203,8 +184,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getModifiers()
     {
@@ -212,8 +192,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getParentClass()
     {
@@ -221,8 +200,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getProperties($filter = null)
     {
@@ -230,8 +208,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getShortName()
     {
@@ -239,8 +216,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getStartLine()
     {
@@ -248,8 +224,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getStaticProperties()
     {
@@ -257,8 +232,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getStaticPropertyValue($name, $default = '')
     {
@@ -266,8 +240,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getTraitAliases()
     {
@@ -275,8 +248,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getTraitNames()
     {
@@ -284,8 +256,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getTraits()
     {
@@ -293,8 +264,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasConstant($name)
     {
@@ -302,8 +272,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasMethod($name)
     {
@@ -311,8 +280,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasProperty($name)
     {
@@ -320,8 +288,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function implementsInterface($interface)
     {
@@ -329,8 +296,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function inNamespace()
     {
@@ -338,8 +304,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isAbstract()
     {
@@ -347,8 +312,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isCloneable()
     {
@@ -356,8 +320,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isFinal()
     {
@@ -365,8 +328,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isInstance($object)
     {
@@ -374,8 +336,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isInstantiable()
     {
@@ -383,8 +344,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isInterface()
     {
@@ -392,8 +352,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isInternal()
     {
@@ -401,8 +360,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isIterateable()
     {
@@ -410,8 +368,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isSubclassOf($class)
     {
@@ -419,8 +376,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isTrait()
     {
@@ -428,8 +384,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isUserDefined()
     {
@@ -437,8 +392,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function newInstance($args)
     {
@@ -446,8 +400,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function newInstanceArgs(array $args = [])
     {
@@ -455,8 +408,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function newInstanceWithoutConstructor()
     {
@@ -464,8 +416,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setStaticPropertyValue($name, $value)
     {
@@ -473,8 +424,7 @@ class StaticReflectionClass extends ReflectionClass
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __toString()
     {

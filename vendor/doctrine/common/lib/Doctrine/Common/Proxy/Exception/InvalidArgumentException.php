@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Proxy\Exception;
 
 use Doctrine\Common\Persistence\Proxy;
@@ -24,15 +25,13 @@ use InvalidArgumentException as BaseInvalidArgumentException;
 /**
  * Proxy Invalid Argument Exception.
  *
- * @link www.doctrine-project.org
- * @since 2.4
+ * @link   www.doctrine-project.org
+ * @since  2.4
  * @author Marco Pivetta <ocramius@gmail.com>
  */
 class InvalidArgumentException extends BaseInvalidArgumentException implements ProxyException
 {
-
     /**
-     *
      * @return self
      */
     public static function proxyDirectoryRequired()
@@ -41,7 +40,6 @@ class InvalidArgumentException extends BaseInvalidArgumentException implements P
     }
 
     /**
-     *
      * @param string $className
      * @param string $proxyNamespace
      *
@@ -53,7 +51,6 @@ class InvalidArgumentException extends BaseInvalidArgumentException implements P
     }
 
     /**
-     *
      * @param string $name
      *
      * @return self
@@ -64,7 +61,6 @@ class InvalidArgumentException extends BaseInvalidArgumentException implements P
     }
 
     /**
-     *
      * @return self
      */
     public static function proxyNamespaceRequired()
@@ -73,7 +69,6 @@ class InvalidArgumentException extends BaseInvalidArgumentException implements P
     }
 
     /**
-     *
      * @param Proxy $proxy
      *
      * @return self
@@ -84,7 +79,6 @@ class InvalidArgumentException extends BaseInvalidArgumentException implements P
     }
 
     /**
-     *
      * @param mixed $callback
      *
      * @return self
@@ -92,7 +86,7 @@ class InvalidArgumentException extends BaseInvalidArgumentException implements P
     public static function invalidClassNotFoundCallback($callback)
     {
         $type = is_object($callback) ? get_class($callback) : gettype($callback);
-        
+
         return new self(sprintf('Invalid \$notFoundCallback given: must be a callable, "%s" given', $type));
     }
 }

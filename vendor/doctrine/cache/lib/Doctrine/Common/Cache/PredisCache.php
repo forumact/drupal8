@@ -1,4 +1,5 @@
 <?php
+
 namespace Doctrine\Common\Cache;
 
 use Predis\ClientInterface;
@@ -10,15 +11,12 @@ use Predis\ClientInterface;
  */
 class PredisCache extends CacheProvider
 {
-
     /**
-     *
      * @var ClientInterface
      */
     private $client;
 
     /**
-     *
      * @param ClientInterface $client
      *
      * @return void
@@ -29,7 +27,6 @@ class PredisCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -38,55 +35,49 @@ class PredisCache extends CacheProvider
         if (null === $result) {
             return false;
         }
-        
+
         return unserialize($result);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetchMultiple(array $keys)
     {
-        $fetchedItems = call_user_func_array(array(
-            $this->client,
-            'mget'
-        ), $keys);
-        
+        $fetchedItems = call_user_func_array(array($this->client, 'mget'), $keys);
+
         return array_map('unserialize', array_filter(array_combine($keys, $fetchedItems)));
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0)
     {
         if ($lifetime) {
             $success = true;
-            
+
             // Keys have lifetime, use SETEX for each of them
             foreach ($keysAndValues as $key => $value) {
                 $response = $this->client->setex($key, $lifetime, serialize($value));
-                
+
                 if ((string) $response != 'OK') {
                     $success = false;
                 }
             }
-            
+
             return $success;
         }
-        
+
         // No lifetime, use MSET
         $response = $this->client->mset(array_map(function ($value) {
             return serialize($value);
         }, $keysAndValues));
-        
+
         return (string) $response == 'OK';
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -95,7 +86,6 @@ class PredisCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -106,12 +96,11 @@ class PredisCache extends CacheProvider
         } else {
             $response = $this->client->set($id, $data);
         }
-        
+
         return $response === true || $response == 'OK';
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
@@ -120,30 +109,28 @@ class PredisCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
     {
         $response = $this->client->flushdb();
-        
+
         return $response === true || $response == 'OK';
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
         $info = $this->client->info();
-        
+
         return array(
-            Cache::STATS_HITS => $info['Stats']['keyspace_hits'],
-            Cache::STATS_MISSES => $info['Stats']['keyspace_misses'],
-            Cache::STATS_UPTIME => $info['Server']['uptime_in_seconds'],
-            Cache::STATS_MEMORY_USAGE => $info['Memory']['used_memory'],
-            Cache::STATS_MEMORY_AVAILABLE => false
+            Cache::STATS_HITS              => $info['Stats']['keyspace_hits'],
+            Cache::STATS_MISSES            => $info['Stats']['keyspace_misses'],
+            Cache::STATS_UPTIME            => $info['Server']['uptime_in_seconds'],
+            Cache::STATS_MEMORY_USAGE      => $info['Memory']['used_memory'],
+            Cache::STATS_MEMORY_AVAILABLE  => false
         );
     }
 }

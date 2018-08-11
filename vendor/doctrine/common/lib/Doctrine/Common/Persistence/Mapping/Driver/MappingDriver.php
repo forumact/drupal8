@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -23,16 +24,15 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 /**
  * Contract for metadata drivers.
  *
- * @since 2.2
+ * @since  2.2
  * @author Jonathan H. Wage <jonwage@gmail.com>
  */
 interface MappingDriver
 {
-
     /**
      * Loads the metadata for the specified class into the provided container.
      *
-     * @param string $className
+     * @param string        $className
      * @param ClassMetadata $metadata
      *
      * @return void

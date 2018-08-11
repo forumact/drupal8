@@ -38,23 +38,18 @@
 /**
  * Class that represents an RDF Literal of datatype rdf:XMLLiteral
  *
- * @package EasyRdf
- * @link http://www.w3.org/TR/REC-rdf-syntax/#section-Syntax-XML-literals
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @link       http://www.w3.org/TR/REC-rdf-syntax/#section-Syntax-XML-literals
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Literal_XML extends EasyRdf_Literal
 {
-
-    /**
-     * Constructor for creating a new rdf:XMLLiteral literal
+    /** Constructor for creating a new rdf:XMLLiteral literal
      *
-     * @param mixed $value
-     *            The XML fragment
-     * @param string $lang
-     *            Should be null (literals with a datatype can't have a language)
-     * @param string $datatype
-     *            Optional datatype (default 'rdf:XMLLiteral')
+     * @param  mixed  $value     The XML fragment
+     * @param  string $lang      Should be null (literals with a datatype can't have a language)
+     * @param  string $datatype  Optional datatype (default 'rdf:XMLLiteral')
      * @return object EasyRdf_Literal_XML
      */
     public function __construct($value, $lang = null, $datatype = null)
@@ -62,10 +57,9 @@ class EasyRdf_Literal_XML extends EasyRdf_Literal
         parent::__construct($value, null, $datatype);
     }
 
-    /**
-     * Parse the XML literal into a DOMDocument
+    /** Parse the XML literal into a DOMDocument
      *
-     * @link http://php.net/manual/en/domdocument.loadxml.php
+     * @link   http://php.net/manual/en/domdocument.loadxml.php
      * @return object DOMDocument
      */
     public function domParse()

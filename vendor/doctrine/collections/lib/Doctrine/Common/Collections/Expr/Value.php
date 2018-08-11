@@ -16,19 +16,17 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections\Expr;
 
 class Value implements Expression
 {
-
     /**
-     *
      * @var mixed
      */
     private $value;
 
     /**
-     *
      * @param mixed $value
      */
     public function __construct($value)
@@ -37,7 +35,6 @@ class Value implements Expression
     }
 
     /**
-     *
      * @return mixed
      */
     public function getValue()
@@ -46,8 +43,7 @@ class Value implements Expression
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function visit(ExpressionVisitor $visitor)
     {

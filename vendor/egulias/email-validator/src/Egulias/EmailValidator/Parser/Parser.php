@@ -1,4 +1,5 @@
 <?php
+
 namespace Egulias\EmailValidator\Parser;
 
 use Egulias\EmailValidator\EmailLexer;
@@ -6,11 +7,8 @@ use Egulias\EmailValidator\EmailValidator;
 
 abstract class Parser
 {
-
     protected $warnings = array();
-
     protected $lexer;
-
     protected $openedParenthesis = 0;
 
     public function __construct(EmailLexer $lexer)
@@ -25,10 +23,7 @@ abstract class Parser
 
     abstract public function parse($str);
 
-    /**
-     *
-     * @return int
-     */
+    /** @return int */
     public function getOpenedParenthesis()
     {
         return $this->openedParenthesis;
@@ -39,10 +34,11 @@ abstract class Parser
      */
     protected function validateQuotedPair()
     {
-        if (! ($this->lexer->token['type'] === EmailLexer::INVALID || $this->lexer->token['type'] === EmailLexer::C_DEL)) {
+        if (!($this->lexer->token['type'] === EmailLexer::INVALID
+            || $this->lexer->token['type'] === EmailLexer::C_DEL)) {
             throw new \InvalidArgumentException('ERR_EXPECTING_QPAIR');
         }
-        
+
         $this->warnings[] = EmailValidator::DEPREC_QP;
     }
 
@@ -51,22 +47,19 @@ abstract class Parser
         $this->openedParenthesis = 1;
         $this->isUnclosedComment();
         $this->warnings[] = EmailValidator::CFWS_COMMENT;
-        while (! $this->lexer->isNextToken(EmailLexer::S_CLOSEPARENTHESIS)) {
+        while (!$this->lexer->isNextToken(EmailLexer::S_CLOSEPARENTHESIS)) {
             if ($this->lexer->isNextToken(EmailLexer::S_OPENPARENTHESIS)) {
-                $this->openedParenthesis ++;
+                $this->openedParenthesis++;
             }
             $this->warnEscaping();
             $this->lexer->moveNext();
         }
-        
+
         $this->lexer->moveNext();
-        if ($this->lexer->isNextTokenAny(array(
-            EmailLexer::GENERIC,
-            EmailLexer::S_EMPTY
-        ))) {
+        if ($this->lexer->isNextTokenAny(array(EmailLexer::GENERIC, EmailLexer::S_EMPTY))) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');
         }
-        
+
         if ($this->lexer->isNextToken(EmailLexer::S_AT)) {
             $this->warnings[] = EmailValidator::DEPREC_CFWS_NEAR_AT;
         }
@@ -85,22 +78,22 @@ abstract class Parser
     protected function parseFWS()
     {
         $previous = $this->lexer->getPrevious();
-        
+
         $this->checkCRLFInFWS();
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_CR) {
             throw new \InvalidArgumentException('ERR_CR_NO_LF');
         }
-        
-        if ($this->lexer->isNextToken(EmailLexer::GENERIC) && $previous['type'] !== EmailLexer::S_AT) {
+
+        if ($this->lexer->isNextToken(EmailLexer::GENERIC) && $previous['type']  !== EmailLexer::S_AT) {
             throw new \InvalidArgumentException('ERR_ATEXT_AFTER_CFWS');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_LF || $this->lexer->token['type'] === EmailLexer::C_NUL) {
             throw new \InvalidArgumentException('ERR_EXPECTING_CTEXT');
         }
-        
-        if ($this->lexer->isNextToken(EmailLexer::S_AT) || $previous['type'] === EmailLexer::S_AT) {
+
+        if ($this->lexer->isNextToken(EmailLexer::S_AT) || $previous['type']  === EmailLexer::S_AT) {
             $this->warnings[] = EmailValidator::DEPREC_CFWS_NEAR_AT;
         } else {
             $this->warnings[] = EmailValidator::CFWS_FWS;
@@ -119,22 +112,30 @@ abstract class Parser
         if ($this->escaped()) {
             return false;
         }
-        
-        if ($this->lexer->token['type'] === EmailLexer::S_SP || $this->lexer->token['type'] === EmailLexer::S_HTAB || $this->lexer->token['type'] === EmailLexer::S_CR || $this->lexer->token['type'] === EmailLexer::S_LF || $this->lexer->token['type'] === EmailLexer::CRLF) {
+
+        if ($this->lexer->token['type'] === EmailLexer::S_SP ||
+            $this->lexer->token['type'] === EmailLexer::S_HTAB ||
+            $this->lexer->token['type'] === EmailLexer::S_CR ||
+            $this->lexer->token['type'] === EmailLexer::S_LF ||
+            $this->lexer->token['type'] === EmailLexer::CRLF
+        ) {
             return true;
         }
-        
+
         return false;
     }
 
     protected function escaped()
     {
         $previous = $this->lexer->getPrevious();
-        
-        if ($previous['type'] === EmailLexer::S_BACKSLASH && $this->lexer->token['type'] !== EmailLexer::GENERIC) {
+
+        if ($previous['type'] === EmailLexer::S_BACKSLASH
+            &&
+            $this->lexer->token['type'] !== EmailLexer::GENERIC
+        ) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -143,21 +144,18 @@ abstract class Parser
         if ($this->lexer->token['type'] !== EmailLexer::S_BACKSLASH) {
             return false;
         }
-        
+
         if ($this->lexer->isNextToken(EmailLexer::GENERIC)) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');
         }
-        
-        if (! $this->lexer->isNextTokenAny(array(
-            EmailLexer::S_SP,
-            EmailLexer::S_HTAB,
-            EmailLexer::C_DEL
-        ))) {
+
+        if (!$this->lexer->isNextTokenAny(array(EmailLexer::S_SP, EmailLexer::S_HTAB, EmailLexer::C_DEL))) {
             return false;
         }
-        
+
         $this->warnings[] = EmailValidator::DEPREC_QP;
         return true;
+
     }
 
     protected function checkDQUOTE($hasClosingQuote)
@@ -172,7 +170,7 @@ abstract class Parser
         if ($previous['type'] === EmailLexer::GENERIC && $this->lexer->isNextToken(EmailLexer::GENERIC)) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');
         }
-        
+
         $this->warnings[] = EmailValidator::RFC5321_QUOTEDSTRING;
         try {
             $this->lexer->find(EmailLexer::S_DQUOTE);
@@ -180,7 +178,7 @@ abstract class Parser
         } catch (\Exception $e) {
             throw new \InvalidArgumentException('ERR_UNCLOSEDQUOTEDSTR');
         }
-        
+
         return $hasClosingQuote;
     }
 
@@ -192,10 +190,7 @@ abstract class Parser
         if ($this->lexer->isNextToken(EmailLexer::CRLF)) {
             throw new \InvalidArgumentException('ERR_FWS_CRLF_X2');
         }
-        if (! $this->lexer->isNextTokenAny(array(
-            EmailLexer::S_SP,
-            EmailLexer::S_HTAB
-        ))) {
+        if (!$this->lexer->isNextTokenAny(array(EmailLexer::S_SP, EmailLexer::S_HTAB))) {
             throw new \InvalidArgumentException('ERR_FWS_CRLF_END');
         }
     }

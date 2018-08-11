@@ -1,4 +1,5 @@
 <?php
+
 namespace Composer\Installers\Test;
 
 use Composer\Installers\BitrixInstaller;
@@ -12,12 +13,12 @@ use Composer\Composer;
  */
 class BitrixInstallerTest extends TestCase
 {
-
     /** @var BitrixInstaller */
     private $installer;
 
     /** @var Composer */
     private $composer;
+
 
     /**
      * Sets up the fixture, for example, instantiate the class-under-test.
@@ -30,7 +31,6 @@ class BitrixInstallerTest extends TestCase
     }
 
     /**
-     *
      * @param string $vars
      * @param string $expectedVars
      *
@@ -40,7 +40,11 @@ class BitrixInstallerTest extends TestCase
      */
     final public function testInflectPackageVars($vars, $expectedVars)
     {
-        $this->installer = new BitrixInstaller(new Package($vars['name'], '4.2', '4.2'), $this->composer);
+
+        $this->installer = new BitrixInstaller(
+            new Package($vars['name'], '4.2', '4.2'),
+            $this->composer
+        );
         $actual = $this->installer->inflectPackageVars($vars);
         $this->assertEquals($actual, $expectedVars);
     }
@@ -53,36 +57,19 @@ class BitrixInstallerTest extends TestCase
     final public function provideExpectedInflectionResults()
     {
         return array(
-            // check bitrix-dir is correct
+            //check bitrix-dir is correct
             array(
-                array(
-                    'name' => 'Nyan/Cat'
-                ),
-                array(
-                    'name' => 'Nyan/Cat',
-                    'bitrix_dir' => 'bitrix'
-                )
+                array('name' => 'Nyan/Cat'),
+                array('name' => 'Nyan/Cat', 'bitrix_dir' => 'bitrix')
             ),
             array(
-                array(
-                    'name' => 'Nyan/Cat',
-                    'bitrix_dir' => 'bitrix'
-                ),
-                array(
-                    'name' => 'Nyan/Cat',
-                    'bitrix_dir' => 'bitrix'
-                )
+                array('name' => 'Nyan/Cat', 'bitrix_dir' => 'bitrix'),
+                array('name' => 'Nyan/Cat', 'bitrix_dir' => 'bitrix')
             ),
             array(
-                array(
-                    'name' => 'Nyan/Cat',
-                    'bitrix_dir' => 'local'
-                ),
-                array(
-                    'name' => 'Nyan/Cat',
-                    'bitrix_dir' => 'local'
-                )
-            )
+                array('name' => 'Nyan/Cat', 'bitrix_dir' => 'local'),
+                array('name' => 'Nyan/Cat', 'bitrix_dir' => 'local')
+            ),
         );
     }
 }

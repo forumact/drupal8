@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -25,7 +26,7 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
  * The DriverChain allows you to add multiple other mapping drivers for
  * certain namespaces.
  *
- * @since 2.2
+ * @since  2.2
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan H. Wage <jonwage@gmail.com>
@@ -33,7 +34,6 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
  */
 class MappingDriverChain implements MappingDriver
 {
-
     /**
      * The default driver.
      *
@@ -42,7 +42,6 @@ class MappingDriverChain implements MappingDriver
     private $defaultDriver;
 
     /**
-     *
      * @var array
      */
     private $drivers = [];
@@ -73,7 +72,7 @@ class MappingDriverChain implements MappingDriver
      * Adds a nested driver.
      *
      * @param MappingDriver $nestedDriver
-     * @param string $namespace
+     * @param string        $namespace
      *
      * @return void
      */
@@ -93,8 +92,7 @@ class MappingDriverChain implements MappingDriver
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function loadMetadataForClass($className, ClassMetadata $metadata)
     {
@@ -105,65 +103,63 @@ class MappingDriverChain implements MappingDriver
                 return;
             }
         }
-        
+
         if (null !== $this->defaultDriver) {
             $this->defaultDriver->loadMetadataForClass($className, $metadata);
             return;
         }
-        
+
         throw MappingException::classNotFoundInNamespaces($className, array_keys($this->drivers));
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getAllClassNames()
     {
         $classNames = [];
         $driverClasses = [];
-        
+
         /* @var $driver MappingDriver */
-        foreach ($this->drivers as $namespace => $driver) {
+        foreach ($this->drivers AS $namespace => $driver) {
             $oid = spl_object_hash($driver);
-            
-            if (! isset($driverClasses[$oid])) {
+
+            if (!isset($driverClasses[$oid])) {
                 $driverClasses[$oid] = $driver->getAllClassNames();
             }
-            
-            foreach ($driverClasses[$oid] as $className) {
+
+            foreach ($driverClasses[$oid] AS $className) {
                 if (strpos($className, $namespace) === 0) {
                     $classNames[$className] = true;
                 }
             }
         }
-        
+
         if (null !== $this->defaultDriver) {
             foreach ($this->defaultDriver->getAllClassNames() as $className) {
                 $classNames[$className] = true;
             }
         }
-        
+
         return array_keys($classNames);
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isTransient($className)
     {
         /* @var $driver MappingDriver */
-        foreach ($this->drivers as $namespace => $driver) {
+        foreach ($this->drivers AS $namespace => $driver) {
             if (strpos($className, $namespace) === 0) {
                 return $driver->isTransient($className);
             }
         }
-        
+
         if ($this->defaultDriver !== null) {
             return $this->defaultDriver->isTransient($className);
         }
-        
+
         return true;
     }
 }

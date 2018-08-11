@@ -17,6 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Annotations\Annotation;
 
 /**
@@ -24,26 +25,22 @@ namespace Doctrine\Common\Annotations\Annotation;
  * to check the attribute type during the parsing process.
  *
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
- *        
+ *
  * @Annotation
  */
 final class Attribute
 {
-
     /**
-     *
      * @var string
      */
     public $name;
 
     /**
-     *
      * @var string
      */
     public $type;
 
     /**
-     *
      * @var boolean
      */
     public $required = false;

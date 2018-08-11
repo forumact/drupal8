@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 /**
@@ -25,7 +26,6 @@ namespace Doctrine\Common\Reflection;
  */
 class Psr0FindFile implements ClassFinderInterface
 {
-
     /**
      * The PSR-0 prefixes.
      *
@@ -34,10 +34,8 @@ class Psr0FindFile implements ClassFinderInterface
     protected $prefixes;
 
     /**
-     *
-     * @param array $prefixes
-     *            An array of prefixes. Each key is a PHP namespace and each value is
-     *            a list of directories.
+     * @param array $prefixes An array of prefixes. Each key is a PHP namespace and each value is
+     *                        a list of directories.
      */
     public function __construct($prefixes)
     {
@@ -45,8 +43,7 @@ class Psr0FindFile implements ClassFinderInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findFile($class)
     {
@@ -54,7 +51,7 @@ class Psr0FindFile implements ClassFinderInterface
         if ('\\' == $class[0]) {
             $class = substr($class, 1);
         }
-        
+
         if (false !== $lastNsPos) {
             // namespaced class name
             $classPath = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $lastNsPos)) . DIRECTORY_SEPARATOR;
@@ -64,9 +61,9 @@ class Psr0FindFile implements ClassFinderInterface
             $classPath = null;
             $className = $class;
         }
-        
+
         $classPath .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-        
+
         foreach ($this->prefixes as $prefix => $dirs) {
             if (0 === strpos($class, $prefix)) {
                 foreach ($dirs as $dir) {
@@ -76,7 +73,7 @@ class Psr0FindFile implements ClassFinderInterface
                 }
             }
         }
-        
+
         return null;
     }
 }

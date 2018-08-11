@@ -3,9 +3,8 @@ namespace Composer\Installers;
 
 class AglInstaller extends BaseInstaller
 {
-
     protected $locations = array(
-        'module' => 'More/{$name}/'
+        'module' => 'More/{$name}/',
     );
 
     /**
@@ -16,7 +15,7 @@ class AglInstaller extends BaseInstaller
         $vars['name'] = preg_replace_callback('/(?:^|_|-)(.?)/', function ($matches) {
             return strtoupper($matches[1]);
         }, $vars['name']);
-        
+
         return $vars;
     }
 }

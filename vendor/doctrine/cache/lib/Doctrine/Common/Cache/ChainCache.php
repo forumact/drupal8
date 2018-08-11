@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
@@ -25,9 +26,7 @@ namespace Doctrine\Common\Cache;
  */
 class ChainCache extends CacheProvider
 {
-
     /**
-     *
      * @var CacheProvider[]
      */
     private $cacheProviders = array();
@@ -43,43 +42,40 @@ class ChainCache extends CacheProvider
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setNamespace($namespace)
     {
         parent::setNamespace($namespace);
-        
+
         foreach ($this->cacheProviders as $cacheProvider) {
             $cacheProvider->setNamespace($namespace);
         }
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doFetch($id)
     {
         foreach ($this->cacheProviders as $key => $cacheProvider) {
             if ($cacheProvider->doContains($id)) {
                 $value = $cacheProvider->doFetch($id);
-                
+
                 // We populate all the previous cache layers (that are assumed to be faster)
-                for ($subKey = $key - 1; $subKey >= 0; $subKey --) {
+                for ($subKey = $key - 1 ; $subKey >= 0 ; $subKey--) {
                     $this->cacheProviders[$subKey]->doSave($id, $value);
                 }
-                
+
                 return $value;
             }
         }
-        
+
         return false;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doContains($id)
     {
@@ -88,68 +84,64 @@ class ChainCache extends CacheProvider
                 return true;
             }
         }
-        
+
         return false;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
         $stored = true;
-        
+
         foreach ($this->cacheProviders as $cacheProvider) {
             $stored = $cacheProvider->doSave($id, $data, $lifeTime) && $stored;
         }
-        
+
         return $stored;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doDelete($id)
     {
         $deleted = true;
-        
+
         foreach ($this->cacheProviders as $cacheProvider) {
             $deleted = $cacheProvider->doDelete($id) && $deleted;
         }
-        
+
         return $deleted;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doFlush()
     {
         $flushed = true;
-        
+
         foreach ($this->cacheProviders as $cacheProvider) {
             $flushed = $cacheProvider->doFlush() && $flushed;
         }
-        
+
         return $flushed;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function doGetStats()
     {
         // We return all the stats from all adapters
         $stats = array();
-        
+
         foreach ($this->cacheProviders as $cacheProvider) {
             $stats[] = $cacheProvider->doGetStats();
         }
-        
+
         return $stats;
     }
 }

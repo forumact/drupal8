@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common;
 
 /**
@@ -25,15 +26,14 @@ namespace Doctrine\Common;
  * information to an event handler when an event is raised. The single empty EventArgs
  * instance can be obtained through {@link getEmptyInstance}.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
  * @author Roman Borschel <roman@code-factory.org>
  */
 class EventArgs
 {
-
     /**
      * Single instance of EventArgs.
      *
@@ -53,15 +53,15 @@ class EventArgs
      * @see EventManager::dispatchEvent
      *
      * @link http://msdn.microsoft.com/en-us/library/system.eventargs.aspx
-     *      
+     *
      * @return EventArgs
      */
     public static function getEmptyInstance()
     {
-        if (! self::$_emptyEventArgsInstance) {
-            self::$_emptyEventArgsInstance = new EventArgs();
+        if ( ! self::$_emptyEventArgsInstance) {
+            self::$_emptyEventArgsInstance = new EventArgs;
         }
-        
+
         return self::$_emptyEventArgsInstance;
     }
 }

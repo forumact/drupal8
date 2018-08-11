@@ -16,20 +16,19 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
  * APCu cache provider.
  *
- * @link www.doctrine-project.org
- * @since 1.6
+ * @link   www.doctrine-project.org
+ * @since  1.6
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
 class ApcuCache extends CacheProvider
 {
-
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -38,7 +37,6 @@ class ApcuCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -47,7 +45,6 @@ class ApcuCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -56,7 +53,6 @@ class ApcuCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
@@ -66,7 +62,6 @@ class ApcuCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
@@ -75,7 +70,6 @@ class ApcuCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetchMultiple(array $keys)
@@ -84,31 +78,29 @@ class ApcuCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0)
     {
         $result = apcu_store($keysAndValues, null, $lifetime);
-        
+
         return empty($result);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
         $info = apcu_cache_info(true);
-        $sma = apcu_sma_info();
-        
+        $sma  = apcu_sma_info();
+
         return array(
-            Cache::STATS_HITS => $info['num_hits'],
-            Cache::STATS_MISSES => $info['num_misses'],
-            Cache::STATS_UPTIME => $info['start_time'],
-            Cache::STATS_MEMORY_USAGE => $info['mem_size'],
-            Cache::STATS_MEMORY_AVAILABLE => $sma['avail_mem']
+            Cache::STATS_HITS             => $info['num_hits'],
+            Cache::STATS_MISSES           => $info['num_misses'],
+            Cache::STATS_UPTIME           => $info['start_time'],
+            Cache::STATS_MEMORY_USAGE     => $info['mem_size'],
+            Cache::STATS_MEMORY_AVAILABLE => $sma['avail_mem'],
         );
     }
 }

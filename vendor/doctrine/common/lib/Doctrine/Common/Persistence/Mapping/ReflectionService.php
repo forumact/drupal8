@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 /**
@@ -28,7 +29,6 @@ namespace Doctrine\Common\Persistence\Mapping;
  */
 interface ReflectionService
 {
-
     /**
      * Returns an array of the parent classes (not interfaces) for the given class.
      *
@@ -50,7 +50,6 @@ interface ReflectionService
     public function getClassShortName($class);
 
     /**
-     *
      * @param string $class
      *
      * @return string

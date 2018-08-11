@@ -17,6 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Annotations\Annotation;
 
 /**
@@ -24,7 +25,7 @@ namespace Doctrine\Common\Annotations\Annotation;
  * to check if that attribute is required during the parsing process.
  *
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
- *        
+ *
  * @Annotation
  */
 final class Required

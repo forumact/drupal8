@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 use Doctrine\Common\Reflection\RuntimePublicReflectionProperty;
@@ -31,45 +32,40 @@ use ReflectionProperty;
  */
 class RuntimeReflectionService implements ReflectionService
 {
-
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getParentClasses($class)
     {
-        if (! class_exists($class)) {
+        if ( ! class_exists($class)) {
             throw MappingException::nonExistingClass($class);
         }
-        
+
         return class_parents($class);
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassShortName($class)
     {
         $reflectionClass = new ReflectionClass($class);
-        
+
         return $reflectionClass->getShortName();
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassNamespace($class)
     {
         $reflectionClass = new ReflectionClass($class);
-        
+
         return $reflectionClass->getNamespaceName();
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClass($class)
     {
@@ -77,25 +73,23 @@ class RuntimeReflectionService implements ReflectionService
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getAccessibleProperty($class, $property)
     {
         $reflectionProperty = new ReflectionProperty($class, $property);
-        
+
         if ($reflectionProperty->isPublic()) {
             $reflectionProperty = new RuntimePublicReflectionProperty($class, $property);
         }
-        
+
         $reflectionProperty->setAccessible(true);
-        
+
         return $reflectionProperty;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasPublicMethod($class, $method)
     {
@@ -104,7 +98,7 @@ class RuntimeReflectionService implements ReflectionService
         } catch (ReflectionException $e) {
             return false;
         }
-        
+
         return $reflectionMethod->isPublic();
     }
 }

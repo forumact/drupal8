@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections;
 
 use ArrayIterator;
@@ -25,14 +26,13 @@ use Doctrine\Common\Collections\Expr\ClosureExpressionVisitor;
 /**
  * An ArrayCollection is a Collection implementation that wraps a regular PHP array.
  *
- * @since 2.0
+ * @since  2.0
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
  * @author Roman Borschel <roman@code-factory.org>
  */
 class ArrayCollection implements Collection, Selectable
 {
-
     /**
      * An array containing the entries of this collection.
      *
@@ -51,8 +51,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function toArray()
     {
@@ -60,8 +59,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function first()
     {
@@ -69,8 +67,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function last()
     {
@@ -78,8 +75,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function key()
     {
@@ -87,8 +83,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function next()
     {
@@ -96,8 +91,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function current()
     {
@@ -105,42 +99,40 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove($key)
     {
-        if (! isset($this->elements[$key]) && ! array_key_exists($key, $this->elements)) {
+        if ( ! isset($this->elements[$key]) && ! array_key_exists($key, $this->elements)) {
             return null;
         }
-        
+
         $removed = $this->elements[$key];
         unset($this->elements[$key]);
-        
+
         return $removed;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function removeElement($element)
     {
         $key = array_search($element, $this->elements, true);
-        
+
         if ($key === false) {
             return false;
         }
-        
+
         unset($this->elements[$key]);
-        
+
         return true;
     }
 
     /**
      * Required by interface ArrayAccess.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetExists($offset)
     {
@@ -150,7 +142,7 @@ class ArrayCollection implements Collection, Selectable
     /**
      * Required by interface ArrayAccess.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetGet($offset)
     {
@@ -160,21 +152,21 @@ class ArrayCollection implements Collection, Selectable
     /**
      * Required by interface ArrayAccess.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetSet($offset, $value)
     {
-        if (! isset($offset)) {
+        if ( ! isset($offset)) {
             return $this->add($value);
         }
-        
+
         $this->set($offset, $value);
     }
 
     /**
      * Required by interface ArrayAccess.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetUnset($offset)
     {
@@ -182,8 +174,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function containsKey($key)
     {
@@ -191,8 +182,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function contains($element)
     {
@@ -200,8 +190,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function exists(Closure $p)
     {
@@ -210,13 +199,12 @@ class ArrayCollection implements Collection, Selectable
                 return true;
             }
         }
-        
+
         return false;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function indexOf($element)
     {
@@ -224,8 +212,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function get($key)
     {
@@ -233,8 +220,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getKeys()
     {
@@ -242,8 +228,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getValues()
     {
@@ -251,8 +236,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count()
     {
@@ -260,8 +244,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function set($key, $value)
     {
@@ -269,19 +252,17 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function add($value)
     {
         $this->elements[] = $value;
-        
+
         return true;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isEmpty()
     {
@@ -291,7 +272,7 @@ class ArrayCollection implements Collection, Selectable
     /**
      * Required by interface IteratorAggregate.
      *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator()
     {
@@ -299,8 +280,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function map(Closure $func)
     {
@@ -308,8 +288,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function filter(Closure $p)
     {
@@ -317,28 +296,26 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function forAll(Closure $p)
     {
         foreach ($this->elements as $key => $element) {
-            if (! $p($key, $element)) {
+            if ( ! $p($key, $element)) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function partition(Closure $p)
     {
         $matches = $noMatches = array();
-        
+
         foreach ($this->elements as $key => $element) {
             if ($p($key, $element)) {
                 $matches[$key] = $element;
@@ -346,11 +323,8 @@ class ArrayCollection implements Collection, Selectable
                 $noMatches[$key] = $element;
             }
         }
-        
-        return array(
-            new static($matches),
-            new static($noMatches)
-        );
+
+        return array(new static($matches), new static($noMatches));
     }
 
     /**
@@ -364,8 +338,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function clear()
     {
@@ -373,8 +346,7 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function slice($offset, $length = null)
     {
@@ -382,35 +354,34 @@ class ArrayCollection implements Collection, Selectable
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function matching(Criteria $criteria)
     {
-        $expr = $criteria->getWhereExpression();
+        $expr     = $criteria->getWhereExpression();
         $filtered = $this->elements;
-        
+
         if ($expr) {
-            $visitor = new ClosureExpressionVisitor();
-            $filter = $visitor->dispatch($expr);
+            $visitor  = new ClosureExpressionVisitor();
+            $filter   = $visitor->dispatch($expr);
             $filtered = array_filter($filtered, $filter);
         }
-        
+
         if ($orderings = $criteria->getOrderings()) {
             foreach (array_reverse($orderings) as $field => $ordering) {
-                $next = ClosureExpressionVisitor::sortByField($field, $ordering == Criteria::DESC ? - 1 : 1);
+                $next = ClosureExpressionVisitor::sortByField($field, $ordering == Criteria::DESC ? -1 : 1);
             }
-            
+
             uasort($filtered, $next);
         }
-        
+
         $offset = $criteria->getFirstResult();
         $length = $criteria->getMaxResults();
-        
+
         if ($offset || $length) {
-            $filtered = array_slice($filtered, (int) $offset, $length);
+            $filtered = array_slice($filtered, (int)$offset, $length);
         }
-        
+
         return new static($filtered);
     }
 }

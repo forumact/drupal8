@@ -13,7 +13,6 @@ use Psr\Http\Message\RequestInterface;
  */
 class CurlHandler
 {
-
     /** @var CurlFactoryInterface */
     private $factory;
 
@@ -22,12 +21,13 @@ class CurlHandler
      *
      * - factory: Optional curl factory used to create cURL handles.
      *
-     * @param array $options
-     *            Array of options to use with the handler
+     * @param array $options Array of options to use with the handler
      */
     public function __construct(array $options = [])
     {
-        $this->factory = isset($options['handle_factory']) ? $options['handle_factory'] : new CurlFactory(3);
+        $this->factory = isset($options['handle_factory'])
+            ? $options['handle_factory']
+            : new CurlFactory(3);
     }
 
     public function __invoke(RequestInterface $request, array $options)
@@ -35,11 +35,11 @@ class CurlHandler
         if (isset($options['delay'])) {
             usleep($options['delay'] * 1000);
         }
-        
+
         $easy = $this->factory->create($request, $options);
         curl_exec($easy->handle);
         $easy->errno = curl_errno($easy->handle);
-        
+
         return CurlFactory::finish($this, $easy, $this->factory);
     }
 }

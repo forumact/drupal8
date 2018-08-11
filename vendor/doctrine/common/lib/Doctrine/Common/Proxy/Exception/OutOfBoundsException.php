@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Proxy\Exception;
 
 use OutOfBoundsException as BaseOutOfBoundsException;
@@ -23,14 +24,12 @@ use OutOfBoundsException as BaseOutOfBoundsException;
 /**
  * Proxy Invalid Argument Exception.
  *
- * @link www.doctrine-project.org
+ * @link   www.doctrine-project.org
  * @author Fredrik Wendel <fredrik_w@users.sourceforge.net>
  */
 class OutOfBoundsException extends BaseOutOfBoundsException implements ProxyException
 {
-
     /**
-     *
      * @param string $className
      * @param string $idField
      *

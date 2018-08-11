@@ -38,23 +38,18 @@
 /**
  * Class that represents an RDF Literal of datatype xsd:integer
  *
- * @package EasyRdf
- * @link http://www.w3.org/TR/xmlschema-2/#integer
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @link       http://www.w3.org/TR/xmlschema-2/#integer
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Literal_Integer extends EasyRdf_Literal
 {
-
-    /**
-     * Constructor for creating a new integer literal
+    /** Constructor for creating a new integer literal
      *
-     * @param mixed $value
-     *            The value of the literal
-     * @param string $lang
-     *            Should be null (literals with a datatype can't have a language)
-     * @param string $datatype
-     *            Optional datatype (default 'xsd:integer')
+     * @param  mixed  $value     The value of the literal
+     * @param  string $lang      Should be null (literals with a datatype can't have a language)
+     * @param  string $datatype  Optional datatype (default 'xsd:integer')
      * @return object EasyRdf_Literal_Integer
      */
     public function __construct($value, $lang = null, $datatype = null)
@@ -62,13 +57,12 @@ class EasyRdf_Literal_Integer extends EasyRdf_Literal
         parent::__construct($value, null, $datatype);
     }
 
-    /**
-     * Return the value of the literal cast to a PHP int
+    /** Return the value of the literal cast to a PHP int
      *
      * @return double
      */
     public function getValue()
     {
-        return (int) $this->value;
+        return (int)$this->value;
     }
 }

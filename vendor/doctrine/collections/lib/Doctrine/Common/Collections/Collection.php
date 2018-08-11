@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections;
 
 use ArrayAccess;
@@ -40,20 +41,18 @@ use IteratorAggregate;
  * position unless you explicitly positioned it before. Prefer iteration with
  * external iterators.
  *
- * @since 2.0
+ * @since  2.0
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
  * @author Roman Borschel <roman@code-factory.org>
  */
 interface Collection extends Countable, IteratorAggregate, ArrayAccess
 {
-
     /**
      * Adds an element at the end of the collection.
      *
-     * @param mixed $element
-     *            The element to add.
-     *            
+     * @param mixed $element The element to add.
+     *
      * @return boolean Always TRUE.
      */
     public function add($element);
@@ -69,9 +68,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Checks whether an element is contained in the collection.
      * This is an O(n) operation, where n is the size of the collection.
      *
-     * @param mixed $element
-     *            The element to search for.
-     *            
+     * @param mixed $element The element to search for.
+     *
      * @return boolean TRUE if the collection contains the element, FALSE otherwise.
      */
     public function contains($element);
@@ -86,9 +84,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Removes the element at the specified index from the collection.
      *
-     * @param string|integer $key
-     *            The kex/index of the element to remove.
-     *            
+     * @param string|integer $key The kex/index of the element to remove.
+     *
      * @return mixed The removed element or NULL, if the collection did not contain the element.
      */
     public function remove($key);
@@ -96,9 +93,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Removes the specified element from the collection, if it is found.
      *
-     * @param mixed $element
-     *            The element to remove.
-     *            
+     * @param mixed $element The element to remove.
+     *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeElement($element);
@@ -106,20 +102,18 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Checks whether the collection contains an element with the specified key/index.
      *
-     * @param string|integer $key
-     *            The key/index to check for.
-     *            
+     * @param string|integer $key The key/index to check for.
+     *
      * @return boolean TRUE if the collection contains an element with the specified key/index,
-     *         FALSE otherwise.
+     *                 FALSE otherwise.
      */
     public function containsKey($key);
 
     /**
      * Gets the element at the specified key/index.
      *
-     * @param string|integer $key
-     *            The key/index of the element to retrieve.
-     *            
+     * @param string|integer $key The key/index of the element to retrieve.
+     *
      * @return mixed
      */
     public function get($key);
@@ -128,7 +122,7 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Gets all keys/indices of the collection.
      *
      * @return array The keys/indices of the collection, in the order of the corresponding
-     *         elements in the collection.
+     *               elements in the collection.
      */
     public function getKeys();
 
@@ -136,18 +130,16 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Gets all values of the collection.
      *
      * @return array The values of all elements in the collection, in the order they
-     *         appear in the collection.
+     *               appear in the collection.
      */
     public function getValues();
 
     /**
      * Sets an element in the collection at the specified key/index.
      *
-     * @param string|integer $key
-     *            The key/index of the element to set.
-     * @param mixed $value
-     *            The element to set.
-     *            
+     * @param string|integer $key   The key/index of the element to set.
+     * @param mixed          $value The element to set.
+     *
      * @return void
      */
     public function set($key, $value);
@@ -197,9 +189,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Tests for the existence of an element that satisfies the given predicate.
      *
-     * @param Closure $p
-     *            The predicate.
-     *            
+     * @param Closure $p The predicate.
+     *
      * @return boolean TRUE if the predicate is TRUE for at least one element, FALSE otherwise.
      */
     public function exists(Closure $p);
@@ -208,9 +199,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Returns all the elements of this collection that satisfy the predicate p.
      * The order of the elements is preserved.
      *
-     * @param Closure $p
-     *            The predicate used for filtering.
-     *            
+     * @param Closure $p The predicate used for filtering.
+     *
      * @return Collection A collection with the results of the filter operation.
      */
     public function filter(Closure $p);
@@ -218,9 +208,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Tests whether the given predicate p holds for all elements of this collection.
      *
-     * @param Closure $p
-     *            The predicate.
-     *            
+     * @param Closure $p The predicate.
+     *
      * @return boolean TRUE, if the predicate yields TRUE for all elements, FALSE otherwise.
      */
     public function forAll(Closure $p);
@@ -239,24 +228,21 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Partitions this collection in two collections according to a predicate.
      * Keys are preserved in the resulting collections.
      *
-     * @param Closure $p
-     *            The predicate on which to partition.
-     *            
+     * @param Closure $p The predicate on which to partition.
+     *
      * @return array An array with two elements. The first element contains the collection
-     *         of elements where the predicate returned TRUE, the second element
-     *         contains the collection of elements where the predicate returned FALSE.
+     *               of elements where the predicate returned TRUE, the second element
+     *               contains the collection of elements where the predicate returned FALSE.
      */
     public function partition(Closure $p);
 
     /**
-     * Gets the index/key of a given element.
-     * The comparison of two elements is strict,
+     * Gets the index/key of a given element. The comparison of two elements is strict,
      * that means not only the value but also the type must match.
      * For objects this means reference equality.
      *
-     * @param mixed $element
-     *            The element to search for.
-     *            
+     * @param mixed $element The element to search for.
+     *
      * @return int|string|bool The key/index of the element or FALSE if the element was not found.
      */
     public function indexOf($element);
@@ -268,11 +254,9 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Keys have to be preserved by this method. Calling this method will only return the
      * selected slice and NOT change the elements contained in the collection slice is called on.
      *
-     * @param int $offset
-     *            The offset to start from.
-     * @param int|null $length
-     *            The maximum number of elements to return, or null for no limit.
-     *            
+     * @param int      $offset The offset to start from.
+     * @param int|null $length The maximum number of elements to return, or null for no limit.
+     *
      * @return array
      */
     public function slice($offset, $length = null);

@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -38,7 +39,6 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
  */
 interface ObjectManagerAware
 {
-
     /**
      * Injects responsible ObjectManager and the ClassMetadata into this persistent object.
      *

@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -25,8 +26,8 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
  * The StaticPHPDriver calls a static loadMetadata() method on your entity
  * classes where you can manually populate the ClassMetadata instance.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan H. Wage <jonwage@gmail.com>
@@ -34,7 +35,6 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
  */
 class StaticPHPDriver implements MappingDriver
 {
-
     /**
      * Paths of entity directories.
      *
@@ -72,7 +72,6 @@ class StaticPHPDriver implements MappingDriver
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function loadMetadataForClass($className, ClassMetadata $metadata)
@@ -81,8 +80,7 @@ class StaticPHPDriver implements MappingDriver
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      * @todo Same code exists in AnnotationDriver, should we re-use it somehow or not worry about it?
      */
     public function getAllClassNames()
@@ -90,49 +88,51 @@ class StaticPHPDriver implements MappingDriver
         if ($this->classNames !== null) {
             return $this->classNames;
         }
-        
-        if (! $this->paths) {
+
+        if (!$this->paths) {
             throw MappingException::pathRequired();
         }
-        
+
         $classes = [];
         $includedFiles = [];
-        
+
         foreach ($this->paths as $path) {
-            if (! is_dir($path)) {
+            if (!is_dir($path)) {
                 throw MappingException::fileMappingDriversRequireConfiguredDirectoryPath($path);
             }
-            
-            $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::LEAVES_ONLY);
-            
+
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($path),
+                \RecursiveIteratorIterator::LEAVES_ONLY
+            );
+
             foreach ($iterator as $file) {
                 if ($file->getBasename('.php') == $file->getBasename()) {
                     continue;
                 }
-                
+
                 $sourceFile = realpath($file->getPathName());
                 require_once $sourceFile;
                 $includedFiles[] = $sourceFile;
             }
         }
-        
+
         $declared = get_declared_classes();
-        
+
         foreach ($declared as $className) {
             $rc = new \ReflectionClass($className);
             $sourceFile = $rc->getFileName();
-            if (in_array($sourceFile, $includedFiles) && ! $this->isTransient($className)) {
+            if (in_array($sourceFile, $includedFiles) && !$this->isTransient($className)) {
                 $classes[] = $className;
             }
         }
-        
+
         $this->classNames = $classes;
-        
+
         return $classes;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function isTransient($className)

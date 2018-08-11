@@ -38,21 +38,20 @@
 /**
  * Parent class for the EasyRdf serialiser
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Serialiser
 {
-
     protected $prefixes = array();
 
     public function __construct()
-    {}
+    {
+    }
 
     /**
      * Keep track of the prefixes used while serialising
-     *
      * @ignore
      */
     protected function addPrefix($qname)
@@ -63,21 +62,26 @@ class EasyRdf_Serialiser
 
     /**
      * Check and cleanup parameters passed to serialise() method
-     *
      * @ignore
      */
     protected function checkSerialiseParams(&$graph, &$format)
     {
-        if (is_null($graph) or ! is_object($graph) or ! ($graph instanceof EasyRdf_Graph)) {
-            throw new InvalidArgumentException("\$graph should be an EasyRdf_Graph object and cannot be null");
+        if (is_null($graph) or !is_object($graph) or !($graph instanceof EasyRdf_Graph)) {
+            throw new InvalidArgumentException(
+                "\$graph should be an EasyRdf_Graph object and cannot be null"
+            );
         }
-        
+
         if (is_null($format) or $format == '') {
-            throw new InvalidArgumentException("\$format cannot be null or empty");
+            throw new InvalidArgumentException(
+                "\$format cannot be null or empty"
+            );
         } elseif (is_object($format) and ($format instanceof EasyRdf_Format)) {
             $format = $format->getName();
-        } elseif (! is_string($format)) {
-            throw new InvalidArgumentException("\$format should be a string or an EasyRdf_Format object");
+        } elseif (!is_string($format)) {
+            throw new InvalidArgumentException(
+                "\$format should be a string or an EasyRdf_Format object"
+            );
         }
     }
 
@@ -85,7 +89,6 @@ class EasyRdf_Serialiser
      * Protected method to get the number of reverse properties for a resource
      * If a resource only has a single property, the number of values for that
      * property is returned instead.
-     *
      * @ignore
      */
     protected function reversePropertyCount($resource)
@@ -102,11 +105,12 @@ class EasyRdf_Serialiser
 
     /**
      * Sub-classes must follow this protocol
-     *
      * @ignore
      */
     public function serialise($graph, $format, array $options = array())
     {
-        throw new EasyRdf_Exception("This method should be overridden by sub-classes.");
+        throw new EasyRdf_Exception(
+            "This method should be overridden by sub-classes."
+        );
     }
 }

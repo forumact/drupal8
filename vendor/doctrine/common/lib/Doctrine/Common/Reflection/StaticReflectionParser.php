@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 use Doctrine\Common\Annotations\TokenParser;
@@ -28,7 +29,6 @@ use ReflectionException;
  */
 class StaticReflectionParser implements ReflectionProviderInterface
 {
-
     /**
      * The fully qualified class name.
      *
@@ -99,37 +99,33 @@ class StaticReflectionParser implements ReflectionProviderInterface
     /**
      * Parses a class residing in a PSR-0 hierarchy.
      *
-     * @param string $className
-     *            The full, namespaced class name.
-     * @param ClassFinderInterface $finder
-     *            A ClassFinder object which finds the class.
-     * @param boolean $classAnnotationOptimize
-     *            Only retrieve the class docComment.
-     *            Presumes there is only one statement per line.
+     * @param string               $className               The full, namespaced class name.
+     * @param ClassFinderInterface $finder                  A ClassFinder object which finds the class.
+     * @param boolean              $classAnnotationOptimize Only retrieve the class docComment.
+     *                                                      Presumes there is only one statement per line.
      */
     public function __construct($className, $finder, $classAnnotationOptimize = false)
     {
         $this->className = ltrim($className, '\\');
         $lastNsPos = strrpos($this->className, '\\');
-        
+
         if ($lastNsPos !== false) {
             $this->namespace = substr($this->className, 0, $lastNsPos);
             $this->shortClassName = substr($this->className, $lastNsPos + 1);
         } else {
             $this->shortClassName = $this->className;
         }
-        
+
         $this->finder = $finder;
         $this->classAnnotationOptimize = $classAnnotationOptimize;
     }
 
     /**
-     *
      * @return void
      */
     protected function parse()
     {
-        if ($this->parsed || ! $fileName = $this->finder->findFile($this->className)) {
+        if ($this->parsed || !$fileName = $this->finder->findFile($this->className)) {
             return;
         }
         $this->parsed = true;
@@ -168,7 +164,7 @@ class StaticReflectionParser implements ReflectionProviderInterface
                             // For example, it can be T_FINAL.
                             continue 2;
                         }
-                    // No break.
+                        // No break.
                     case T_FUNCTION:
                         // The next string after function is the name, but
                         // there can be & before the function name so find the
@@ -196,10 +192,10 @@ class StaticReflectionParser implements ReflectionProviderInterface
                                 if ($alias == $prefix) {
                                     $this->parentClassName = '\\' . $use . $postfix;
                                     $fullySpecified = true;
-                                }
+                              }
                             }
                         }
-                        if (! $fullySpecified) {
+                        if (!$fullySpecified) {
                             $this->parentClassName = '\\' . $this->namespace . '\\' . $this->parentClassName;
                         }
                         break;
@@ -209,7 +205,6 @@ class StaticReflectionParser implements ReflectionProviderInterface
     }
 
     /**
-     *
      * @return StaticReflectionParser
      */
     protected function getParentStaticReflectionParser()
@@ -217,12 +212,11 @@ class StaticReflectionParser implements ReflectionProviderInterface
         if (empty($this->parentStaticReflectionParser)) {
             $this->parentStaticReflectionParser = new static($this->parentClassName, $this->finder);
         }
-        
+
         return $this->parentStaticReflectionParser;
     }
 
     /**
-     *
      * @return string
      */
     public function getClassName()
@@ -231,7 +225,6 @@ class StaticReflectionParser implements ReflectionProviderInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getNamespaceName()
@@ -240,8 +233,7 @@ class StaticReflectionParser implements ReflectionProviderInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getReflectionClass()
     {
@@ -249,8 +241,7 @@ class StaticReflectionParser implements ReflectionProviderInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getReflectionMethod($methodName)
     {
@@ -258,8 +249,7 @@ class StaticReflectionParser implements ReflectionProviderInterface
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getReflectionProperty($propertyName)
     {
@@ -274,37 +264,33 @@ class StaticReflectionParser implements ReflectionProviderInterface
     public function getUseStatements()
     {
         $this->parse();
-        
+
         return $this->useStatements;
     }
 
     /**
      * Gets the doc comment.
      *
-     * @param string $type
-     *            The type: 'class', 'property' or 'method'.
-     * @param string $name
-     *            The name of the property or method, not needed for 'class'.
-     *            
+     * @param string $type The type: 'class', 'property' or 'method'.
+     * @param string $name The name of the property or method, not needed for 'class'.
+     *
      * @return string The doc comment, empty string if none.
      */
     public function getDocComment($type = 'class', $name = '')
     {
         $this->parse();
-        
+
         return $name ? $this->docComment[$type][$name] : $this->docComment[$type];
     }
 
     /**
      * Gets the PSR-0 parser for the declaring class.
      *
-     * @param string $type
-     *            The type: 'property' or 'method'.
-     * @param string $name
-     *            The name of the property or method.
-     *            
+     * @param string $type The type: 'property' or 'method'.
+     * @param string $name The name of the property or method.
+     *
      * @return StaticReflectionParser A static reflection parser for the declaring class.
-     *        
+     *
      * @throws ReflectionException
      */
     public function getStaticReflectionParserForDeclaringClass($type, $name)
@@ -313,7 +299,7 @@ class StaticReflectionParser implements ReflectionProviderInterface
         if (isset($this->docComment[$type][$name])) {
             return $this;
         }
-        if (! empty($this->parentClassName)) {
+        if (!empty($this->parentClassName)) {
             return $this->getParentStaticReflectionParser()->getStaticReflectionParserForDeclaringClass($type, $name);
         }
         throw new ReflectionException('Invalid ' . $type . ' "' . $name . '"');

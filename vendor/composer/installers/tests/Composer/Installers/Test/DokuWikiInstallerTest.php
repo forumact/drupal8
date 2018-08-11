@@ -8,31 +8,28 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class DokuWikiInstallerTest extends BaseTestCase
 {
-
     /**
-     *
      * @var DokuWikiInstaller
      */
     private $installer;
 
     public function setUp()
     {
-        $this->installer = new DokuWikiInstaller(new Package('NyanCat', '4.2', '4.2'), new Composer());
+        $this->installer = new DokuWikiInstaller(
+            new Package('NyanCat', '4.2', '4.2'),
+            new Composer()
+        );
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals($this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )), array(
-            'name' => $expected,
-            'type' => $type
-        ));
+        $this->assertEquals(
+            $this->installer->inflectPackageVars(array('name' => $name, 'type'=>$type)),
+            array('name' => $expected, 'type'=>$type)
+        );
     }
 
     public function packageNameInflectionProvider()
@@ -41,53 +38,53 @@ class DokuWikiInstallerTest extends BaseTestCase
             array(
                 'dokuwiki-plugin',
                 'dokuwiki-test-plugin',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-plugin',
                 'test-plugin',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-plugin',
                 'dokuwiki_test',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-plugin',
                 'test',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-plugin',
                 'test-template',
-                'test-template'
+                'test-template',
             ),
             array(
                 'dokuwiki-template',
                 'dokuwiki-test-template',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-template',
                 'test-template',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-template',
                 'dokuwiki_test',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-template',
                 'test',
-                'test'
+                'test',
             ),
             array(
                 'dokuwiki-template',
                 'test-plugin',
-                'test-plugin'
-            )
+                'test-plugin',
+            ),
         );
     }
 }

@@ -38,13 +38,12 @@
 /**
  * Class to serialise RDF using the ARC2 library.
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Serialiser_Arc extends EasyRdf_Serialiser_RdfPhp
 {
-
     private static $supportedTypes = array(
         'rdfxml' => 'RDFXML',
         'turtle' => 'Turtle',
@@ -65,29 +64,33 @@ class EasyRdf_Serialiser_Arc extends EasyRdf_Serialiser_RdfPhp
     /**
      * Serialise an EasyRdf_Graph into RDF format of choice.
      *
-     * @param EasyRdf_Graph $graph
-     *            An EasyRdf_Graph object.
-     * @param string $format
-     *            The name of the format to convert to.
-     * @param array $options
+     * @param EasyRdf_Graph $graph   An EasyRdf_Graph object.
+     * @param string        $format  The name of the format to convert to.
+     * @param array         $options
      * @throws EasyRdf_Exception
-     * @return string The RDF in the new desired format.
+     * @return string              The RDF in the new desired format.
      */
     public function serialise($graph, $format, array $options = array())
     {
         parent::checkSerialiseParams($graph, $format);
-        
+
         if (array_key_exists($format, self::$supportedTypes)) {
             $className = self::$supportedTypes[$format];
         } else {
-            throw new EasyRdf_Exception("EasyRdf_Serialiser_Arc does not support: $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Serialiser_Arc does not support: $format"
+            );
         }
-        
+
         $serialiser = ARC2::getSer($className);
         if ($serialiser) {
-            return $serialiser->getSerializedIndex(parent::serialise($graph, 'php'));
+            return $serialiser->getSerializedIndex(
+                parent::serialise($graph, 'php')
+            );
         } else {
-            throw new EasyRdf_Exception("ARC2 failed to get a $className serialiser.");
+            throw new EasyRdf_Exception(
+                "ARC2 failed to get a $className serialiser."
+            );
         }
     }
 }

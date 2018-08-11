@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Event;
 
 use Doctrine\Common\EventArgs;
@@ -25,22 +26,19 @@ use Doctrine\Common\Persistence\ObjectManager;
  * Lifecycle Events are triggered by the UnitOfWork during lifecycle transitions
  * of entities.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Roman Borschel <roman@code-factory.de>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class LifecycleEventArgs extends EventArgs
 {
-
     /**
-     *
      * @var ObjectManager
      */
     private $objectManager;
 
     /**
-     *
      * @var object
      */
     private $object;
@@ -48,7 +46,7 @@ class LifecycleEventArgs extends EventArgs
     /**
      * Constructor.
      *
-     * @param object $object
+     * @param object        $object
      * @param ObjectManager $objectManager
      */
     public function __construct($object, ObjectManager $objectManager)

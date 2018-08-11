@@ -35,12 +35,13 @@
  * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 
+
 /**
  * Class containing static utility functions
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Utils
 {
@@ -54,8 +55,7 @@ class EasyRdf_Utils
      * 'rss-tag-soup' becomes RssTagSoup
      * 'FOO//BAR' becomes FooBar
      *
-     * @param
-     *            string The input string
+     * @param string The input string
      * @return string The input string converted to CamelCase
      */
     public static function camelise($str)
@@ -72,8 +72,7 @@ class EasyRdf_Utils
      *
      * Note: this method only checks the key of the first value in the array.
      *
-     * @param mixed $param
-     *            The variable to check
+     * @param mixed $param The variable to check
      * @return bool true if the variable is an associative array
      */
     public static function isAssociativeArray($param)
@@ -93,8 +92,7 @@ class EasyRdf_Utils
     /**
      * Remove the fragment from a URI (if it has one)
      *
-     * @param mixed $uri
-     *            A URI
+     * @param mixed $uri A URI
      * @return string The same URI with the fragment removed
      */
     public static function removeFragmentFromUri($uri)
@@ -107,33 +105,31 @@ class EasyRdf_Utils
         }
     }
 
-    /**
-     * Return pretty-print view of a resource URI
+    /** Return pretty-print view of a resource URI
      *
      * This method is mainly intended for internal use and is used by
      * EasyRdf_Graph and EasyRdf_Sparql_Result to format a resource
      * for display.
      *
-     * @param mixed $resource
-     *            An EasyRdf_Resource object or an associative array
-     * @param string $format
-     *            Either 'html' or 'text'
-     * @param string $color
-     *            The colour of the text
+     * @param  mixed  $resource An EasyRdf_Resource object or an associative array
+     * @param  string $format   Either 'html' or 'text'
+     * @param  string $color    The colour of the text
      * @return string
      */
     public static function dumpResourceValue($resource, $format = 'html', $color = 'blue')
     {
-        if (! preg_match('/^#?[-\w]+$/', $color)) {
-            throw new InvalidArgumentException("\$color must be a legal color code or name");
+        if (!preg_match('/^#?[-\w]+$/', $color)) {
+            throw new InvalidArgumentException(
+                "\$color must be a legal color code or name"
+            );
         }
-        
+
         if (is_object($resource)) {
             $resource = strval($resource);
         } elseif (is_array($resource)) {
             $resource = $resource['value'];
         }
-        
+
         $short = EasyRdf_Namespace::shorten($resource);
         if ($format == 'html') {
             $escaped = htmlentities($resource, ENT_QUOTES);
@@ -156,36 +152,32 @@ class EasyRdf_Utils
         }
     }
 
-    /**
-     * Return pretty-print view of a literal
+    /** Return pretty-print view of a literal
      *
      * This method is mainly intended for internal use and is used by
      * EasyRdf_Graph and EasyRdf_Sparql_Result to format a literal
      * for display.
      *
-     * @param mixed $literal
-     *            An EasyRdf_Literal object or an associative array
-     * @param string $format
-     *            Either 'html' or 'text'
-     * @param string $color
-     *            The colour of the text
+     * @param  mixed  $literal  An EasyRdf_Literal object or an associative array
+     * @param  string $format   Either 'html' or 'text'
+     * @param  string $color    The colour of the text
      * @return string
      */
     public static function dumpLiteralValue($literal, $format = 'html', $color = 'black')
     {
-        if (! preg_match('/^#?[-\w]+$/', $color)) {
-            throw new InvalidArgumentException("\$color must be a legal color code or name");
-        }
-        
-        if (is_object($literal)) {
-            $literal = $literal->toRdfPhp();
-        } elseif (! is_array($literal)) {
-            $literal = array(
-                'value' => $literal
+        if (!preg_match('/^#?[-\w]+$/', $color)) {
+            throw new InvalidArgumentException(
+                "\$color must be a legal color code or name"
             );
         }
-        
-        $text = '"' . $literal['value'] . '"';
+
+        if (is_object($literal)) {
+            $literal = $literal->toRdfPhp();
+        } elseif (!is_array($literal)) {
+            $literal = array('value' => $literal);
+        }
+
+        $text = '"'.$literal['value'].'"';
         if (isset($literal['lang'])) {
             $text .= '@' . $literal['lang'];
         }
@@ -194,23 +186,23 @@ class EasyRdf_Utils
             if ($short) {
                 $text .= "^^$short";
             } else {
-                $text .= "^^<" . $literal['datatype'] . ">";
+                $text .= "^^<".$literal['datatype'].">";
             }
         }
-        
+
         if ($format == 'html') {
-            return "<span style='color:$color'>" . htmlentities($text, ENT_COMPAT, "UTF-8") . "</span>";
+            return "<span style='color:$color'>".
+                   htmlentities($text, ENT_COMPAT, "UTF-8").
+                   "</span>";
         } else {
             return $text;
         }
     }
 
-    /**
-     * Clean up and split a mime-type up into its parts
+    /** Clean up and split a mime-type up into its parts
      *
-     * @param string $mimeType
-     *            A MIME Type, optionally with parameters
-     * @return array $type, $parameters
+     * @param  string $mimeType   A MIME Type, optionally with parameters
+     * @return array  $type, $parameters
      */
     public static function parseMimeType($mimeType)
     {
@@ -222,90 +214,78 @@ class EasyRdf_Utils
                 $params[$matches[1]] = $matches[2];
             }
         }
-        return array(
-            $type,
-            $params
-        );
+        return array($type, $params);
     }
 
-    /**
-     * Execute a command as a pipe
+    /** Execute a command as a pipe
      *
      * The proc_open() function is used to open a pipe to a
      * a command line process, writing $input to STDIN, returning STDOUT
      * and throwing an exception if anything is written to STDERR or the
      * process returns non-zero.
      *
-     * @param string $command
-     *            The command to execute
-     * @param array $args
-     *            Optional list of arguments to pass to the command
-     * @param string $input
-     *            Optional buffer to send to the command
-     * @param string $dir
-     *            Path to directory to run command in (defaults to /tmp)
+     * @param  string $command   The command to execute
+     * @param  array  $args      Optional list of arguments to pass to the command
+     * @param  string $input     Optional buffer to send to the command
+     * @param  string $dir       Path to directory to run command in (defaults to /tmp)
      * @return string The result of the command, printed to STDOUT
      */
     public static function execCommandPipe($command, $args = null, $input = null, $dir = null)
     {
         $descriptorspec = array(
-            0 => array(
-                'pipe',
-                'r'
-            ),
-            1 => array(
-                'pipe',
-                'w'
-            ),
-            2 => array(
-                'pipe',
-                'w'
-            )
+            0 => array('pipe', 'r'),
+            1 => array('pipe', 'w'),
+            2 => array('pipe', 'w')
         );
-        
+
         // Use the system tmp directory by default
-        if (! $dir) {
+        if (!$dir) {
             $dir = sys_get_temp_dir();
         }
-        
+
         if (is_array($args)) {
-            $fullCommand = implode(' ', array_map('escapeshellcmd', array_merge(array(
-                $command
-            ), $args)));
+            $fullCommand = implode(
+                ' ',
+                array_map('escapeshellcmd', array_merge(array($command), $args))
+            );
         } else {
             $fullCommand = escapeshellcmd($command);
             if ($args) {
-                $fullCommand .= ' ' . escapeshellcmd($args);
+                $fullCommand .= ' '.escapeshellcmd($args);
             }
         }
-        
+
         $process = proc_open($fullCommand, $descriptorspec, $pipes, $dir);
         if (is_resource($process)) {
             // $pipes now looks like this:
             // 0 => writeable handle connected to child stdin
             // 1 => readable handle connected to child stdout
             // 2 => readable handle connected to child stderr
-            
+
             if ($input) {
                 fwrite($pipes[0], $input);
             }
             fclose($pipes[0]);
-            
+
             $output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
             $error = stream_get_contents($pipes[2]);
             fclose($pipes[2]);
-            
+
             // It is important that you close any pipes before calling
             // proc_close in order to avoid a deadlock
             $returnValue = proc_close($process);
             if ($returnValue) {
-                throw new EasyRdf_Exception("Error while executing command $command: " . $error);
+                throw new EasyRdf_Exception(
+                    "Error while executing command $command: ".$error
+                );
             }
         } else {
-            throw new EasyRdf_Exception("Failed to execute command $command");
+            throw new EasyRdf_Exception(
+                "Failed to execute command $command"
+            );
         }
-        
+
         return $output;
     }
 }

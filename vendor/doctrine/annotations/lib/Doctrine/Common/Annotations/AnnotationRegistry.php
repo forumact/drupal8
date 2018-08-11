@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Annotations;
 
 /**
@@ -23,7 +24,6 @@ namespace Doctrine\Common\Annotations;
  */
 final class AnnotationRegistry
 {
-
     /**
      * A map of namespaces to use for autoloading purposes based on a PSR-0 convention.
      *
@@ -34,17 +34,16 @@ final class AnnotationRegistry
      *
      * @var array
      */
-    private static $autoloadNamespaces = array();
+    static private $autoloadNamespaces = array();
 
     /**
      * A map of autoloader callables.
      *
      * @var array
      */
-    private static $loaders = array();
+    static private $loaders = array();
 
     /**
-     *
      * @return void
      */
     static public function reset()
@@ -70,7 +69,7 @@ final class AnnotationRegistry
      *
      * Loading of this namespaces will be done with a PSR-0 namespace loading algorithm.
      *
-     * @param string $namespace
+     * @param string            $namespace
      * @param string|array|null $dirs
      *
      * @return void
@@ -108,7 +107,7 @@ final class AnnotationRegistry
      */
     static public function registerLoader($callable)
     {
-        if (! is_callable($callable)) {
+        if (!is_callable($callable)) {
             throw new \InvalidArgumentException("A callable is expected in AnnotationRegistry::registerLoader().");
         }
         self::$loaders[] = $callable;
@@ -123,7 +122,7 @@ final class AnnotationRegistry
      */
     static public function loadAnnotationClass($class)
     {
-        foreach (self::$autoloadNamespaces as $namespace => $dirs) {
+        foreach (self::$autoloadNamespaces AS $namespace => $dirs) {
             if (strpos($class, $namespace) === 0) {
                 $file = str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
                 if ($dirs === null) {
@@ -132,7 +131,7 @@ final class AnnotationRegistry
                         return true;
                     }
                 } else {
-                    foreach ((array) $dirs as $dir) {
+                    foreach((array)$dirs AS $dir) {
                         if (is_file($dir . DIRECTORY_SEPARATOR . $file)) {
                             require $dir . DIRECTORY_SEPARATOR . $file;
                             return true;
@@ -141,8 +140,8 @@ final class AnnotationRegistry
                 }
             }
         }
-        
-        foreach (self::$loaders as $loader) {
+
+        foreach (self::$loaders AS $loader) {
             if (call_user_func($loader, $class) === true) {
                 return true;
             }

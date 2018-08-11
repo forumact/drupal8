@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Event;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,13 +27,11 @@ use Doctrine\Common\Persistence\ObjectManager;
  * @author Guilherme Blanco <guilehrmeblanco@hotmail.com>
  * @author Roman Borschel <roman@code-factory.org>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.2
+ * @since  2.2
  */
 class PreUpdateEventArgs extends LifecycleEventArgs
 {
-
     /**
-     *
      * @var array
      */
     private $entityChangeSet;
@@ -40,14 +39,14 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     /**
      * Constructor.
      *
-     * @param object $entity
+     * @param object        $entity
      * @param ObjectManager $objectManager
-     * @param array $changeSet
+     * @param array         $changeSet
      */
     public function __construct($entity, ObjectManager $objectManager, array &$changeSet)
     {
         parent::__construct($entity, $objectManager);
-        
+
         $this->entityChangeSet = &$changeSet;
     }
 
@@ -83,7 +82,7 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     public function getOldValue($field)
     {
         $this->assertValidField($field);
-        
+
         return $this->entityChangeSet[$field][0];
     }
 
@@ -97,7 +96,7 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     public function getNewValue($field)
     {
         $this->assertValidField($field);
-        
+
         return $this->entityChangeSet[$field][1];
     }
 
@@ -105,14 +104,14 @@ class PreUpdateEventArgs extends LifecycleEventArgs
      * Sets the new value of this field.
      *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return void
      */
     public function setNewValue($field, $value)
     {
         $this->assertValidField($field);
-        
+
         $this->entityChangeSet[$field][1] = $value;
     }
 
@@ -127,8 +126,12 @@ class PreUpdateEventArgs extends LifecycleEventArgs
      */
     private function assertValidField($field)
     {
-        if (! isset($this->entityChangeSet[$field])) {
-            throw new \InvalidArgumentException(sprintf('Field "%s" is not a valid field of the entity "%s" in PreUpdateEventArgs.', $field, get_class($this->getEntity())));
+        if ( ! isset($this->entityChangeSet[$field])) {
+            throw new \InvalidArgumentException(sprintf(
+                'Field "%s" is not a valid field of the entity "%s" in PreUpdateEventArgs.',
+                $field,
+                get_class($this->getEntity())
+            ));
         }
     }
 }

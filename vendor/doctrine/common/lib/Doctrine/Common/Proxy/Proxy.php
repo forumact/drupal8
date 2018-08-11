@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Proxy;
 
 use Closure;
@@ -25,12 +26,11 @@ use Doctrine\Common\Persistence\Proxy as BaseProxy;
  * Interface for proxy classes.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @author Marco Pivetta <ocramius@gmail.com>
- * @since 2.4
+ * @author Marco Pivetta  <ocramius@gmail.com>
+ * @since  2.4
  */
 interface Proxy extends BaseProxy
 {
-
     /**
      * Marks the proxy as initialized or not.
      *
@@ -41,8 +41,7 @@ interface Proxy extends BaseProxy
     public function __setInitialized($initialized);
 
     /**
-     * Sets the initializer callback to be used when initializing the proxy.
-     * That
+     * Sets the initializer callback to be used when initializing the proxy. That
      * initializer should accept 3 parameters: $proxy, $method and $params. Those
      * are respectively the proxy object that is being initialized, the method name
      * that triggered initialization and the parameters passed to that method.
@@ -63,8 +62,7 @@ interface Proxy extends BaseProxy
     public function __getInitializer();
 
     /**
-     * Sets the callback to be used when cloning the proxy.
-     * That initializer should accept
+     * Sets the callback to be used when cloning the proxy. That initializer should accept
      * a single parameter, which is the cloned proxy instance itself.
      *
      * @param Closure|null $cloner
@@ -86,7 +84,7 @@ interface Proxy extends BaseProxy
      * Retrieves the list of lazy loaded properties for a given proxy
      *
      * @return array Keys are the property names, and values are the default values
-     *         for those properties.
+     *               for those properties.
      */
     public function __getLazyProperties();
 }

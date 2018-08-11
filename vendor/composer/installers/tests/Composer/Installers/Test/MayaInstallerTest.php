@@ -8,31 +8,28 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class MayaInstallerTest extends BaseTestCase
 {
-
     /**
-     *
      * @var MayaInstaller
      */
     private $installer;
 
     public function setUp()
     {
-        $this->installer = new MayaInstaller(new Package('NyanCat', '4.2', '4.2'), new Composer());
+        $this->installer = new MayaInstaller(
+            new Package('NyanCat', '4.2', '4.2'),
+            new Composer()
+        );
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals(array(
-            'name' => $expected,
-            'type' => $type
-        ), $this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )));
+        $this->assertEquals(
+            array('name' => $expected, 'type' => $type),
+            $this->installer->inflectPackageVars(array('name' => $name, 'type' => $type))
+        );
     }
 
     public function packageNameInflectionProvider()
@@ -58,8 +55,8 @@ class MayaInstallerTest extends BaseTestCase
             array(
                 'maya-module',
                 'some-module-module',
-                'SomeModule'
-            )
+                'SomeModule',
+            ),
         );
     }
 }

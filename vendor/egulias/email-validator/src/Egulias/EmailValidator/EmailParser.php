@@ -1,4 +1,5 @@
 <?php
+
 namespace Egulias\EmailValidator;
 
 use Egulias\EmailValidator\Parser\DomainPart;
@@ -11,19 +12,13 @@ use Egulias\EmailValidator\Parser\LocalPart;
  */
 class EmailParser
 {
-
     const EMAIL_MAX_LENGTH = 254;
 
     protected $warnings = array();
-
     protected $domainPart = '';
-
     protected $localPart = '';
-
     protected $lexer;
-
     protected $localPartParser;
-
     protected $domainPartParser;
 
     public function __construct(EmailLexer $lexer)
@@ -34,42 +29,38 @@ class EmailParser
     }
 
     /**
-     *
-     * @param
-     *            $str
+     * @param $str
      * @return array
      */
     public function parse($str)
     {
         $this->lexer->setInput($str);
-        
-        if (! $this->hasAtToken()) {
+
+        if (!$this->hasAtToken()) {
             throw new \InvalidArgumentException('ERR_NOLOCALPART');
         }
-        
+
+
         $this->localPartParser->parse($str);
         $this->domainPartParser->parse($str);
-        
+
         $this->setParts($str);
-        
+
         if ($this->lexer->hasInvalidTokens()) {
             throw new \InvalidArgumentException('ERR_INVALID_ATEXT');
         }
-        
-        return array(
-            'local' => $this->localPart,
-            'domain' => $this->domainPart
-        );
+
+        return array('local' => $this->localPart, 'domain' => $this->domainPart);
     }
 
     public function getWarnings()
     {
         $localPartWarnings = $this->localPartParser->getWarnings();
         $domainPartWarnings = $this->domainPartParser->getWarnings();
-        
+
         $this->warnings = array_merge($localPartWarnings, $domainPartWarnings);
         $this->addLongEmailWarning($this->localPart, $this->domainPart);
-        
+
         return $this->warnings;
     }
 
@@ -92,12 +83,11 @@ class EmailParser
         if ($this->lexer->token['type'] === EmailLexer::S_AT) {
             return false;
         }
-        
+
         return true;
     }
 
     /**
-     *
      * @param string $localPart
      * @param string $parsedDomainPart
      */

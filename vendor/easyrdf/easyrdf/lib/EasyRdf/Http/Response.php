@@ -41,10 +41,10 @@
 /**
  * Class that represents an HTTP 1.0 / 1.1 response message.
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- *            Copyright (c) 2005-2009 Zend Technologies USA Inc.
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ *             Copyright (c) 2005-2009 Zend Technologies USA Inc.
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Http_Response
 {
@@ -58,8 +58,7 @@ class EasyRdf_Http_Response
 
     /**
      * The HTTP response code as string
-     * (e.g.
-     * 'Not Found' for 404 or 'Internal Server Error' for 500)
+     * (e.g. 'Not Found' for 404 or 'Internal Server Error' for 500)
      *
      * @var string
      */
@@ -82,25 +81,25 @@ class EasyRdf_Http_Response
     /**
      * Constructor.
      *
-     * @param int $status
-     *            HTTP Status code
-     * @param array $headers
-     *            The HTTP response headers
-     * @param string $body
-     *            The content of the response
-     * @param string $version
-     *            The HTTP Version (1.0 or 1.1)
-     * @param string $message
-     *            The HTTP response Message
-     * @return object EasyRdf_Http_Response
+     * @param  int     $status HTTP Status code
+     * @param  array   $headers The HTTP response headers
+     * @param  string  $body The content of the response
+     * @param  string  $version The HTTP Version (1.0 or 1.1)
+     * @param  string  $message The HTTP response Message
+     * @return object  EasyRdf_Http_Response
      */
-    public function __construct($status, $headers, $body = null, $version = '1.1', $message = null)
-    {
+    public function __construct(
+        $status,
+        $headers,
+        $body = null,
+        $version = '1.1',
+        $message = null
+    ) {
         $this->status = intval($status);
         $this->body = $body;
         $this->version = $version;
         $this->message = $message;
-        
+
         foreach ($headers as $k => $v) {
             $k = ucwords(strtolower($k));
             $this->headers[$k] = $v;
@@ -149,8 +148,7 @@ class EasyRdf_Http_Response
 
     /**
      * Return a message describing the HTTP response code
-     * (Eg.
-     * "OK", "Not Found", "Moved Permanently")
+     * (Eg. "OK", "Not Found", "Moved Permanently")
      *
      * @return string
      */
@@ -172,7 +170,7 @@ class EasyRdf_Http_Response
             case 'chunked':
                 return self::decodeChunkedBody($this->body);
                 break;
-            
+
             // No transfer encoding, or unknown encoding extension:
             // return body as is
             default:
@@ -217,8 +215,7 @@ class EasyRdf_Http_Response
     /**
      * Get a specific header as string, or null if it is not set
      *
-     * @param
-     *            string$header
+     * @param string$header
      * @return string|array|null
      */
     public function getHeader($header)
@@ -234,20 +231,18 @@ class EasyRdf_Http_Response
     /**
      * Get all headers as string
      *
-     * @param boolean $statusLine
-     *            Whether to return the first status line (ie "HTTP 200 OK")
-     * @param string $br
-     *            Line breaks (eg. "\n", "\r\n", "<br />")
+     * @param boolean $statusLine Whether to return the first status line (ie "HTTP 200 OK")
+     * @param string  $br         Line breaks (eg. "\n", "\r\n", "<br />")
      * @return string
      */
     public function getHeadersAsString($statusLine = true, $br = "\n")
     {
         $str = '';
-        
+
         if ($statusLine) {
             $str = "HTTP/{$this->version} {$this->status} {$this->message}{$br}";
         }
-        
+
         // Iterate over the headers and stringify them
         foreach ($this->headers as $name => $value) {
             if (is_string($value)) {
@@ -258,7 +253,7 @@ class EasyRdf_Http_Response
                 }
             }
         }
-        
+
         return $str;
     }
 
@@ -275,9 +270,11 @@ class EasyRdf_Http_Response
         if ($matches and sizeof($matches) == 2) {
             list ($headerLines, $body) = $matches;
         } else {
-            throw new EasyRdf_Exception("Failed to parse HTTP response.");
+            throw new EasyRdf_Exception(
+                "Failed to parse HTTP response."
+            );
         }
-        
+
         // Split headers part to lines
         $headerLines = preg_split('|[\r\n]+|m', $headerLines);
         $status = array_shift($headerLines);
@@ -286,21 +283,21 @@ class EasyRdf_Http_Response
             $status = $m[2];
             $message = $m[3];
         } else {
-            throw new EasyRdf_Exception("Failed to parse HTTP response status line.");
+            throw new EasyRdf_Exception(
+                "Failed to parse HTTP response status line."
+            );
         }
-        
+
         // Process the rest of the header lines
         $headers = array();
         foreach ($headerLines as $line) {
             if (preg_match("|^([\w-]+):\s+(.+)$|", $line, $m)) {
                 $hName = ucwords(strtolower($m[1]));
                 $hValue = $m[2];
-                
+
                 if (isset($headers[$hName])) {
                     if (! is_array($headers[$hName])) {
-                        $headers[$hName] = array(
-                            $headers[$hName]
-                        );
+                        $headers[$hName] = array($headers[$hName]);
                     }
                     $headers[$hName][] = $hValue;
                 } else {
@@ -308,9 +305,10 @@ class EasyRdf_Http_Response
                 }
             }
         }
-        
+
         return new EasyRdf_Http_Response($status, $headers, $body, $version, $message);
     }
+
 
     /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
@@ -321,7 +319,7 @@ class EasyRdf_Http_Response
     public static function decodeChunkedBody($body)
     {
         $decBody = '';
-        
+
         while (trim($body)) {
             if (preg_match('/^([\da-fA-F]+)[^\r\n]*\r\n/sm', $body, $m)) {
                 $length = hexdec(trim($m[1]));
@@ -329,18 +327,20 @@ class EasyRdf_Http_Response
                 $decBody .= substr($body, $cut, $length);
                 $body = substr($body, $cut + $length + 2);
             } else {
-                throw new EasyRdf_Exception("Failed to decode chunked body in HTTP response.");
+                throw new EasyRdf_Exception(
+                    "Failed to decode chunked body in HTTP response."
+                );
             }
         }
-        
+
         return $decBody;
     }
+
 
     /**
      * Get the entire response as string
      *
-     * @param string $br
-     *            Line breaks (eg. "\n", "\r\n", "<br />")
+     * @param string $br Line breaks (eg. "\n", "\r\n", "<br />")
      * @return string
      */
     public function asString($br = "\n")

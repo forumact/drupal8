@@ -1,4 +1,5 @@
 <?php
+
 namespace Composer\Installers\Test;
 
 use Composer\Composer;
@@ -7,7 +8,6 @@ use Composer\Package\Package;
 
 class SiteDirectInstallerTest extends TestCase
 {
-
     /** @var SiteDirectInstaller $installer */
     protected $installer;
 
@@ -17,11 +17,14 @@ class SiteDirectInstallerTest extends TestCase
     public function SetUp()
     {
         $this->package = new Package('sitedirect/some_name', '1.0.9', '1.0');
-        $this->installer = new SiteDirectInstaller($this->package, new Composer());
+        $this->installer = new SiteDirectInstaller(
+            $this->package,
+            new Composer()
+        );
+
     }
 
     /**
-     *
      * @dataProvider dataProvider
      */
     public function testInflectPackageVars($data, $expected)
@@ -31,14 +34,13 @@ class SiteDirectInstallerTest extends TestCase
     }
 
     /**
-     *
      * @dataProvider dataProvider
      */
     public function testInstallPath($data, $expected)
     {
         $result = $this->installer->inflectPackageVars($data);
         $path = $this->createPackage($data);
-        
+
         // use $result to get the proper capitalization for the vendor path
         $expectedPath = "modules/{$result['vendor']}/{$result['name']}/";
         $notExpectedPath = "modules/{$data['vendor']}/{$data['name']}/";
@@ -47,19 +49,17 @@ class SiteDirectInstallerTest extends TestCase
     }
 
     /**
-     *
-     * @param
-     *            $data
+     * @param $data
      * @return string
      */
     private function createPackage($data)
     {
         $fullName = "{$data['vendor']}/{$data['name']}";
-        
+
         $package = new Package($fullName, '1.0', '1.0');
         $package->setType('sitedirect-module');
         $installer = new SiteDirectInstaller($package, new Composer());
-        
+
         $path = $installer->getInstallPath($package, 'sitedirect');
         return $path;
     }
@@ -71,50 +71,50 @@ class SiteDirectInstallerTest extends TestCase
                 'data' => array(
                     'name' => 'kernel',
                     'vendor' => 'sitedirect',
-                    'type' => 'sitedirect-module'
+                    'type' => 'sitedirect-module',
                 ),
                 'expected' => array(
                     'name' => 'Kernel',
                     'vendor' => 'SiteDirect',
-                    'type' => 'sitedirect-module'
+                    'type' => 'sitedirect-module',
                 )
             ),
             array(
                 'data' => array(
                     'name' => 'that_guy',
                     'vendor' => 'whatGuy',
-                    'type' => 'sitedirect-module'
+                    'type' => 'sitedirect-module',
                 ),
                 'expected' => array(
                     'name' => 'ThatGuy',
                     'vendor' => 'whatGuy',
-                    'type' => 'sitedirect-module'
+                    'type' => 'sitedirect-module',
                 )
             ),
             array(
                 'data' => array(
                     'name' => 'checkout',
                     'vendor' => 'someVendor',
-                    'type' => 'sitedirect-plugin'
+                    'type' => 'sitedirect-plugin',
                 ),
                 'expected' => array(
                     'name' => 'Checkout',
                     'vendor' => 'someVendor',
-                    'type' => 'sitedirect-plugin'
+                    'type' => 'sitedirect-plugin',
                 )
             ),
             array(
                 'data' => array(
                     'name' => 'checkout',
                     'vendor' => 'siteDirect',
-                    'type' => 'sitedirect-plugin'
+                    'type' => 'sitedirect-plugin',
                 ),
                 'expected' => array(
                     'name' => 'Checkout',
                     'vendor' => 'SiteDirect',
-                    'type' => 'sitedirect-plugin'
+                    'type' => 'sitedirect-plugin',
                 )
-            )
+            ),
         );
     }
 }

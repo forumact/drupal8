@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
 namespace Composer\Semver\Constraint;
 
 trigger_error('The ' . __CLASS__ . ' abstract class is deprecated, there is no replacement for it, it will be removed in the next major version.', E_USER_DEPRECATED);
@@ -17,12 +18,10 @@ trigger_error('The ' . __CLASS__ . ' abstract class is deprecated, there is no r
  */
 abstract class AbstractConstraint implements ConstraintInterface
 {
-
     /** @var string */
     protected $prettyString;
 
     /**
-     *
      * @param ConstraintInterface $provider
      *
      * @return bool
@@ -33,13 +32,12 @@ abstract class AbstractConstraint implements ConstraintInterface
             // see note at bottom of this class declaration
             return $this->matchSpecific($provider);
         }
-        
+
         // turn matching around to find a match
         return $provider->matches($this);
     }
 
     /**
-     *
      * @param string $prettyString
      */
     public function setPrettyString($prettyString)
@@ -48,7 +46,6 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getPrettyString()
@@ -56,10 +53,10 @@ abstract class AbstractConstraint implements ConstraintInterface
         if ($this->prettyString) {
             return $this->prettyString;
         }
-        
+
         return $this->__toString();
     }
-    
+
     // implementations must implement a method of this format:
     // not declared abstract here because type hinting violates parameter coherence (TODO right word?)
     // public function matchSpecific(<SpecificConstraintType> $provider);

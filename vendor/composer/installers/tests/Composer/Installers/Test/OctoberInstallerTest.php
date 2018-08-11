@@ -8,31 +8,28 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class OctoberInstallerTest extends BaseTestCase
 {
-
     /**
-     *
      * @var OctoberInstaller
      */
     private $installer;
 
     public function setUp()
     {
-        $this->installer = new OctoberInstaller(new Package('NyanCat', '4.2', '4.2'), new Composer());
+        $this->installer = new OctoberInstaller(
+            new Package('NyanCat', '4.2', '4.2'),
+            new Composer()
+        );
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals($this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )), array(
-            'name' => $expected,
-            'type' => $type
-        ));
+        $this->assertEquals(
+            $this->installer->inflectPackageVars(array('name' => $name, 'type' => $type)),
+            array('name' => $expected, 'type' => $type)
+        );
     }
 
     public function packageNameInflectionProvider()
@@ -41,30 +38,30 @@ class OctoberInstallerTest extends BaseTestCase
             array(
                 'october-plugin',
                 'subpagelist',
-                'subpagelist'
+                'subpagelist',
             ),
             array(
                 'october-plugin',
                 'subpagelist-plugin',
-                'subpagelist'
+                'subpagelist',
             ),
             array(
                 'october-plugin',
                 'semanticoctober',
-                'semanticoctober'
+                'semanticoctober',
             ),
             // tests that exactly one '-theme' is cut off
             array(
                 'october-theme',
                 'some-theme-theme',
-                'some-theme'
+                'some-theme',
             ),
             // tests that names without '-theme' suffix stay valid
             array(
                 'october-theme',
                 'someothertheme',
-                'someothertheme'
-            )
+                'someothertheme',
+            ),
         );
     }
 }

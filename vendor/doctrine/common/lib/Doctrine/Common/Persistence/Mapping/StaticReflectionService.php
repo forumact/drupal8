@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 /**
@@ -25,10 +26,8 @@ namespace Doctrine\Common\Persistence\Mapping;
  */
 class StaticReflectionService implements ReflectionService
 {
-
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getParentClasses($class)
     {
@@ -36,33 +35,30 @@ class StaticReflectionService implements ReflectionService
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassShortName($className)
     {
         if (strpos($className, '\\') !== false) {
-            $className = substr($className, strrpos($className, "\\") + 1);
+            $className = substr($className, strrpos($className, "\\")+1);
         }
         return $className;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassNamespace($className)
     {
         $namespace = '';
         if (strpos($className, '\\') !== false) {
-            $namespace = strrev(substr(strrev($className), strpos(strrev($className), '\\') + 1));
+            $namespace = strrev(substr( strrev($className), strpos(strrev($className), '\\')+1 ));
         }
         return $namespace;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClass($class)
     {
@@ -70,8 +66,7 @@ class StaticReflectionService implements ReflectionService
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getAccessibleProperty($class, $property)
     {
@@ -79,8 +74,7 @@ class StaticReflectionService implements ReflectionService
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasPublicMethod($class, $method)
     {

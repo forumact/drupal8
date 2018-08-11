@@ -16,29 +16,27 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 /**
  * Contract for a Doctrine persistence layer ObjectManager class to implement.
  *
- * @link www.doctrine-project.org
- * @since 2.1
+ * @link   www.doctrine-project.org
+ * @since  2.1
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Jonathan Wage <jonwage@gmail.com>
  */
 interface ObjectManager
 {
-
     /**
      * Finds an object by its identifier.
      *
      * This is just a convenient shortcut for getRepository($className)->find($id).
      *
-     * @param string $className
-     *            The class name of the object to find.
-     * @param mixed $id
-     *            The identity of the object to find.
-     *            
+     * @param string $className The class name of the object to find.
+     * @param mixed  $id        The identity of the object to find.
+     *
      * @return object The found object.
      */
     public function find($className, $id);
@@ -51,9 +49,8 @@ interface ObjectManager
      * NOTE: The persist operation always considers objects that are not yet known to
      * this ObjectManager as NEW. Do not pass detached objects to the persist operation.
      *
-     * @param object $object
-     *            The instance to make managed and persistent.
-     *            
+     * @param object $object The instance to make managed and persistent.
+     *
      * @return void
      */
     public function persist($object);
@@ -63,9 +60,8 @@ interface ObjectManager
      *
      * A removed object will be removed from the database as a result of the flush operation.
      *
-     * @param object $object
-     *            The object instance to remove.
-     *            
+     * @param object $object The object instance to remove.
+     *
      * @return void
      */
     public function remove($object);
@@ -82,28 +78,24 @@ interface ObjectManager
     public function merge($object);
 
     /**
-     * Clears the ObjectManager.
-     * All objects that are currently managed
+     * Clears the ObjectManager. All objects that are currently managed
      * by this ObjectManager become detached.
      *
-     * @param string|null $objectName
-     *            if given, only objects of this type will get detached.
-     *            
+     * @param string|null $objectName if given, only objects of this type will get detached.
+     *
      * @return void
      */
     public function clear($objectName = null);
 
     /**
      * Detaches an object from the ObjectManager, causing a managed object to
-     * become detached.
-     * Unflushed changes made to the object if any
+     * become detached. Unflushed changes made to the object if any
      * (including removal of the object), will not be synchronized to the database.
      * Objects which previously referenced the detached object will continue to
      * reference it.
      *
-     * @param object $object
-     *            The object to detach.
-     *            
+     * @param object $object The object to detach.
+     *
      * @return void
      */
     public function detach($object);
@@ -112,9 +104,8 @@ interface ObjectManager
      * Refreshes the persistent state of an object from the database,
      * overriding any local changes that have not yet been persisted.
      *
-     * @param object $object
-     *            The object to refresh.
-     *            
+     * @param object $object The object to refresh.
+     *
      * @return void
      */
     public function refresh($object);

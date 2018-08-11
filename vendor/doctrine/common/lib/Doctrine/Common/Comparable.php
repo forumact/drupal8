@@ -16,19 +16,19 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common;
 
 /**
  * Comparable interface that allows to compare two value objects to each other for similarity.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  */
 interface Comparable
 {
-
     /**
      * Compares the current object to the passed $other.
      *

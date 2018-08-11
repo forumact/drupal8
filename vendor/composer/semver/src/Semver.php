@@ -8,16 +8,15 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
 namespace Composer\Semver;
 
 use Composer\Semver\Constraint\Constraint;
 
 class Semver
 {
-
     const SORT_ASC = 1;
-
-    const SORT_DESC = - 1;
+    const SORT_DESC = -1;
 
     /** @var VersionParser */
     private static $versionParser;
@@ -35,11 +34,11 @@ class Semver
         if (null === self::$versionParser) {
             self::$versionParser = new VersionParser();
         }
-        
+
         $versionParser = self::$versionParser;
         $provider = new Constraint('==', $versionParser->normalize($version));
         $constraints = $versionParser->parseConstraints($constraints);
-        
+
         return $constraints->matches($provider);
     }
 
@@ -56,7 +55,7 @@ class Semver
         $versions = array_filter($versions, function ($version) use ($constraints) {
             return Semver::satisfies($version, $constraints);
         });
-        
+
         return array_values($versions);
     }
 
@@ -85,7 +84,6 @@ class Semver
     }
 
     /**
-     *
      * @param array $versions
      * @param int $direction
      *
@@ -96,37 +94,34 @@ class Semver
         if (null === self::$versionParser) {
             self::$versionParser = new VersionParser();
         }
-        
+
         $versionParser = self::$versionParser;
         $normalized = array();
-        
+
         // Normalize outside of usort() scope for minor performance increase.
         // Creates an array of arrays: [[normalized, key], ...]
         foreach ($versions as $key => $version) {
-            $normalized[] = array(
-                $versionParser->normalize($version),
-                $key
-            );
+            $normalized[] = array($versionParser->normalize($version), $key);
         }
-        
+
         usort($normalized, function (array $left, array $right) use ($direction) {
             if ($left[0] === $right[0]) {
                 return 0;
             }
-            
+
             if (Comparator::lessThan($left[0], $right[0])) {
-                return - $direction;
+                return -$direction;
             }
-            
+
             return $direction;
         });
-        
+
         // Recreate input array, using the original indexes which are now in sorted order.
         $sorted = array();
         foreach ($normalized as $item) {
             $sorted[] = $versions[$item[1]];
         }
-        
+
         return $sorted;
     }
 }

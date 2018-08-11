@@ -41,52 +41,50 @@
  * http://n2.talis.com/wiki/RDF_PHP_Specification
  * docs/appendix-a-rdf-formats-php.md
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Parser_RdfPhp extends EasyRdf_Parser
 {
-
     /**
      * Constructor
      *
      * @return object EasyRdf_Parser_RdfPhp
      */
     public function __construct()
-    {}
+    {
+    }
 
     /**
-     * Parse RDF/PHP into an EasyRdf_Graph
-     *
-     * @param
-     *            object EasyRdf_Graph $graph the graph to load the data into
-     * @param string $data
-     *            the RDF document data
-     * @param string $format
-     *            the format of the input data
-     * @param string $baseUri
-     *            the base URI of the data being parsed
-     * @return integer The number of triples added to the graph
-     */
+      * Parse RDF/PHP into an EasyRdf_Graph
+      *
+      * @param object EasyRdf_Graph $graph   the graph to load the data into
+      * @param string               $data    the RDF document data
+      * @param string               $format  the format of the input data
+      * @param string               $baseUri the base URI of the data being parsed
+      * @return integer             The number of triples added to the graph
+      */
     public function parse($graph, $data, $format, $baseUri)
     {
         $this->checkParseParams($graph, $data, $format, $baseUri);
-        
+
         if ($format != 'php') {
-            throw new EasyRdf_Exception("EasyRdf_Parser_RdfPhp does not support: $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Parser_RdfPhp does not support: $format"
+            );
         }
-        
+
         foreach ($data as $subject => $properties) {
             if (substr($subject, 0, 2) === '_:') {
                 $subject = $this->remapBnode($subject);
             } elseif (preg_match('/^\w+$/', $subject)) {
-                // Cope with invalid RDF/JSON serialisations that
-                // put the node name in, without the _: prefix
-                // (such as net.fortytwo.sesametools.rdfjson)
+                # Cope with invalid RDF/JSON serialisations that
+                # put the node name in, without the _: prefix
+                # (such as net.fortytwo.sesametools.rdfjson)
                 $subject = $this->remapBnode($subject);
             }
-            
+
             foreach ($properties as $property => $objects) {
                 foreach ($objects as $object) {
                     if ($object['type'] === 'bnode') {
@@ -96,7 +94,7 @@ class EasyRdf_Parser_RdfPhp extends EasyRdf_Parser
                 }
             }
         }
-        
+
         return $this->tripleCount;
     }
 }

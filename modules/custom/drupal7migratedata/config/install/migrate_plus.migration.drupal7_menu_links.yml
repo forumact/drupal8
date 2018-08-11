@@ -17,7 +17,7 @@ process:
   menu_name:
     -
       plugin: migration_lookup
-      migration: d7_menu
+      migration: drupal7_menu
       source: menu_name
     -
       plugin: skip_on_empty
@@ -52,4 +52,6 @@ destination:
   no_stub: true
 migration_dependencies:
   required:
-    - d7_menu
+    - drupal7_menu
+  optional:
+    - drupal7_node

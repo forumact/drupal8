@@ -41,13 +41,12 @@
  * http://n2.talis.com/wiki/RDF_JSON_Specification
  * docs/appendix-a-rdf-formats-json.md
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Parser_Json extends EasyRdf_Parser_RdfPhp
 {
-
     private $jsonLastErrorExists = false;
 
     /**
@@ -60,8 +59,7 @@ class EasyRdf_Parser_Json extends EasyRdf_Parser_RdfPhp
         $this->jsonLastErrorExists = function_exists('json_last_error');
     }
 
-    /**
-     * Return the last JSON parser error as a string
+    /** Return the last JSON parser error as a string
      *
      * If json_last_error() is not available a generic message will be returned.
      *
@@ -91,8 +89,7 @@ class EasyRdf_Parser_Json extends EasyRdf_Parser_RdfPhp
         }
     }
 
-    /**
-     * Parse the triple-centric JSON format, as output by libraptor
+    /** Parse the triple-centric JSON format, as output by libraptor
      *
      * http://librdf.org/raptor/api/serializer-json.html
      *
@@ -106,9 +103,9 @@ class EasyRdf_Parser_Json extends EasyRdf_Parser_RdfPhp
             } else {
                 $subject = $triple['subject']['value'];
             }
-            
+
             $predicate = $triple['predicate']['value'];
-            
+
             if ($triple['object']['type'] == 'bnode') {
                 $object = array(
                     'type' => 'bnode',
@@ -117,39 +114,39 @@ class EasyRdf_Parser_Json extends EasyRdf_Parser_RdfPhp
             } else {
                 $object = $triple['object'];
             }
-            
+
             $this->addTriple($subject, $predicate, $object);
         }
-        
+
         return $this->tripleCount;
     }
 
     /**
-     * Parse RDF/JSON into an EasyRdf_Graph
-     *
-     * @param
-     *            object EasyRdf_Graph $graph the graph to load the data into
-     * @param string $data
-     *            the RDF document data
-     * @param string $format
-     *            the format of the input data
-     * @param string $baseUri
-     *            the base URI of the data being parsed
-     * @return integer The number of triples added to the graph
-     */
+      * Parse RDF/JSON into an EasyRdf_Graph
+      *
+      * @param object EasyRdf_Graph $graph   the graph to load the data into
+      * @param string               $data    the RDF document data
+      * @param string               $format  the format of the input data
+      * @param string               $baseUri the base URI of the data being parsed
+      * @return integer             The number of triples added to the graph
+      */
     public function parse($graph, $data, $format, $baseUri)
     {
         $this->checkParseParams($graph, $data, $format, $baseUri);
-        
+
         if ($format != 'json') {
-            throw new EasyRdf_Exception("EasyRdf_Parser_Json does not support: $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Parser_Json does not support: $format"
+            );
         }
-        
+
         $decoded = @json_decode(strval($data), true);
         if ($decoded === null) {
-            throw new EasyRdf_Parser_Exception($this->jsonLastErrorString());
+            throw new EasyRdf_Parser_Exception(
+                $this->jsonLastErrorString()
+            );
         }
-        
+
         if (array_key_exists('triples', $decoded)) {
             return $this->parseJsonTriples($decoded, $baseUri);
         } else {

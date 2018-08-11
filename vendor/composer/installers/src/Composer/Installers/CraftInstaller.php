@@ -6,19 +6,17 @@ namespace Composer\Installers;
  */
 class CraftInstaller extends BaseInstaller
 {
-
     const NAME_PREFIX = 'craft';
-
     const NAME_SUFFIX = 'plugin';
 
     protected $locations = array(
-        'plugin' => 'craft/plugins/{$name}/'
+        'plugin' => 'craft/plugins/{$name}/',
     );
 
     /**
      * Strip `craft-` prefix and/or `-plugin` suffix from package names
      *
-     * @param array $vars
+     * @param  array $vars
      *
      * @return array
      */
@@ -31,7 +29,7 @@ class CraftInstaller extends BaseInstaller
     {
         $vars['name'] = preg_replace('/-' . self::NAME_SUFFIX . '$/i', '', $vars['name']);
         $vars['name'] = preg_replace('/^' . self::NAME_PREFIX . '-/i', '', $vars['name']);
-        
+
         return $vars;
     }
 }

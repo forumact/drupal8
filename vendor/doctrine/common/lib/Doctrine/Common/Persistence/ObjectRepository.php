@@ -16,25 +16,24 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 /**
  * Contract for a Doctrine persistence layer ObjectRepository class to implement.
  *
- * @link www.doctrine-project.org
- * @since 2.1
+ * @link   www.doctrine-project.org
+ * @since  2.1
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Jonathan Wage <jonwage@gmail.com>
  */
 interface ObjectRepository
 {
-
     /**
      * Finds an object by its primary key / identifier.
      *
-     * @param mixed $id
-     *            The identifier.
-     *            
+     * @param mixed $id The identifier.
+     *
      * @return object The object.
      */
     public function find($id);
@@ -53,13 +52,13 @@ interface ObjectRepository
      * an UnexpectedValueException if certain values of the sorting or limiting details are
      * not supported.
      *
-     * @param array $criteria
+     * @param array      $criteria
      * @param array|null $orderBy
-     * @param int|null $limit
-     * @param int|null $offset
+     * @param int|null   $limit
+     * @param int|null   $offset
      *
      * @return array The objects.
-     *        
+     *
      * @throws \UnexpectedValueException
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
@@ -67,9 +66,8 @@ interface ObjectRepository
     /**
      * Finds a single object by a set of criteria.
      *
-     * @param array $criteria
-     *            The criteria.
-     *            
+     * @param array $criteria The criteria.
+     *
      * @return object The object.
      */
     public function findOneBy(array $criteria);

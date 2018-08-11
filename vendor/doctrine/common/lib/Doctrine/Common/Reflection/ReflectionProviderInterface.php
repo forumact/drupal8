@@ -16,11 +16,11 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 interface ReflectionProviderInterface
 {
-
     /**
      * Gets the ReflectionClass equivalent for this class.
      *

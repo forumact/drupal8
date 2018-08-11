@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 /**
@@ -25,45 +26,45 @@ namespace Doctrine\Common\Persistence\Mapping;
  */
 class MappingException extends \Exception
 {
-
     /**
-     *
      * @param string $className
-     * @param array $namespaces
+     * @param array  $namespaces
      *
      * @return self
      */
     public static function classNotFoundInNamespaces($className, $namespaces)
     {
-        return new self("The class '" . $className . "' was not found in the " . "chain configured namespaces " . implode(", ", $namespaces));
+        return new self("The class '" . $className . "' was not found in the ".
+            "chain configured namespaces " . implode(", ", $namespaces));
     }
 
     /**
-     *
      * @return self
      */
     public static function pathRequired()
     {
-        return new self("Specifying the paths to your entities is required " . "in the AnnotationDriver to retrieve all class names.");
+        return new self("Specifying the paths to your entities is required ".
+            "in the AnnotationDriver to retrieve all class names.");
     }
 
     /**
-     *
      * @param string|null $path
      *
      * @return self
      */
     public static function fileMappingDriversRequireConfiguredDirectoryPath($path = null)
     {
-        if (! empty($path)) {
+        if ( ! empty($path)) {
             $path = '[' . $path . ']';
         }
-        
-        return new self('File mapping drivers must have a valid directory path, ' . 'however the given path ' . $path . ' seems to be incorrect!');
+
+        return new self(
+            'File mapping drivers must have a valid directory path, ' .
+            'however the given path ' . $path . ' seems to be incorrect!'
+        );
     }
 
     /**
-     *
      * @param string $entityName
      * @param string $fileName
      *
@@ -75,7 +76,6 @@ class MappingException extends \Exception
     }
 
     /**
-     *
      * @param string $entityName
      * @param string $fileName
      *
@@ -87,7 +87,6 @@ class MappingException extends \Exception
     }
 
     /**
-     *
      * @param string $className
      *
      * @return self

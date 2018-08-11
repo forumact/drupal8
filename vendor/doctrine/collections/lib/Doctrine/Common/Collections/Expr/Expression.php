@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections\Expr;
 
 /**
@@ -25,9 +26,7 @@ namespace Doctrine\Common\Collections\Expr;
  */
 interface Expression
 {
-
     /**
-     *
      * @param ExpressionVisitor $visitor
      *
      * @return mixed

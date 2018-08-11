@@ -3,10 +3,9 @@ namespace Composer\Installers;
 
 class MauticInstaller extends BaseInstaller
 {
-
     protected $locations = array(
         'plugin' => 'plugins/{$name}/',
-        'theme' => 'themes/{$name}/'
+        'theme' => 'themes/{$name}/',
     );
 
     /**
@@ -19,7 +18,8 @@ class MauticInstaller extends BaseInstaller
                 return strtoupper($matches[0][1]);
             }, ucfirst($vars['name']));
         }
-        
+
         return $vars;
     }
+
 }

@@ -16,13 +16,14 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
  * Interface for cache drivers.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
@@ -32,17 +33,11 @@ namespace Doctrine\Common\Cache;
  */
 interface Cache
 {
-
-    const STATS_HITS = 'hits';
-
-    const STATS_MISSES = 'misses';
-
-    const STATS_UPTIME = 'uptime';
-
-    const STATS_MEMORY_USAGE = 'memory_usage';
-
+    const STATS_HITS             = 'hits';
+    const STATS_MISSES           = 'misses';
+    const STATS_UPTIME           = 'uptime';
+    const STATS_MEMORY_USAGE     = 'memory_usage';
     const STATS_MEMORY_AVAILABLE = 'memory_available';
-
     /**
      * Only for backward compatibility (may be removed in next major release)
      *
@@ -53,9 +48,8 @@ interface Cache
     /**
      * Fetches an entry from the cache.
      *
-     * @param string $id
-     *            The id of the cache entry to fetch.
-     *            
+     * @param string $id The id of the cache entry to fetch.
+     *
      * @return mixed The cached data or FALSE, if no cache entry exists for the given id.
      */
     public function fetch($id);
@@ -63,9 +57,8 @@ interface Cache
     /**
      * Tests if an entry exists in the cache.
      *
-     * @param string $id
-     *            The cache id of the entry to check for.
-     *            
+     * @param string $id The cache id of the entry to check for.
+     *
      * @return bool TRUE if a cache entry exists for the given cache id, FALSE otherwise.
      */
     public function contains($id);
@@ -75,15 +68,12 @@ interface Cache
      *
      * If a cache entry with the given id already exists, its data will be replaced.
      *
-     * @param string $id
-     *            The cache id.
-     * @param mixed $data
-     *            The cache entry/data.
-     * @param int $lifeTime
-     *            The lifetime in number of seconds for this cache entry.
-     *            If zero (the default), the entry never expires (although it may be deleted from the cache
-     *            to make place for other entries).
-     *            
+     * @param string $id       The cache id.
+     * @param mixed  $data     The cache entry/data.
+     * @param int    $lifeTime The lifetime in number of seconds for this cache entry.
+     *                         If zero (the default), the entry never expires (although it may be deleted from the cache
+     *                         to make place for other entries).
+     *
      * @return bool TRUE if the entry was successfully stored in the cache, FALSE otherwise.
      */
     public function save($id, $data, $lifeTime = 0);
@@ -91,11 +81,10 @@ interface Cache
     /**
      * Deletes a cache entry.
      *
-     * @param string $id
-     *            The cache id.
-     *            
+     * @param string $id The cache id.
+     *
      * @return bool TRUE if the cache entry was successfully deleted, FALSE otherwise.
-     *         Deleting a non-existing entry is considered successful.
+     *              Deleting a non-existing entry is considered successful.
      */
     public function delete($id);
 
@@ -120,7 +109,7 @@ interface Cache
      * Memory allowed to use for storage.
      *
      * @since 2.2
-     *       
+     *
      * @return array|null An associative array with server's statistics if available, NULL otherwise.
      */
     public function getStats();

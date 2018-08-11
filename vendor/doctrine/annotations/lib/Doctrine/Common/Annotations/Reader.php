@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Annotations;
 
 /**
@@ -25,14 +26,12 @@ namespace Doctrine\Common\Annotations;
  */
 interface Reader
 {
-
     /**
      * Gets the annotations applied to a class.
      *
-     * @param \ReflectionClass $class
-     *            The ReflectionClass of the class from which
-     *            the class annotations should be read.
-     *            
+     * @param \ReflectionClass $class The ReflectionClass of the class from which
+     *                                the class annotations should be read.
+     *
      * @return array An array of Annotations.
      */
     function getClassAnnotations(\ReflectionClass $class);
@@ -40,12 +39,10 @@ interface Reader
     /**
      * Gets a class annotation.
      *
-     * @param \ReflectionClass $class
-     *            The ReflectionClass of the class from which
-     *            the class annotations should be read.
-     * @param string $annotationName
-     *            The name of the annotation.
-     *            
+     * @param \ReflectionClass $class          The ReflectionClass of the class from which
+     *                                         the class annotations should be read.
+     * @param string           $annotationName The name of the annotation.
+     *
      * @return object|null The Annotation or NULL, if the requested annotation does not exist.
      */
     function getClassAnnotation(\ReflectionClass $class, $annotationName);
@@ -53,10 +50,9 @@ interface Reader
     /**
      * Gets the annotations applied to a method.
      *
-     * @param \ReflectionMethod $method
-     *            The ReflectionMethod of the method from which
-     *            the annotations should be read.
-     *            
+     * @param \ReflectionMethod $method The ReflectionMethod of the method from which
+     *                                  the annotations should be read.
+     *
      * @return array An array of Annotations.
      */
     function getMethodAnnotations(\ReflectionMethod $method);
@@ -64,11 +60,9 @@ interface Reader
     /**
      * Gets a method annotation.
      *
-     * @param \ReflectionMethod $method
-     *            The ReflectionMethod to read the annotations from.
-     * @param string $annotationName
-     *            The name of the annotation.
-     *            
+     * @param \ReflectionMethod $method         The ReflectionMethod to read the annotations from.
+     * @param string            $annotationName The name of the annotation.
+     *
      * @return object|null The Annotation or NULL, if the requested annotation does not exist.
      */
     function getMethodAnnotation(\ReflectionMethod $method, $annotationName);
@@ -76,10 +70,9 @@ interface Reader
     /**
      * Gets the annotations applied to a property.
      *
-     * @param \ReflectionProperty $property
-     *            The ReflectionProperty of the property
-     *            from which the annotations should be read.
-     *            
+     * @param \ReflectionProperty $property The ReflectionProperty of the property
+     *                                      from which the annotations should be read.
+     *
      * @return array An array of Annotations.
      */
     function getPropertyAnnotations(\ReflectionProperty $property);
@@ -87,11 +80,9 @@ interface Reader
     /**
      * Gets a property annotation.
      *
-     * @param \ReflectionProperty $property
-     *            The ReflectionProperty to read the annotations from.
-     * @param string $annotationName
-     *            The name of the annotation.
-     *            
+     * @param \ReflectionProperty $property       The ReflectionProperty to read the annotations from.
+     * @param string              $annotationName The name of the annotation.
+     *
      * @return object|null The Annotation or NULL, if the requested annotation does not exist.
      */
     function getPropertyAnnotation(\ReflectionProperty $property, $annotationName);

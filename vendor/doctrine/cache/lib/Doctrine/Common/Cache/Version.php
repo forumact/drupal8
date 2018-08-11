@@ -16,10 +16,10 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 class Version
 {
-
     const VERSION = '1.6.1-DEV';
 }

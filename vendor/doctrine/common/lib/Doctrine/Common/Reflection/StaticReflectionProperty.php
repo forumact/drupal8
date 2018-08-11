@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 use ReflectionException;
@@ -23,7 +24,6 @@ use ReflectionProperty;
 
 class StaticReflectionProperty extends ReflectionProperty
 {
-
     /**
      * The PSR-0 parser object.
      *
@@ -39,9 +39,8 @@ class StaticReflectionProperty extends ReflectionProperty
     protected $propertyName;
 
     /**
-     *
      * @param StaticReflectionParser $staticReflectionParser
-     * @param string|null $propertyName
+     * @param string|null            $propertyName
      */
     public function __construct(StaticReflectionParser $staticReflectionParser, $propertyName)
     {
@@ -50,8 +49,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -59,7 +57,6 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
      * @return StaticReflectionParser
      */
     protected function getStaticReflectionParser()
@@ -68,8 +65,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDeclaringClass()
     {
@@ -77,8 +73,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getDocComment()
     {
@@ -86,7 +81,6 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
      * @return array
      */
     public function getUseStatements()
@@ -95,8 +89,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function export($class, $name, $return = false)
     {
@@ -104,8 +97,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getModifiers()
     {
@@ -113,8 +105,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getValue($object = null)
     {
@@ -122,8 +113,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isDefault()
     {
@@ -131,8 +121,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isPrivate()
     {
@@ -140,8 +129,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isProtected()
     {
@@ -149,8 +137,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isPublic()
     {
@@ -158,8 +145,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isStatic()
     {
@@ -167,8 +153,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setAccessible($accessible)
     {
@@ -176,8 +161,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setValue($object, $value = null)
     {
@@ -185,8 +169,7 @@ class StaticReflectionProperty extends ReflectionProperty
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __toString()
     {

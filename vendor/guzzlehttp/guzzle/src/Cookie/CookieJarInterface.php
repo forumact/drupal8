@@ -16,16 +16,14 @@ use Psr\Http\Message\ResponseInterface;
  */
 interface CookieJarInterface extends \Countable, \IteratorAggregate
 {
-
     /**
      * Create a request with added cookie headers.
      *
      * If no matching cookies are found in the cookie jar, then no Cookie
      * header is added to the request and the same request is returned.
      *
-     * @param RequestInterface $request
-     *            Request object to modify.
-     *            
+     * @param RequestInterface $request Request object to modify.
+     *
      * @return RequestInterface returns the modified request.
      */
     public function withCookieHeader(RequestInterface $request);
@@ -33,19 +31,19 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
     /**
      * Extract cookies from an HTTP response and store them in the CookieJar.
      *
-     * @param RequestInterface $request
-     *            Request that was sent
-     * @param ResponseInterface $response
-     *            Response that was received
+     * @param RequestInterface  $request  Request that was sent
+     * @param ResponseInterface $response Response that was received
      */
-    public function extractCookies(RequestInterface $request, ResponseInterface $response);
+    public function extractCookies(
+        RequestInterface $request,
+        ResponseInterface $response
+    );
 
     /**
      * Sets a cookie in the cookie jar.
      *
-     * @param SetCookie $cookie
-     *            Cookie to set.
-     *            
+     * @param SetCookie $cookie Cookie to set.
+     *
      * @return bool Returns true on success or false on failure
      */
     public function setCookie(SetCookie $cookie);
@@ -60,13 +58,10 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      * arguments, then the cookie with the specified name, path and domain is
      * removed.
      *
-     * @param string $domain
-     *            Clears cookies matching a domain
-     * @param string $path
-     *            Clears cookies matching a domain and path
-     * @param string $name
-     *            Clears cookies matching a domain, path, and name
-     *            
+     * @param string $domain Clears cookies matching a domain
+     * @param string $path   Clears cookies matching a domain and path
+     * @param string $name   Clears cookies matching a domain, path, and name
+     *
      * @return CookieJarInterface
      */
     public function clear($domain = null, $path = null, $name = null);

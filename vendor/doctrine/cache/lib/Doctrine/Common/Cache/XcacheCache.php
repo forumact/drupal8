@@ -16,13 +16,14 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
  * Xcache cache driver.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
@@ -31,9 +32,7 @@ namespace Doctrine\Common\Cache;
  */
 class XcacheCache extends CacheProvider
 {
-
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -42,7 +41,6 @@ class XcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -51,7 +49,6 @@ class XcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -60,7 +57,6 @@ class XcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
@@ -69,15 +65,14 @@ class XcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
     {
         $this->checkAuthorization();
-        
+
         xcache_clear_cache(XC_TYPE_VAR);
-        
+
         return true;
     }
 
@@ -91,25 +86,27 @@ class XcacheCache extends CacheProvider
     protected function checkAuthorization()
     {
         if (ini_get('xcache.admin.enable_auth')) {
-            throw new \BadMethodCallException('To use all features of \Doctrine\Common\Cache\XcacheCache, ' . 'you must set "xcache.admin.enable_auth" to "Off" in your php.ini.');
+            throw new \BadMethodCallException(
+                'To use all features of \Doctrine\Common\Cache\XcacheCache, '
+                . 'you must set "xcache.admin.enable_auth" to "Off" in your php.ini.'
+            );
         }
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
         $this->checkAuthorization();
-        
+
         $info = xcache_info(XC_TYPE_VAR, 0);
         return array(
-            Cache::STATS_HITS => $info['hits'],
+            Cache::STATS_HITS   => $info['hits'],
             Cache::STATS_MISSES => $info['misses'],
             Cache::STATS_UPTIME => null,
-            Cache::STATS_MEMORY_USAGE => $info['size'],
-            Cache::STATS_MEMORY_AVAILABLE => $info['avail']
+            Cache::STATS_MEMORY_USAGE      => $info['size'],
+            Cache::STATS_MEMORY_AVAILABLE  => $info['avail'],
         );
     }
 }

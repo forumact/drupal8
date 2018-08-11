@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections;
 
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -30,13 +31,11 @@ use Doctrine\Common\Collections\Expr\Value;
  * may be different between implementations (Array vs ORM vs ODM).
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.3
+ * @since  2.3
  */
 class ExpressionBuilder
 {
-
     /**
-     *
      * @param mixed $x
      *
      * @return CompositeExpression
@@ -47,7 +46,6 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param mixed $x
      *
      * @return CompositeExpression
@@ -58,9 +56,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -70,9 +67,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -82,9 +78,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -94,9 +89,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -106,9 +100,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -118,9 +111,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -130,7 +122,6 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
      *
      * @return Comparison
@@ -141,9 +132,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $values
+     * @param mixed  $values
      *
      * @return Comparison
      */
@@ -153,9 +143,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $values
+     * @param mixed  $values
      *
      * @return Comparison
      */
@@ -165,9 +154,8 @@ class ExpressionBuilder
     }
 
     /**
-     *
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */

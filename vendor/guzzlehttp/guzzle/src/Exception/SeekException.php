@@ -8,7 +8,6 @@ use Psr\Http\Message\StreamInterface;
  */
 class SeekException extends \RuntimeException implements GuzzleException
 {
-
     private $stream;
 
     public function __construct(StreamInterface $stream, $pos = 0, $msg = '')
@@ -19,7 +18,6 @@ class SeekException extends \RuntimeException implements GuzzleException
     }
 
     /**
-     *
      * @return StreamInterface
      */
     public function getStream()

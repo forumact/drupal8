@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Util;
 
 use Doctrine\Common\Persistence\Proxy;
@@ -29,7 +30,6 @@ use Doctrine\Common\Persistence\Proxy;
  */
 class ClassUtils
 {
-
     /**
      * Gets the real class name of a class name that could be a proxy.
      *
@@ -39,10 +39,10 @@ class ClassUtils
      */
     public static function getRealClass($class)
     {
-        if (false === $pos = strrpos($class, '\\' . Proxy::MARKER . '\\')) {
+        if (false === $pos = strrpos($class, '\\'.Proxy::MARKER.'\\')) {
             return $class;
         }
-        
+
         return substr($class, $pos + Proxy::MARKER_LENGTH + 2);
     }
 
@@ -67,7 +67,7 @@ class ClassUtils
      */
     public static function getParentClass($className)
     {
-        return get_parent_class(self::getRealClass($className));
+        return get_parent_class( self::getRealClass( $className ) );
     }
 
     /**
@@ -79,7 +79,7 @@ class ClassUtils
      */
     public static function newReflectionClass($class)
     {
-        return new \ReflectionClass(self::getRealClass($class));
+        return new \ReflectionClass( self::getRealClass( $class ) );
     }
 
     /**
@@ -91,7 +91,7 @@ class ClassUtils
      */
     public static function newReflectionObject($object)
     {
-        return self::newReflectionClass(self::getClass($object));
+        return self::newReflectionClass( self::getClass( $object ) );
     }
 
     /**
@@ -104,6 +104,6 @@ class ClassUtils
      */
     public static function generateProxyClassName($className, $proxyNamespace)
     {
-        return rtrim($proxyNamespace, '\\') . '\\' . Proxy::MARKER . '\\' . ltrim($className, '\\');
+        return rtrim($proxyNamespace, '\\') . '\\'.Proxy::MARKER.'\\' . ltrim($className, '\\');
     }
 }

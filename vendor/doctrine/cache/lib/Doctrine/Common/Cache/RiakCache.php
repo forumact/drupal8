@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 use Riak\Bucket;
@@ -27,17 +28,15 @@ use Riak\Object;
 /**
  * Riak cache provider.
  *
- * @link www.doctrine-project.org
- * @since 1.1
+ * @link   www.doctrine-project.org
+ * @since  1.1
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  */
 class RiakCache extends CacheProvider
 {
-
     const EXPIRES_HEADER = 'X-Riak-Meta-Expires';
 
     /**
-     *
      * @var \Riak\Bucket
      */
     private $bucket;
@@ -53,29 +52,30 @@ class RiakCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
     {
         try {
             $response = $this->bucket->get($id);
-            
+
             // No objects found
-            if (! $response->hasObject()) {
+            if ( ! $response->hasObject()) {
                 return false;
             }
-            
+
             // Check for attempted siblings
-            $object = ($response->hasSiblings()) ? $this->resolveConflict($id, $response->getVClock(), $response->getObjectList()) : $response->getFirstObject();
-            
+            $object = ($response->hasSiblings())
+                ? $this->resolveConflict($id, $response->getVClock(), $response->getObjectList())
+                : $response->getFirstObject();
+
             // Check for expired object
             if ($this->isExpired($object)) {
                 $this->bucket->delete($object);
-                
+
                 return false;
             }
-            
+
             return unserialize($object->getContent());
         } catch (Exception\RiakException $e) {
             // Covers:
@@ -84,12 +84,11 @@ class RiakCache extends CacheProvider
             // - Riak\UnexpectedResponseException
             // - Riak\NotFoundException
         }
-        
+
         return false;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -97,67 +96,65 @@ class RiakCache extends CacheProvider
         try {
             // We only need the HEAD, not the entire object
             $input = new Input\GetInput();
-            
+
             $input->setReturnHead(true);
-            
+
             $response = $this->bucket->get($id, $input);
-            
+
             // No objects found
-            if (! $response->hasObject()) {
+            if ( ! $response->hasObject()) {
                 return false;
             }
-            
+
             $object = $response->getFirstObject();
-            
+
             // Check for expired object
             if ($this->isExpired($object)) {
                 $this->bucket->delete($object);
-                
+
                 return false;
             }
-            
+
             return true;
         } catch (Exception\RiakException $e) {
             // Do nothing
         }
-        
+
         return false;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
         try {
             $object = new Object($id);
-            
+
             $object->setContent(serialize($data));
-            
+
             if ($lifeTime > 0) {
                 $object->addMetadata(self::EXPIRES_HEADER, (string) (time() + $lifeTime));
             }
-            
+
             $this->bucket->put($object);
-            
+
             return true;
         } catch (Exception\RiakException $e) {
             // Do nothing
         }
-        
+
         return false;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
     {
         try {
             $this->bucket->delete($id);
-            
+
             return true;
         } catch (Exception\BadArgumentsException $e) {
             // Key did not exist on cluster already
@@ -167,33 +164,31 @@ class RiakCache extends CacheProvider
             // - Riak\Exception\CommunicationException
             // - Riak\Exception\UnexpectedResponseException
         }
-        
+
         return false;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
     {
         try {
             $keyList = $this->bucket->getKeyList();
-            
+
             foreach ($keyList as $key) {
                 $this->bucket->delete($key);
             }
-            
+
             return true;
         } catch (Exception\RiakException $e) {
             // Do nothing
         }
-        
+
         return false;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
@@ -212,13 +207,13 @@ class RiakCache extends CacheProvider
     private function isExpired(Object $object)
     {
         $metadataMap = $object->getMetadataMap();
-        
-        return isset($metadataMap[self::EXPIRES_HEADER]) && $metadataMap[self::EXPIRES_HEADER] < time();
+
+        return isset($metadataMap[self::EXPIRES_HEADER])
+            && $metadataMap[self::EXPIRES_HEADER] < time();
     }
 
     /**
-     * On-read conflict resolution.
-     * Applied approach here is last write wins.
+     * On-read conflict resolution. Applied approach here is last write wins.
      * Specific needs may override this method to apply alternate conflict resolutions.
      *
      * {@internal Riak does not attempt to resolve a write conflict, and store
@@ -233,7 +228,7 @@ class RiakCache extends CacheProvider
      *
      * @param string $id
      * @param string $vClock
-     * @param array $objectList
+     * @param array  $objectList
      *
      * @return \Riak\Object
      */
@@ -241,15 +236,15 @@ class RiakCache extends CacheProvider
     {
         // Our approach here is last-write wins
         $winner = $objectList[count($objectList)];
-        
+
         $putInput = new Input\PutInput();
         $putInput->setVClock($vClock);
-        
+
         $mergedObject = new Object($id);
         $mergedObject->setContent($winner->getContent());
-        
+
         $this->bucket->put($mergedObject, $putInput);
-        
+
         return $mergedObject;
     }
 }

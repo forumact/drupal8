@@ -34,8 +34,9 @@
  * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
  * @license    http://www.opensource.org/licenses/bsd-license.php
  */
+
 if (PHP_MAJOR_VERSION > 5 or (PHP_MAJOR_VERSION == 5 and PHP_MINOR_VERSION >= 3)) {
-    require dirname(__FILE__) . '/JsonLd_real.php';
+    require dirname(__FILE__).'/JsonLd_real.php';
 } else {
     throw new LogicException("JSON-LD support requires PHP 5.3+");
 }

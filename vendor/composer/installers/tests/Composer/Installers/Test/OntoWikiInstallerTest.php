@@ -10,9 +10,7 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
  */
 class OntoWikiInstallerTest extends BaseTestCase
 {
-
     /**
-     *
      * @var OntoWikiInstaller
      */
     private $installer;
@@ -23,18 +21,14 @@ class OntoWikiInstallerTest extends BaseTestCase
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals($this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )), array(
-            'name' => $expected,
-            'type' => $type
-        ));
+        $this->assertEquals(
+            $this->installer->inflectPackageVars(array('name' => $name, 'type'=>$type)),
+            array('name' => $expected, 'type'=>$type)
+        );
     }
 
     public function packageNameInflectionProvider()
@@ -43,48 +37,48 @@ class OntoWikiInstallerTest extends BaseTestCase
             array(
                 'ontowiki-extension',
                 'CSVImport.ontowiki',
-                'csvimport'
+                'csvimport',
             ),
             array(
                 'ontowiki-extension',
                 'csvimport',
-                'csvimport'
+                'csvimport',
             ),
             array(
                 'ontowiki-extension',
                 'some_ontowiki_extension',
-                'some_ontowiki_extension'
+                'some_ontowiki_extension',
             ),
             array(
                 'ontowiki-extension',
                 'some_ontowiki_extension.ontowiki',
-                'some_ontowiki_extension'
+                'some_ontowiki_extension',
             ),
             array(
                 'ontowiki-translation',
                 'de-translation.ontowiki',
-                'de'
+                'de',
             ),
             array(
                 'ontowiki-translation',
                 'en-US-translation.ontowiki',
-                'en-us'
+                'en-us',
             ),
             array(
                 'ontowiki-translation',
                 'en-US-translation',
-                'en-us'
+                'en-us',
             ),
             array(
                 'ontowiki-theme',
                 'blue-theme.ontowiki',
-                'blue'
+                'blue',
             ),
             array(
                 'ontowiki-theme',
                 'blue-theme',
-                'blue'
-            )
+                'blue',
+            ),
         );
     }
 }

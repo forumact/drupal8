@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
 namespace Composer\Semver\Constraint;
 
 /**
@@ -15,12 +16,10 @@ namespace Composer\Semver\Constraint;
  */
 class EmptyConstraint implements ConstraintInterface
 {
-
     /** @var string */
     protected $prettyString;
 
     /**
-     *
      * @param ConstraintInterface $provider
      *
      * @return bool
@@ -31,9 +30,7 @@ class EmptyConstraint implements ConstraintInterface
     }
 
     /**
-     *
-     * @param
-     *            $prettyString
+     * @param $prettyString
      */
     public function setPrettyString($prettyString)
     {
@@ -41,7 +38,6 @@ class EmptyConstraint implements ConstraintInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getPrettyString()
@@ -49,12 +45,11 @@ class EmptyConstraint implements ConstraintInterface
         if ($this->prettyString) {
             return $this->prettyString;
         }
-        
+
         return $this->__toString();
     }
 
     /**
-     *
      * @return string
      */
     public function __toString()

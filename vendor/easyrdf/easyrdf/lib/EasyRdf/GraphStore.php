@@ -39,30 +39,25 @@
  * A class for fetching, saving and deleting graphs to a Graph Store.
  * Implementation of the SPARQL 1.1 Graph Store HTTP Protocol.
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_GraphStore
 {
-
     /**
      * Use to reference default graph of triplestore
      */
     const DEFAULT_GRAPH = 'urn:easyrdf:default-graph';
 
-    /**
-     * The address of the GraphStore endpoint
-     */
+    /** The address of the GraphStore endpoint */
     private $uri = null;
-
     private $parsedUri = null;
 
-    /**
-     * Create a new SPARQL Graph Store client
+
+    /** Create a new SPARQL Graph Store client
      *
-     * @param string $uri
-     *            The address of the graph store endpoint
+     * @param string $uri The address of the graph store endpoint
      */
     public function __construct($uri)
     {
@@ -70,8 +65,7 @@ class EasyRdf_GraphStore
         $this->parsedUri = new EasyRdf_ParsedUri($uri);
     }
 
-    /**
-     * Get the URI of the graph store
+    /** Get the URI of the graph store
      *
      * @return string The URI of the graph store
      */
@@ -80,14 +74,12 @@ class EasyRdf_GraphStore
         return $this->uri;
     }
 
-    /**
-     * Fetch a named graph from the graph store
+    /** Fetch a named graph from the graph store
      *
      * The URI can either be a full absolute URI or
      * a URI relative to the URI of the graph store.
      *
-     * @param string $uriRef
-     *            The URI of graph desired
+     * @param string $uriRef The URI of graph desired
      * @return EasyRdf_Graph The graph requested
      */
     public function get($uriRef)
@@ -98,18 +90,17 @@ class EasyRdf_GraphStore
         } else {
             $graphUri = $this->parsedUri->resolve($uriRef)->toString();
             $dataUrl = $this->urlForGraph($graphUri);
-            
+
             $graph = new EasyRdf_Graph($graphUri);
         }
-        
+
         $graph->load($dataUrl);
-        
+
         return $graph;
     }
 
     /**
      * Fetch default graph from the graph store
-     *
      * @return EasyRdf_Graph
      */
     public function getDefault()
@@ -117,8 +108,7 @@ class EasyRdf_GraphStore
         return $this->get(self::DEFAULT_GRAPH);
     }
 
-    /**
-     * Send some graph data to the graph store
+    /** Send some graph data to the graph store
      *
      * This method is used by insert() and replace()
      *
@@ -134,39 +124,40 @@ class EasyRdf_GraphStore
         } else {
             $data = $graph;
         }
-        
+
         if ($uriRef === null) {
             throw new InvalidArgumentException('Graph IRI is not specified');
         }
-        
+
         $formatObj = EasyRdf_Format::getFormat($format);
         $mimeType = $formatObj->getDefaultMimeType();
-        
+
         if ($uriRef === self::DEFAULT_GRAPH) {
             $dataUrl = $this->urlForGraph(self::DEFAULT_GRAPH);
         } else {
             $graphUri = $this->parsedUri->resolve($uriRef)->toString();
             $dataUrl = $this->urlForGraph($graphUri);
         }
-        
+
         $client = EasyRdf_Http::getDefaultHttpClient();
         $client->resetParameters(true);
         $client->setUri($dataUrl);
         $client->setMethod($method);
         $client->setRawData($data);
         $client->setHeaders('Content-Type', $mimeType);
-        
+
         $response = $client->request();
-        
-        if (! $response->isSuccessful()) {
-            throw new EasyRdf_Exception("HTTP request for {$dataUrl} failed: " . $response->getMessage());
+
+        if (!$response->isSuccessful()) {
+            throw new EasyRdf_Exception(
+                "HTTP request for {$dataUrl} failed: ".$response->getMessage()
+            );
         }
-        
+
         return $response;
     }
 
-    /**
-     * Replace the contents of a graph in the graph store with new data
+    /** Replace the contents of a graph in the graph store with new data
      *
      * The $graph parameter is the EasyRdf_Graph object to be sent to the
      * graph store. Alternatively it can be a string, already serialised.
@@ -177,12 +168,9 @@ class EasyRdf_GraphStore
      * The $format parameter can be given to specify the serialisation
      * used to send the graph data to the graph store.
      *
-     * @param EasyRdf_Graph|string $graph
-     *            Data
-     * @param string $uriRef
-     *            The URI of graph to be replaced
-     * @param string $format
-     *            The format of the data to send to the graph store
+     * @param EasyRdf_Graph|string $graph  Data
+     * @param string               $uriRef The URI of graph to be replaced
+     * @param string               $format The format of the data to send to the graph store
      * @return EasyRdf_Http_Response The response from the graph store
      */
     public function replace($graph, $uriRef = null, $format = 'ntriples')
@@ -199,10 +187,8 @@ class EasyRdf_GraphStore
      * The $format parameter can be given to specify the serialisation
      * used to send the graph data to the graph store.
      *
-     * @param EasyRdf_Graph|string $graph
-     *            Data
-     * @param string $format
-     *            The format of the data to send to the graph store
+     * @param EasyRdf_Graph|string $graph  Data
+     * @param string               $format The format of the data to send to the graph store
      * @return EasyRdf_Http_Response The response from the graph store
      */
     public function replaceDefault($graph, $format = 'ntriples')
@@ -210,8 +196,7 @@ class EasyRdf_GraphStore
         return self::replace($graph, self::DEFAULT_GRAPH, $format);
     }
 
-    /**
-     * Add data to a graph in the graph store
+    /** Add data to a graph in the graph store
      *
      * The $graph parameter is the EasyRdf_Graph object to be sent to the
      * graph store. Alternatively it can be a string, already serialised.
@@ -222,12 +207,9 @@ class EasyRdf_GraphStore
      * The $format parameter can be given to specify the serialisation
      * used to send the graph data to the graph store.
      *
-     * @param EasyRdf_Graph|string $graph
-     *            Data
-     * @param string $uriRef
-     *            The URI of graph to be added to
-     * @param string $format
-     *            The format of the data to send to the graph store
+     * @param EasyRdf_Graph|string $graph  Data
+     * @param string               $uriRef The URI of graph to be added to
+     * @param string               $format The format of the data to send to the graph store
      * @return object EasyRdf_Http_Response The response from the graph store
      */
     public function insert($graph, $uriRef = null, $format = 'ntriples')
@@ -244,10 +226,8 @@ class EasyRdf_GraphStore
      * The $format parameter can be given to specify the serialisation
      * used to send the graph data to the graph store.
      *
-     * @param EasyRdf_Graph|string $graph
-     *            Data
-     * @param string $format
-     *            The format of the data to send to the graph store
+     * @param EasyRdf_Graph|string $graph  Data
+     * @param string               $format The format of the data to send to the graph store
      * @return object EasyRdf_Http_Response The response from the graph store
      */
     public function insertIntoDefault($graph, $format = 'ntriples')
@@ -255,15 +235,13 @@ class EasyRdf_GraphStore
         return $this->insert($graph, self::DEFAULT_GRAPH, $format);
     }
 
-    /**
-     * Delete named graph content from the graph store
+    /** Delete named graph content from the graph store
      *
      * The URI can either be a full absolute URI or
      * a URI relative to the URI of the graph store.
      *
-     * @param string $uriRef
-     *            The URI of graph to be added to
-     *            
+     * @param string $uriRef The URI of graph to be added to
+     *
      * @throws EasyRdf_Exception
      * @return EasyRdf_Http_Response The response from the graph store
      */
@@ -275,17 +253,19 @@ class EasyRdf_GraphStore
             $graphUri = $this->parsedUri->resolve($uriRef)->toString();
             $dataUrl = $this->urlForGraph($graphUri);
         }
-        
+
         $client = EasyRdf_Http::getDefaultHttpClient();
         $client->resetParameters(true);
         $client->setUri($dataUrl);
         $client->setMethod('DELETE');
         $response = $client->request();
-        
-        if (! $response->isSuccessful()) {
-            throw new EasyRdf_Exception("HTTP request to delete {$dataUrl} failed: " . $response->getMessage());
+
+        if (!$response->isSuccessful()) {
+            throw new EasyRdf_Exception(
+                "HTTP request to delete {$dataUrl} failed: ".$response->getMessage()
+            );
         }
-        
+
         return $response;
     }
 
@@ -300,25 +280,22 @@ class EasyRdf_GraphStore
         return $this->delete(self::DEFAULT_GRAPH);
     }
 
-    /**
-     * Work out the full URL for a graph store request.
-     * by checking if if it is a direct or indirect request.
-     *
-     * @ignore
+    /** Work out the full URL for a graph store request.
+     *  by checking if if it is a direct or indirect request.
+     *  @ignore
      */
     protected function urlForGraph($url)
     {
         if ($url === self::DEFAULT_GRAPH) {
-            $url = $this->uri . '?default';
+            $url = $this->uri.'?default';
         } elseif (strpos($url, $this->uri) === false) {
-            $url = $this->uri . "?graph=" . urlencode($url);
+            $url = $this->uri."?graph=".urlencode($url);
         }
-        
+
         return $url;
     }
 
-    /**
-     * Magic method to return URI of the graph store when casted to string
+    /** Magic method to return URI of the graph store when casted to string
      *
      * @return string The URI of the graph store
      */

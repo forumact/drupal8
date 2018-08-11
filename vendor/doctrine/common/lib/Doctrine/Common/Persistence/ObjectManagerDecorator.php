@@ -16,27 +16,25 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 /**
  * Base class to simplify ObjectManager decorators
  *
  * @license http://opensource.org/licenses/MIT MIT
- * @link www.doctrine-project.org
- * @since 2.4
- * @author Lars Strojny <lars@strojny.net>
+ * @link    www.doctrine-project.org
+ * @since   2.4
+ * @author  Lars Strojny <lars@strojny.net>
  */
 abstract class ObjectManagerDecorator implements ObjectManager
 {
-
     /**
-     *
      * @var ObjectManager
      */
     protected $wrapped;
 
     /**
-     *
      * {@inheritdoc}
      */
     public function find($className, $id)
@@ -45,7 +43,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function persist($object)
@@ -54,7 +51,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function remove($object)
@@ -63,7 +59,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function merge($object)
@@ -72,7 +67,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function clear($objectName = null)
@@ -81,7 +75,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function detach($object)
@@ -90,7 +83,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function refresh($object)
@@ -99,7 +91,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function flush()
@@ -108,7 +99,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getRepository($className)
@@ -117,7 +107,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getClassMetadata($className)
@@ -126,7 +115,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getMetadataFactory()
@@ -135,7 +123,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function initializeObject($obj)
@@ -144,7 +131,6 @@ abstract class ObjectManagerDecorator implements ObjectManager
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function contains($object)

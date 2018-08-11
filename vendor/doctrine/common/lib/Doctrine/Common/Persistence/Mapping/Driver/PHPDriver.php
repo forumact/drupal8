@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -24,8 +25,8 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
  * The PHPDriver includes php files which just populate ClassMetadataInfo
  * instances with plain PHP code.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan H. Wage <jonwage@gmail.com>
@@ -33,16 +34,13 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
  */
 class PHPDriver extends FileDriver
 {
-
     /**
-     *
      * @var ClassMetadata
      */
     protected $metadata;
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __construct($locator, $fileExtension = null)
     {
@@ -50,27 +48,23 @@ class PHPDriver extends FileDriver
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function loadMetadataForClass($className, ClassMetadata $metadata)
     {
         $this->metadata = $metadata;
-        
+
         $this->loadMappingFile($this->locator->findMappingFile($className));
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function loadMappingFile($file)
     {
         $metadata = $this->metadata;
         include $file;
-        
-        return [
-            $metadata->getName() => $metadata
-        ];
+
+        return [$metadata->getName() => $metadata];
     }
 }

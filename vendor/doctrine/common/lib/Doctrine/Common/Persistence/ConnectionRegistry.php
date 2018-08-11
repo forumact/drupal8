@@ -16,20 +16,20 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 /**
  * Contract covering connection for a Doctrine persistence layer ManagerRegistry class to implement.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Lukas Kahwe Smith <smith@pooteeweet.org>
  */
 interface ConnectionRegistry
 {
-
     /**
      * Gets the default connection name.
      *
@@ -40,9 +40,8 @@ interface ConnectionRegistry
     /**
      * Gets the named connection.
      *
-     * @param string $name
-     *            The connection name (null for the default one).
-     *            
+     * @param string $name The connection name (null for the default one).
+     *
      * @return object
      */
     public function getConnection($name = null);

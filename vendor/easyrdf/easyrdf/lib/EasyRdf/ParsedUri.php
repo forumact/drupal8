@@ -35,57 +35,52 @@
  * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 
+
 /**
  * A RFC3986 compliant URI parser
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
- * @link http://www.ietf.org/rfc/rfc3986.txt
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
+ * @link       http://www.ietf.org/rfc/rfc3986.txt
  */
 class EasyRdf_ParsedUri
 {
-
     // For all URIs:
     private $scheme = null;
-
     private $fragment = null;
 
     // For hierarchical URIs:
     private $authority = null;
-
     private $path = null;
-
     private $query = null;
 
     const URI_REGEX = "|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|";
 
-    /**
-     * Constructor for creating a new parsed URI
+    /** Constructor for creating a new parsed URI
      *
      * The $uri parameter can either be a string or an
      * associative array with the following keys:
      * scheme, authority, path, query, fragment
      *
-     * @param mixed $uri
-     *            The URI as a string or an array
+     * @param  mixed $uri  The URI as a string or an array
      * @return object EasyRdf_ParsedUri
      */
     public function __construct($uri = null)
     {
         if (is_string($uri)) {
             if (preg_match(self::URI_REGEX, $uri, $matches)) {
-                if (! empty($matches[1])) {
+                if (!empty($matches[1])) {
                     $this->scheme = isset($matches[2]) ? $matches[2] : '';
                 }
-                if (! empty($matches[3])) {
+                if (!empty($matches[3])) {
                     $this->authority = isset($matches[4]) ? $matches[4] : '';
                 }
                 $this->path = isset($matches[5]) ? $matches[5] : '';
-                if (! empty($matches[6])) {
+                if (!empty($matches[6])) {
                     $this->query = isset($matches[7]) ? $matches[7] : '';
                 }
-                if (! empty($matches[8])) {
+                if (!empty($matches[8])) {
                     $this->fragment = isset($matches[9]) ? $matches[9] : '';
                 }
             }
@@ -98,9 +93,8 @@ class EasyRdf_ParsedUri
         }
     }
 
-    /**
-     * Returns true if this is an absolute (complete) URI
-     *
+
+    /** Returns true if this is an absolute (complete) URI
      * @return boolean
      */
     public function isAbsolute()
@@ -108,9 +102,7 @@ class EasyRdf_ParsedUri
         return $this->scheme !== null;
     }
 
-    /**
-     * Returns true if this is an relative (partial) URI
-     *
+    /** Returns true if this is an relative (partial) URI
      * @return boolean
      */
     public function isRelative()
@@ -118,10 +110,7 @@ class EasyRdf_ParsedUri
         return $this->scheme === null;
     }
 
-    /**
-     * Returns the scheme of the URI (e.g.
-     * http)
-     *
+    /** Returns the scheme of the URI (e.g. http)
      * @return string
      */
     public function getScheme()
@@ -129,22 +118,15 @@ class EasyRdf_ParsedUri
         return $this->scheme;
     }
 
-    /**
-     * Sets the scheme of the URI (e.g.
-     * http)
-     *
-     * @param string $scheme
-     *            The new value for the scheme of the URI
+    /** Sets the scheme of the URI (e.g. http)
+     * @param string $scheme The new value for the scheme of the URI
      */
     public function setScheme($scheme)
     {
         $this->scheme = $scheme;
     }
 
-    /**
-     * Returns the authority of the URI (e.g.
-     * www.example.com:8080)
-     *
+    /** Returns the authority of the URI (e.g. www.example.com:8080)
      * @return string
      */
     public function getAuthority()
@@ -152,22 +134,15 @@ class EasyRdf_ParsedUri
         return $this->authority;
     }
 
-    /**
-     * Sets the authority of the URI (e.g.
-     * www.example.com:8080)
-     *
-     * @param string $authority
-     *            The new value for the authority component of the URI
+    /** Sets the authority of the URI (e.g. www.example.com:8080)
+     * @param string $authority The new value for the authority component of the URI
      */
     public function setAuthority($authority)
     {
         $this->authority = $authority;
     }
 
-    /**
-     * Returns the path of the URI (e.g.
-     * /foo/bar)
-     *
+    /** Returns the path of the URI (e.g. /foo/bar)
      * @return string
      */
     public function getPath()
@@ -175,22 +150,15 @@ class EasyRdf_ParsedUri
         return $this->path;
     }
 
-    /**
-     * Set the path of the URI (e.g.
-     * /foo/bar)
-     *
-     * @param string $path
-     *            The new value for the path component of the URI
+    /** Set the path of the URI (e.g. /foo/bar)
+     * @param string $path The new value for the path component of the URI
      */
     public function setPath($path)
     {
         $this->path = $path;
     }
 
-    /**
-     * Returns the query string part of the URI (e.g.
-     * foo=bar)
-     *
+    /** Returns the query string part of the URI (e.g. foo=bar)
      * @return string
      */
     public function getQuery()
@@ -198,22 +166,15 @@ class EasyRdf_ParsedUri
         return $this->query;
     }
 
-    /**
-     * Set the query string of the URI (e.g.
-     * foo=bar)
-     *
-     * @param string $query
-     *            The new value for the query string component of the URI
+    /** Set the query string of the URI (e.g. foo=bar)
+     * @param string $query The new value for the query string component of the URI
      */
     public function setQuery($query)
     {
         $this->query = $query;
     }
 
-    /**
-     * Returns the fragment part of the URI (i.e.
-     * after the #)
-     *
+    /** Returns the fragment part of the URI (i.e. after the #)
      * @return string
      */
     public function getFragment()
@@ -221,21 +182,17 @@ class EasyRdf_ParsedUri
         return $this->fragment;
     }
 
-    /**
-     * Set the fragment of the URI (i.e.
-     * after the #)
-     *
-     * @param string $fragment
-     *            The new value for the fragment component of the URI
+    /** Set the fragment of the URI (i.e. after the #)
+     * @param string $fragment The new value for the fragment component of the URI
      */
     public function setFragment($fragment)
     {
         $this->fragment = $fragment;
     }
 
+
     /**
-     * Normalises the path of this URI if it has one.
-     * Normalising a path means
+     * Normalises the path of this URI if it has one. Normalising a path means
      * that any unnecessary '.' and '..' segments are removed. For example, the
      * URI http://example.com/a/b/../c/./d would be normalised to
      * http://example.com/a/c/d
@@ -247,33 +204,33 @@ class EasyRdf_ParsedUri
         if (empty($this->path)) {
             return $this;
         }
-        
+
         // Remove ./ from the start
         if (substr($this->path, 0, 2) == './') {
             // Remove both characters
             $this->path = substr($this->path, 2);
         }
-        
+
         // Remove /. from the end
-        if (substr($this->path, - 2) == '/.') {
+        if (substr($this->path, -2) == '/.') {
             // Remove only the last dot, not the slash!
-            $this->path = substr($this->path, 0, - 1);
+            $this->path = substr($this->path, 0, -1);
         }
-        
-        if (substr($this->path, - 3) == '/..') {
+
+        if (substr($this->path, -3) == '/..') {
             $this->path .= '/';
         }
-        
+
         // Split the path into its segments
         $segments = explode('/', $this->path);
         $newSegments = array();
-        
+
         // Remove all unnecessary '.' and '..' segments
         foreach ($segments as $segment) {
             if ($segment == '..') {
                 // Remove the previous part of the path
                 $count = count($newSegments);
-                if ($count > 0 && $newSegments[$count - 1]) {
+                if ($count > 0 && $newSegments[$count-1]) {
                     array_pop($newSegments);
                 }
             } elseif ($segment == '.') {
@@ -283,10 +240,10 @@ class EasyRdf_ParsedUri
                 array_push($newSegments, $segment);
             }
         }
-        
+
         // Construct the new normalised path
         $this->path = implode($newSegments, '/');
-        
+
         // Allow easy chaining of methods
         return $this;
     }
@@ -300,7 +257,7 @@ class EasyRdf_ParsedUri
         if (is_string($relUri)) {
             $relUri = new EasyRdf_ParsedUri($relUri);
         }
-        
+
         // This code is based on the pseudocode in section 5.2.2 of RFC3986
         $target = new EasyRdf_ParsedUri();
         if ($relUri->scheme) {
@@ -332,7 +289,7 @@ class EasyRdf_ParsedUri
                         } else {
                             $path = '/';
                         }
-                        
+
                         $target->path .= $path . $relUri->path;
                     }
                     $target->query = $relUri->query;
@@ -341,16 +298,15 @@ class EasyRdf_ParsedUri
             }
             $target->scheme = $this->scheme;
         }
-        
+
         $target->fragment = $relUri->fragment;
-        
+
         $target->normalise();
-        
+
         return $target;
     }
 
-    /**
-     * Convert the parsed URI back into a string
+    /** Convert the parsed URI back into a string
      *
      * @return string The URI as a string
      */
@@ -373,8 +329,7 @@ class EasyRdf_ParsedUri
         return $str;
     }
 
-    /**
-     * Magic method to convert the URI, when casted, back to a string
+    /** Magic method to convert the URI, when casted, back to a string
      *
      * @return string The URI as a string
      */

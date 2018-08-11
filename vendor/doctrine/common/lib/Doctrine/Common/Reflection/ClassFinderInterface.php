@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Reflection;
 
 /**
@@ -25,13 +26,11 @@ namespace Doctrine\Common\Reflection;
  */
 interface ClassFinderInterface
 {
-
     /**
      * Finds a class.
      *
-     * @param string $class
-     *            The name of the class.
-     *            
+     * @param string $class The name of the class.
+     *
      * @return string|null The name of the class or NULL if not found.
      */
     public function findFile($class);

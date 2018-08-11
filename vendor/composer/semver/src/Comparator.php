@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
 namespace Composer\Semver;
 
 use Composer\Semver\Constraint\Constraint;
 
 class Comparator
 {
-
     /**
      * Evaluates the expression: $version1 > $version2.
      *
@@ -105,7 +105,7 @@ class Comparator
     public static function compare($version1, $operator, $version2)
     {
         $constraint = new Constraint($operator, $version2);
-        
+
         return $constraint->matches(new Constraint('==', $version1));
     }
 }

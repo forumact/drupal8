@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
@@ -24,13 +25,12 @@ namespace Doctrine\Common\Cache;
  * Intended to be used for partial clearing of a cache namespace. For a more
  * global "flushing", see {@see FlushableCache}.
  *
- * @link www.doctrine-project.org
- * @since 1.4
+ * @link   www.doctrine-project.org
+ * @since  1.4
  * @author Adirelle <adirelle@gmail.com>
  */
 interface ClearableCache
 {
-
     /**
      * Deletes all cache entries in the current cache namespace.
      *

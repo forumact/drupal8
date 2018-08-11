@@ -16,15 +16,16 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
-use Memcache;
+use \Memcache;
 
 /**
  * Memcache cache provider.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
@@ -33,9 +34,7 @@ use Memcache;
  */
 class MemcacheCache extends CacheProvider
 {
-
     /**
-     *
      * @var Memcache|null
      */
     private $memcache;
@@ -63,7 +62,6 @@ class MemcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -72,7 +70,6 @@ class MemcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -80,12 +77,11 @@ class MemcacheCache extends CacheProvider
         $flags = null;
         $this->memcache->get($id, $flags);
         
-        // if memcache has changed the value of "flags", it means the value exists
+        //if memcache has changed the value of "flags", it means the value exists
         return ($flags !== null);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -97,7 +93,6 @@ class MemcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
@@ -107,7 +102,6 @@ class MemcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
@@ -116,18 +110,17 @@ class MemcacheCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
         $stats = $this->memcache->getStats();
         return array(
-            Cache::STATS_HITS => $stats['get_hits'],
+            Cache::STATS_HITS   => $stats['get_hits'],
             Cache::STATS_MISSES => $stats['get_misses'],
             Cache::STATS_UPTIME => $stats['uptime'],
-            Cache::STATS_MEMORY_USAGE => $stats['bytes'],
-            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes']
+            Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
+            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],
         );
     }
 }

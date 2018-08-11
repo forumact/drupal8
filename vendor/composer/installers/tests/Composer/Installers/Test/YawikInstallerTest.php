@@ -13,21 +13,17 @@ use Composer\Package\PackageInterface;
  */
 class YawikInstallerTest extends TestCase
 {
-
     /**
-     *
      * @varComposer
      */
     private $composer;
 
     /**
-     *
      * @var PackageInterface
      */
     private $io;
 
     /**
-     *
      * @var Package
      */
     private $package;
@@ -53,26 +49,16 @@ class YawikInstallerTest extends TestCase
     public function testInflectPackageVars($input)
     {
         $installer = new YawikInstaller($this->package, $this->composer);
-        $result = $installer->inflectPackageVars(array(
-            'name' => $input
-        ));
-        $this->assertEquals($result, array(
-            'name' => 'YawikCompanyRegistration'
-        ));
+        $result = $installer->inflectPackageVars(array('name' => $input));
+        $this->assertEquals($result, array('name' => 'YawikCompanyRegistration'));
     }
 
     public function packageNameProvider()
     {
         return array(
-            array(
-                'yawik-company-registration'
-            ),
-            array(
-                'yawik_company_registration'
-            ),
-            array(
-                'YawikCompanyRegistration'
-            )
+            array('yawik-company-registration'),
+            array('yawik_company_registration'),
+            array('YawikCompanyRegistration')
         );
     }
 }

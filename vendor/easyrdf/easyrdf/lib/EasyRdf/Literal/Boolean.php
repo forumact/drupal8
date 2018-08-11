@@ -38,37 +38,31 @@
 /**
  * Class that represents an RDF Literal of datatype xsd:boolean
  *
- * @package EasyRdf
- * @link http://www.w3.org/TR/xmlschema-2/#boolean
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @link       http://www.w3.org/TR/xmlschema-2/#boolean
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Literal_Boolean extends EasyRdf_Literal
 {
-
-    /**
-     * Constructor for creating a new boolean literal
+    /** Constructor for creating a new boolean literal
      *
      * If the value is not a string, then it will be converted to 'true' or 'false'.
      *
-     * @param mixed $value
-     *            The value of the literal
-     * @param string $lang
-     *            Should be null (literals with a datatype can't have a language)
-     * @param string $datatype
-     *            Optional datatype (default 'xsd:boolean')
+     * @param  mixed  $value     The value of the literal
+     * @param  string $lang      Should be null (literals with a datatype can't have a language)
+     * @param  string $datatype  Optional datatype (default 'xsd:boolean')
      * @return object EasyRdf_Literal_Boolean
      */
     public function __construct($value, $lang = null, $datatype = null)
     {
-        if (! is_string($value)) {
+        if (!is_string($value)) {
             $value = $value ? 'true' : 'false';
         }
         parent::__construct($value, null, $datatype);
     }
 
-    /**
-     * Return the value of the literal cast to a PHP bool
+    /** Return the value of the literal cast to a PHP bool
      *
      * If the value is 'true' or '1' return true, otherwise returns false.
      *
@@ -79,8 +73,7 @@ class EasyRdf_Literal_Boolean extends EasyRdf_Literal
         return strtolower($this->value) === 'true' or $this->value === '1';
     }
 
-    /**
-     * Return true if the value of the literal is 'true' or '1'
+    /** Return true if the value of the literal is 'true' or '1'
      *
      * @return bool
      */
@@ -89,8 +82,7 @@ class EasyRdf_Literal_Boolean extends EasyRdf_Literal
         return strtolower($this->value) === 'true' or $this->value === '1';
     }
 
-    /**
-     * Return true if the value of the literal is 'false' or '0'
+    /** Return true if the value of the literal is 'false' or '0'
      *
      * @return bool
      */

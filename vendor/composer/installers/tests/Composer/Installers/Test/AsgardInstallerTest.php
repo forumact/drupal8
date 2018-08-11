@@ -8,31 +8,28 @@ use PHPUnit\Framework\TestCase;
 
 class AsgardInstallerTest extends TestCase
 {
-
     /**
-     *
      * @var AsgardInstaller
      */
     private $installer;
 
     public function setUp()
     {
-        $this->installer = new AsgardInstaller(new Package('NyanCat', '4.2', '4.2'), new Composer());
+        $this->installer = new AsgardInstaller(
+            new Package('NyanCat', '4.2', '4.2'),
+            new Composer()
+        );
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals(array(
-            'name' => $expected,
-            'type' => $type
-        ), $this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )));
+        $this->assertEquals(
+            array('name' => $expected, 'type' => $type),
+            $this->installer->inflectPackageVars(array('name' => $name, 'type' => $type))
+        );
     }
 
     public function packageNameInflectionProvider()
@@ -58,26 +55,26 @@ class AsgardInstallerTest extends TestCase
             array(
                 'asgard-module',
                 'some-module-module',
-                'SomeModule'
+                'SomeModule',
             ),
             // tests that exactly one '-theme' is cut off
             array(
                 'asgard-theme',
                 'some-theme-theme',
-                'SomeTheme'
+                'SomeTheme',
             ),
             // tests that names without '-theme' suffix stay valid
             array(
                 'asgard-theme',
                 'someothertheme',
-                'Someothertheme'
+                'Someothertheme',
             ),
             // Should keep theme name StudlyCase
             array(
                 'asgard-theme',
                 'adminlte-advanced',
                 'AdminlteAdvanced'
-            )
+            ),
         );
     }
 }

@@ -8,38 +8,35 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class SyDESInstallerTest extends BaseTestCase
 {
-
     /**
-     *
      * @var SyDESInstaller
      */
     private $installer;
 
     public function setUp()
     {
-        $this->installer = new SyDESInstaller(new Package('NyanCat', '4.2', '4.2'), new Composer());
+        $this->installer = new SyDESInstaller(
+            new Package('NyanCat', '4.2', '4.2'),
+            new Composer()
+        );
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals(array(
-            'name' => $expected,
-            'type' => $type
-        ), $this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )));
+        $this->assertEquals(
+            array('name' => $expected, 'type' => $type),
+            $this->installer->inflectPackageVars(array('name' => $name, 'type' => $type))
+        );
     }
 
     public function packageNameInflectionProvider()
     {
         return array(
             // modules
-            array(
+			array(
                 'sydes-module',
                 'name',
                 'Name'
@@ -57,29 +54,29 @@ class SyDESInstallerTest extends BaseTestCase
             array(
                 'sydes-module',
                 'sample-name-module',
-                'SampleName'
+                'SampleName',
             ),
             array(
                 'sydes-module',
                 'sydes-sample-name-module',
                 'SampleName'
             ),
-            // themes
+			// themes
             array(
                 'sydes-theme',
                 'some-theme-theme',
-                'some-theme'
+                'some-theme',
             ),
             array(
                 'sydes-theme',
                 'sydes-sometheme',
-                'sometheme'
+                'sometheme',
             ),
             array(
                 'sydes-theme',
                 'Sample-Name',
                 'sample-name'
-            )
+            ),
         );
     }
 }

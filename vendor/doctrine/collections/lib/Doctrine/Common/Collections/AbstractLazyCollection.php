@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections;
 
 use Closure;
@@ -24,11 +25,10 @@ use Closure;
  * Lazy collection that is backed by a concrete collection
  *
  * @author Michaël Gallego <mic.gallego@gmail.com>
- * @since 1.2
+ * @since  1.2
  */
 abstract class AbstractLazyCollection implements Collection
 {
-
     /**
      * The backed collection to use
      *
@@ -37,14 +37,12 @@ abstract class AbstractLazyCollection implements Collection
     protected $collection;
 
     /**
-     *
      * @var boolean
      */
     protected $initialized = false;
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count()
     {
@@ -53,8 +51,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function add($element)
     {
@@ -63,8 +60,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function clear()
     {
@@ -73,8 +69,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function contains($element)
     {
@@ -83,8 +78,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function isEmpty()
     {
@@ -93,8 +87,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function remove($key)
     {
@@ -103,8 +96,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function removeElement($element)
     {
@@ -113,8 +105,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function containsKey($key)
     {
@@ -123,8 +114,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function get($key)
     {
@@ -133,8 +123,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getKeys()
     {
@@ -143,8 +132,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getValues()
     {
@@ -153,8 +141,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function set($key, $value)
     {
@@ -163,8 +150,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function toArray()
     {
@@ -173,8 +159,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function first()
     {
@@ -183,8 +168,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function last()
     {
@@ -193,8 +177,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function key()
     {
@@ -203,8 +186,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function current()
     {
@@ -213,8 +195,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function next()
     {
@@ -223,8 +204,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function exists(Closure $p)
     {
@@ -233,8 +213,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function filter(Closure $p)
     {
@@ -243,8 +222,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function forAll(Closure $p)
     {
@@ -253,8 +231,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function map(Closure $func)
     {
@@ -263,8 +240,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function partition(Closure $p)
     {
@@ -273,8 +249,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function indexOf($element)
     {
@@ -283,8 +258,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function slice($offset, $length = null)
     {
@@ -293,8 +267,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator()
     {
@@ -303,8 +276,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetExists($offset)
     {
@@ -313,8 +285,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetGet($offset)
     {
@@ -323,8 +294,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetSet($offset, $value)
     {
@@ -333,8 +303,7 @@ abstract class AbstractLazyCollection implements Collection
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function offsetUnset($offset)
     {
@@ -359,7 +328,7 @@ abstract class AbstractLazyCollection implements Collection
      */
     protected function initialize()
     {
-        if (! $this->initialized) {
+        if ( ! $this->initialized) {
             $this->doInitialize();
             $this->initialized = true;
         }

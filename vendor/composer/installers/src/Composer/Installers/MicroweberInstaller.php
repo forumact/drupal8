@@ -3,14 +3,13 @@ namespace Composer\Installers;
 
 class MicroweberInstaller extends BaseInstaller
 {
-
     protected $locations = array(
-        'module' => 'userfiles/modules/{$name}/',
+        'module'      => 'userfiles/modules/{$name}/',
         'module-skin' => 'userfiles/modules/{$name}/templates/',
-        'template' => 'userfiles/templates/{$name}/',
-        'element' => 'userfiles/elements/{$name}/',
-        'vendor' => 'vendor/{$name}/',
-        'components' => 'components/{$name}/'
+        'template'    => 'userfiles/templates/{$name}/',
+        'element'     => 'userfiles/elements/{$name}/',
+        'vendor'      => 'vendor/{$name}/',
+        'components'  => 'components/{$name}/'
     );
 
     /**
@@ -19,6 +18,7 @@ class MicroweberInstaller extends BaseInstaller
      * For package type microweber-module, cut off a trailing '-module' if present
      *
      * For package type microweber-template, cut off a trailing '-template' if present.
+     *
      */
     public function inflectPackageVars($vars)
     {
@@ -46,7 +46,7 @@ class MicroweberInstaller extends BaseInstaller
         if ($vars['type'] === 'microweber-element' or $vars['type'] === 'microweber-elements') {
             return $this->inflectElementVars($vars);
         }
-        
+
         return $vars;
     }
 
@@ -54,7 +54,7 @@ class MicroweberInstaller extends BaseInstaller
     {
         $vars['name'] = preg_replace('/-template$/', '', $vars['name']);
         $vars['name'] = preg_replace('/template-$/', '', $vars['name']);
-        
+
         return $vars;
     }
 
@@ -62,7 +62,7 @@ class MicroweberInstaller extends BaseInstaller
     {
         $vars['name'] = preg_replace('/-templates$/', '', $vars['name']);
         $vars['name'] = preg_replace('/templates-$/', '', $vars['name']);
-        
+
         return $vars;
     }
 
@@ -71,7 +71,7 @@ class MicroweberInstaller extends BaseInstaller
         $vars['name'] = preg_replace('/-providers$/', '', $vars['name']);
         $vars['name'] = preg_replace('/-provider$/', '', $vars['name']);
         $vars['name'] = preg_replace('/-adapter$/', '', $vars['name']);
-        
+
         return $vars;
     }
 
@@ -79,7 +79,7 @@ class MicroweberInstaller extends BaseInstaller
     {
         $vars['name'] = preg_replace('/-module$/', '', $vars['name']);
         $vars['name'] = preg_replace('/module-$/', '', $vars['name']);
-        
+
         return $vars;
     }
 
@@ -87,7 +87,7 @@ class MicroweberInstaller extends BaseInstaller
     {
         $vars['name'] = preg_replace('/-modules$/', '', $vars['name']);
         $vars['name'] = preg_replace('/modules-$/', '', $vars['name']);
-        
+
         return $vars;
     }
 
@@ -95,7 +95,7 @@ class MicroweberInstaller extends BaseInstaller
     {
         $vars['name'] = preg_replace('/-skin$/', '', $vars['name']);
         $vars['name'] = preg_replace('/skin-$/', '', $vars['name']);
-        
+
         return $vars;
     }
 
@@ -105,7 +105,7 @@ class MicroweberInstaller extends BaseInstaller
         $vars['name'] = preg_replace('/elements-$/', '', $vars['name']);
         $vars['name'] = preg_replace('/-element$/', '', $vars['name']);
         $vars['name'] = preg_replace('/element-$/', '', $vars['name']);
-        
+
         return $vars;
     }
 }

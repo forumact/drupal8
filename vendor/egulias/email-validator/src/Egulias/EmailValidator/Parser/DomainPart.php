@@ -1,4 +1,6 @@
 <?php
+
+
 namespace Egulias\EmailValidator\Parser;
 
 use Egulias\EmailValidator\EmailLexer;
@@ -6,36 +8,34 @@ use Egulias\EmailValidator\EmailValidator;
 
 class DomainPart extends Parser
 {
-
     const DOMAIN_MAX_LENGTH = 254;
-
     protected $domainPart = '';
 
     public function parse($domainPart)
     {
         $this->lexer->moveNext();
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_DOT) {
             throw new \InvalidArgumentException('ERR_DOT_START');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_EMPTY) {
             throw new \InvalidArgumentException('ERR_NODOMAIN');
         }
         if ($this->lexer->token['type'] === EmailLexer::S_HYPHEN) {
             throw new \InvalidArgumentException('ERR_DOMAINHYPHENEND');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_OPENPARENTHESIS) {
             $this->warnings[] = EmailValidator::DEPREC_COMMENT;
             $this->parseDomainComments();
         }
-        
+
         $domain = $this->doParseDomainPart();
-        
+
         $prev = $this->lexer->getPrevious();
         $length = strlen($domain);
-        
+
         if ($prev['type'] === EmailLexer::S_DOT) {
             throw new \InvalidArgumentException('ERR_DOT_END');
         }
@@ -62,17 +62,17 @@ class DomainPart extends Parser
         if ($prev['type'] === EmailLexer::S_COLON) {
             $this->warnings[] = EmailValidator::RFC5322_IPV6_COLONEND;
         }
-        
-        $IPv6 = substr($addressLiteral, 5);
-        // Daniel Marschall's new IPv6 testing strategy
-        $matchesIP = explode(':', $IPv6);
+
+        $IPv6       = substr($addressLiteral, 5);
+        //Daniel Marschall's new IPv6 testing strategy
+        $matchesIP  = explode(':', $IPv6);
         $groupCount = count($matchesIP);
-        $colons = strpos($IPv6, '::');
-        
+        $colons     = strpos($IPv6, '::');
+
         if (count(preg_grep('/^[0-9A-Fa-f]{0,4}$/', $matchesIP, PREG_GREP_INVERT)) !== 0) {
             $this->warnings[] = EmailValidator::RFC5322_IPV6_BADCHAR;
         }
-        
+
         if ($colons === false) {
             // We need exactly the right number of groups
             if ($groupCount !== $maxGroups) {
@@ -80,18 +80,18 @@ class DomainPart extends Parser
             }
             return;
         }
-        
+
         if ($colons !== strrpos($IPv6, '::')) {
             $this->warnings[] = EmailValidator::RFC5322_IPV6_2X2XCOLON;
             return;
         }
-        
+
         if ($colons === 0 || $colons === (strlen($IPv6) - 2)) {
             // RFC 4291 allows :: at the start or end of an address
-            // with 7 other groups in addition
-            ++ $maxGroups;
+            //with 7 other groups in addition
+            ++$maxGroups;
         }
-        
+
         if ($groupCount > $maxGroups) {
             $this->warnings[] = EmailValidator::RFC5322_IPV6_MAXGRPS;
         } elseif ($groupCount === $maxGroups) {
@@ -106,52 +106,49 @@ class DomainPart extends Parser
         $openBrackets = false;
         do {
             $prev = $this->lexer->getPrevious();
-            
+
             $this->checkNotAllowedChars($this->lexer->token);
-            
+
             if ($this->lexer->token['type'] === EmailLexer::S_OPENPARENTHESIS) {
                 $this->parseComments();
                 $openedParenthesis += $this->getOpenedParenthesis();
                 $this->lexer->moveNext();
                 $tmpPrev = $this->lexer->getPrevious();
                 if ($tmpPrev['type'] === EmailLexer::S_CLOSEPARENTHESIS) {
-                    $openedParenthesis --;
+                    $openedParenthesis--;
                 }
             }
             if ($this->lexer->token['type'] === EmailLexer::S_CLOSEPARENTHESIS) {
                 if ($openedParenthesis === 0) {
                     throw new \InvalidArgumentException('ERR_UNOPENEDCOMMENT');
                 } else {
-                    $openedParenthesis --;
+                    $openedParenthesis--;
                 }
             }
-            
+
             $this->checkConsecutiveDots();
             $this->checkDomainPartExceptions($prev);
-            
+
             if ($openBrackets = $this->hasBrackets($openBrackets)) {
                 $this->parseDomainLiteral();
             }
-            
+
             $this->checkLabelLength($prev);
-            
+
             if ($this->isFWS()) {
                 $this->parseFWS();
             }
-            
+
             $domain .= $this->lexer->token['value'];
             $this->lexer->moveNext();
         } while ($this->lexer->token);
-        
+
         return $domain;
     }
 
     private function checkNotAllowedChars($token)
     {
-        $notAllowed = array(
-            EmailLexer::S_BACKSLASH => true,
-            EmailLexer::S_SLASH => true
-        );
+        $notAllowed = array(EmailLexer::S_BACKSLASH => true, EmailLexer::S_SLASH=> true);
         if (isset($notAllowed[$token['type']])) {
             throw new \InvalidArgumentException('ERR_DOMAIN_CHAR_NOT_ALLOWED');
         }
@@ -169,7 +166,7 @@ class DomainPart extends Parser
                 $this->warnings[] = EmailValidator::RFC5322_IPV6_COLONSTRT;
             }
         }
-        
+
         return $this->doParseDomainLiteral();
     }
 
@@ -181,27 +178,25 @@ class DomainPart extends Parser
             if ($this->lexer->token['type'] === EmailLexer::C_NUL) {
                 throw new \InvalidArgumentException('ERR_EXPECTING_DTEXT');
             }
-            
-            if ($this->lexer->token['type'] === EmailLexer::INVALID || $this->lexer->token['type'] === EmailLexer::C_DEL || $this->lexer->token['type'] === EmailLexer::S_LF) {
+
+            if ($this->lexer->token['type'] === EmailLexer::INVALID ||
+                $this->lexer->token['type'] === EmailLexer::C_DEL   ||
+                $this->lexer->token['type'] === EmailLexer::S_LF
+            ) {
                 $this->warnings[] = EmailValidator::RFC5322_DOMLIT_OBSDTEXT;
             }
-            
-            if ($this->lexer->isNextTokenAny(array(
-                EmailLexer::S_OPENQBRACKET,
-                EmailLexer::S_OPENBRACKET
-            ))) {
+
+            if ($this->lexer->isNextTokenAny(array(EmailLexer::S_OPENQBRACKET, EmailLexer::S_OPENBRACKET))) {
                 throw new \InvalidArgumentException('ERR_EXPECTING_DTEXT');
             }
-            
-            if ($this->lexer->isNextTokenAny(array(
-                EmailLexer::S_HTAB,
-                EmailLexer::S_SP,
-                $this->lexer->token['type'] === EmailLexer::CRLF
-            ))) {
+
+            if ($this->lexer->isNextTokenAny(
+                array(EmailLexer::S_HTAB, EmailLexer::S_SP, $this->lexer->token['type'] === EmailLexer::CRLF)
+            )) {
                 $this->warnings[] = EmailValidator::CFWS_FWS;
                 $this->parseFWS();
             }
-            
+
             if ($this->lexer->isNextToken(EmailLexer::S_CR)) {
                 throw new \InvalidArgumentException('ERR_CR_NO_LF');
             }
@@ -217,35 +212,41 @@ class DomainPart extends Parser
             if ($this->lexer->token['type'] === EmailLexer::S_CLOSEQBRACKET) {
                 break;
             }
-            
+
             $addressLiteral .= $this->lexer->token['value'];
+
         } while ($this->lexer->moveNext());
-        
+
         $addressLiteral = str_replace('[', '', $addressLiteral);
         $addressLiteral = $this->checkIPV4Tag($addressLiteral);
-        
+
         if (false === $addressLiteral) {
             return $addressLiteral;
         }
-        
-        if (! $IPv6TAG) {
+
+        if (!$IPv6TAG) {
             $this->warnings[] = EmailValidator::RFC5322_DOMAINLITERAL;
             return $addressLiteral;
         }
-        
+
         $this->warnings[] = EmailValidator::RFC5321_ADDRESSLITERAL;
-        
+
         $this->checkIPV6Tag($addressLiteral);
-        
+
         return $addressLiteral;
     }
 
     protected function checkIPV4Tag($addressLiteral)
     {
-        $matchesIP = array();
-        
+        $matchesIP  = array();
+
         // Extract IPv4 part from the end of the address-literal (if there is one)
-        if (preg_match('/\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/', $addressLiteral, $matchesIP) > 0) {
+        if (preg_match(
+                '/\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/',
+                $addressLiteral,
+                $matchesIP
+            ) > 0
+        ) {
             $index = strrpos($addressLiteral, $matchesIP[0]);
             if ($index === 0) {
                 $this->warnings[] = EmailValidator::RFC5321_ADDRESSLITERAL;
@@ -254,7 +255,7 @@ class DomainPart extends Parser
             // Convert IPv4 part to IPv6 format for further testing
             $addressLiteral = substr($addressLiteral, 0, $index) . '0:0';
         }
-        
+
         return $addressLiteral;
     }
 
@@ -264,56 +265,60 @@ class DomainPart extends Parser
             EmailLexer::S_DQUOTE => true,
             EmailLexer::S_SEMICOLON => true,
             EmailLexer::S_GREATERTHAN => true,
-            EmailLexer::S_LOWERTHAN => true
+            EmailLexer::S_LOWERTHAN => true,
         );
-        
+
         if (isset($invalidDomainTokens[$this->lexer->token['type']])) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_COMMA) {
             throw new \InvalidArgumentException('ERR_COMMA_IN_DOMAIN');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_AT) {
             throw new \InvalidArgumentException('ERR_CONSECUTIVEATS');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_OPENQBRACKET && $prev['type'] !== EmailLexer::S_AT) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');
         }
-        
+
         if ($this->lexer->token['type'] === EmailLexer::S_HYPHEN && $this->lexer->isNextToken(EmailLexer::S_DOT)) {
             throw new \InvalidArgumentException('ERR_DOMAINHYPHENEND');
         }
-        
-        if ($this->lexer->token['type'] === EmailLexer::S_BACKSLASH && $this->lexer->isNextToken(EmailLexer::GENERIC)) {
+
+        if ($this->lexer->token['type'] === EmailLexer::S_BACKSLASH
+            && $this->lexer->isNextToken(EmailLexer::GENERIC)) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');
         }
     }
 
     protected function hasBrackets($openBrackets)
     {
-        if ($this->lexer->token['type'] === EmailLexer::S_CLOSEBRACKET && ! $openBrackets) {
+        if ($this->lexer->token['type'] === EmailLexer::S_CLOSEBRACKET && !$openBrackets) {
             throw new \InvalidArgumentException('ERR_EXPECTING_OPENBRACKET');
         }
-        
+
         if ($this->lexer->token['type'] !== EmailLexer::S_OPENBRACKET) {
             return false;
         }
-        
+
         try {
             $this->lexer->find(EmailLexer::S_CLOSEBRACKET);
         } catch (\RuntimeException $e) {
             throw new \InvalidArgumentException('ERR_EXPECTING_DOMLIT_CLOSE');
         }
-        
+
         return true;
     }
 
     protected function checkLabelLength($prev)
     {
-        if ($this->lexer->token['type'] === EmailLexer::S_DOT && $prev['type'] === EmailLexer::GENERIC && strlen($prev['value']) > 63) {
+        if ($this->lexer->token['type'] === EmailLexer::S_DOT &&
+            $prev['type'] === EmailLexer::GENERIC &&
+            strlen($prev['value']) > 63
+        ) {
             $this->warnings[] = EmailValidator::RFC5322_LABEL_TOOLONG;
         }
     }
@@ -321,11 +326,11 @@ class DomainPart extends Parser
     protected function parseDomainComments()
     {
         $this->isUnclosedComment();
-        while (! $this->lexer->isNextToken(EmailLexer::S_CLOSEPARENTHESIS)) {
+        while (!$this->lexer->isNextToken(EmailLexer::S_CLOSEPARENTHESIS)) {
             $this->warnEscaping();
             $this->lexer->moveNext();
         }
-        
+
         $this->lexer->moveNext();
         if ($this->lexer->isNextToken(EmailLexer::S_DOT)) {
             throw new \InvalidArgumentException('ERR_EXPECTING_ATEXT');

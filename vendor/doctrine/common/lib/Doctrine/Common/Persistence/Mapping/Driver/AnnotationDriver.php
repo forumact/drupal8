@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping\Driver;
 
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -24,7 +25,7 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
 /**
  * The AnnotationDriver reads the mapping metadata from docblock annotations.
  *
- * @since 2.2
+ * @since  2.2
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan H. Wage <jonwage@gmail.com>
@@ -32,7 +33,6 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
  */
 abstract class AnnotationDriver implements MappingDriver
 {
-
     /**
      * The AnnotationReader.
      *
@@ -79,10 +79,8 @@ abstract class AnnotationDriver implements MappingDriver
      * Initializes a new AnnotationDriver that uses the given AnnotationReader for reading
      * docblock annotations.
      *
-     * @param AnnotationReader $reader
-     *            The AnnotationReader to use, duck-typed.
-     * @param string|array|null $paths
-     *            One or multiple paths where mapping classes can be found.
+     * @param AnnotationReader  $reader The AnnotationReader to use, duck-typed.
+     * @param string|array|null $paths  One or multiple paths where mapping classes can be found.
      */
     public function __construct($reader, $paths = null)
     {
@@ -157,9 +155,8 @@ abstract class AnnotationDriver implements MappingDriver
     /**
      * Sets the file extension used to look for mapping files under.
      *
-     * @param string $fileExtension
-     *            The file extension to set.
-     *            
+     * @param string $fileExtension The file extension to set.
+     *
      * @return void
      */
     public function setFileExtension($fileExtension)
@@ -168,8 +165,7 @@ abstract class AnnotationDriver implements MappingDriver
     }
 
     /**
-     * Returns whether the class with the specified name is transient.
-     * Only non-transient
+     * Returns whether the class with the specified name is transient. Only non-transient
      * classes, that is entities and mapped superclasses, should have their metadata loaded.
      *
      * A class is non-transient if it is annotated with an annotation
@@ -182,7 +178,7 @@ abstract class AnnotationDriver implements MappingDriver
     public function isTransient($className)
     {
         $classAnnotations = $this->reader->getClassAnnotations(new \ReflectionClass($className));
-        
+
         foreach ($classAnnotations as $annot) {
             if (isset($this->entityAnnotationClasses[get_class($annot)])) {
                 return false;
@@ -192,53 +188,59 @@ abstract class AnnotationDriver implements MappingDriver
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getAllClassNames()
     {
         if ($this->classNames !== null) {
             return $this->classNames;
         }
-        
-        if (! $this->paths) {
+
+        if (!$this->paths) {
             throw MappingException::pathRequired();
         }
-        
+
         $classes = [];
         $includedFiles = [];
-        
+
         foreach ($this->paths as $path) {
-            if (! is_dir($path)) {
+            if ( ! is_dir($path)) {
                 throw MappingException::fileMappingDriversRequireConfiguredDirectoryPath($path);
             }
-            
-            $iterator = new \RegexIterator(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::LEAVES_ONLY), '/^.+' . preg_quote($this->fileExtension) . '$/i', \RecursiveRegexIterator::GET_MATCH);
-            
+
+            $iterator = new \RegexIterator(
+                new \RecursiveIteratorIterator(
+                    new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS),
+                    \RecursiveIteratorIterator::LEAVES_ONLY
+                ),
+                '/^.+' . preg_quote($this->fileExtension) . '$/i',
+                \RecursiveRegexIterator::GET_MATCH
+            );
+
             foreach ($iterator as $file) {
                 $sourceFile = $file[0];
-                
-                if (! preg_match('(^phar:)i', $sourceFile)) {
+
+                if ( ! preg_match('(^phar:)i', $sourceFile)) {
                     $sourceFile = realpath($sourceFile);
                 }
-                
+
                 foreach ($this->excludePaths as $excludePath) {
                     $exclude = str_replace('\\', '/', realpath($excludePath));
                     $current = str_replace('\\', '/', $sourceFile);
-                    
+
                     if (strpos($current, $exclude) !== false) {
                         continue 2;
                     }
                 }
-                
+
                 require_once $sourceFile;
-                
+
                 $includedFiles[] = $sourceFile;
             }
         }
-        
+
         $declared = get_declared_classes();
-        
+
         foreach ($declared as $className) {
             $rc = new \ReflectionClass($className);
             $sourceFile = $rc->getFileName();
@@ -246,9 +248,9 @@ abstract class AnnotationDriver implements MappingDriver
                 $classes[] = $className;
             }
         }
-        
+
         $this->classNames = $classes;
-        
+
         return $classes;
     }
 }

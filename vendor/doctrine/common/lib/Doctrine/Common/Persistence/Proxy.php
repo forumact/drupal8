@@ -16,17 +16,17 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 /**
  * Interface for proxy classes.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.2
+ * @since  2.2
  */
 interface Proxy
 {
-
     /**
      * Marker for Proxy class names.
      *

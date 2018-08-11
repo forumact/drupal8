@@ -16,13 +16,14 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
  * Array cache driver.
  *
- * @link www.doctrine-project.org
- * @since 2.0
+ * @link   www.doctrine-project.org
+ * @since  2.0
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
@@ -31,33 +32,27 @@ namespace Doctrine\Common\Cache;
  */
 class ArrayCache extends CacheProvider
 {
-
     /**
-     *
      * @var array[] $data each element being a tuple of [$data, $expiration], where the expiration is int|bool
      */
     private $data = [];
 
     /**
-     *
      * @var int
      */
     private $hitsCount = 0;
 
     /**
-     *
      * @var int
      */
     private $missesCount = 0;
 
     /**
-     *
      * @var int
      */
     private $upTime;
 
     /**
-     *
      * {@inheritdoc}
      */
     public function __construct()
@@ -66,24 +61,22 @@ class ArrayCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
     {
         if (! $this->doContains($id)) {
             $this->missesCount += 1;
-            
+
             return false;
         }
-        
+
         $this->hitsCount += 1;
-        
+
         return $this->data[$id][0];
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -91,66 +84,59 @@ class ArrayCache extends CacheProvider
         if (! isset($this->data[$id])) {
             return false;
         }
-        
+
         $expiration = $this->data[$id][1];
-        
+
         if ($expiration && $expiration < time()) {
             $this->doDelete($id);
-            
+
             return false;
         }
-        
+
         return true;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
-        $this->data[$id] = [
-            $data,
-            $lifeTime ? time() + $lifeTime : false
-        ];
-        
+        $this->data[$id] = [$data, $lifeTime ? time() + $lifeTime : false];
+
         return true;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
     {
         unset($this->data[$id]);
-        
+
         return true;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
     {
         $this->data = [];
-        
+
         return true;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
         return [
-            Cache::STATS_HITS => $this->hitsCount,
-            Cache::STATS_MISSES => $this->missesCount,
-            Cache::STATS_UPTIME => $this->upTime,
-            Cache::STATS_MEMORY_USAGE => null,
-            Cache::STATS_MEMORY_AVAILABLE => null
+            Cache::STATS_HITS             => $this->hitsCount,
+            Cache::STATS_MISSES           => $this->missesCount,
+            Cache::STATS_UPTIME           => $this->upTime,
+            Cache::STATS_MEMORY_USAGE     => null,
+            Cache::STATS_MEMORY_AVAILABLE => null,
         ];
     }
 }

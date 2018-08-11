@@ -11,7 +11,7 @@ id: drupal7
 label: Drupal7 Imports
 
 # More information about the group.
-description: Importing data from Drupal7.
+description: Importing data from Drupal7 to Drupal8.
 
 # Short description of the type of source, e.g. "Drupal 6" or "WordPress".
 source_type: Drupal 7

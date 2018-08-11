@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Event;
 
 use Doctrine\Common\EventArgs;
@@ -24,16 +25,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Provides event arguments for the preFlush event.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Roman Borschel <roman@code-factory.de>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class ManagerEventArgs extends EventArgs
 {
-
     /**
-     *
      * @var ObjectManager
      */
     private $objectManager;

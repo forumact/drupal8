@@ -16,22 +16,21 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
-use Couchbase;
+use \Couchbase;
 
 /**
  * Couchbase cache provider.
  *
- * @link www.doctrine-project.org
- * @since 2.4
+ * @link   www.doctrine-project.org
+ * @since  2.4
  * @author Michael Nitschinger <michael@nitschinger.at>
  */
 class CouchbaseCache extends CacheProvider
 {
-
     /**
-     *
      * @var Couchbase|null
      */
     private $couchbase;
@@ -59,7 +58,6 @@ class CouchbaseCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -68,7 +66,6 @@ class CouchbaseCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -77,7 +74,6 @@ class CouchbaseCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -89,7 +85,6 @@ class CouchbaseCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
@@ -98,7 +93,6 @@ class CouchbaseCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
@@ -107,22 +101,21 @@ class CouchbaseCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
-        $stats = $this->couchbase->getStats();
+        $stats   = $this->couchbase->getStats();
         $servers = $this->couchbase->getServers();
-        $server = explode(":", $servers[0]);
-        $key = $server[0] . ":" . "11210";
-        $stats = $stats[$key];
+        $server  = explode(":", $servers[0]);
+        $key     = $server[0] . ":" . "11210";
+        $stats   = $stats[$key];
         return array(
-            Cache::STATS_HITS => $stats['get_hits'],
+            Cache::STATS_HITS   => $stats['get_hits'],
             Cache::STATS_MISSES => $stats['get_misses'],
             Cache::STATS_UPTIME => $stats['uptime'],
-            Cache::STATS_MEMORY_USAGE => $stats['bytes'],
-            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes']
+            Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
+            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],
         );
     }
 }

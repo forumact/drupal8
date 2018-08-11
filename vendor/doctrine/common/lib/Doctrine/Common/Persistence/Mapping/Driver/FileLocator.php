@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping\Driver;
 
 /**
@@ -29,7 +30,6 @@ namespace Doctrine\Common\Persistence\Mapping\Driver;
  */
 interface FileLocator
 {
-
     /**
      * Locates mapping file for the given class name.
      *
@@ -42,9 +42,8 @@ interface FileLocator
     /**
      * Gets all class names that are found with this file locator.
      *
-     * @param string $globalBasename
-     *            Passed to allow excluding the basename.
-     *            
+     * @param string $globalBasename Passed to allow excluding the basename.
+     *
      * @return array
      */
     public function getAllClassNames($globalBasename);

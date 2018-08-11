@@ -38,66 +38,61 @@
 /**
  * Class to parse JSON-LD to an EasyRdf_Graph
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2014 Markus Lanthaler
- * @author Markus Lanthaler <mail@markus-lanthaler.com>
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2014 Markus Lanthaler
+ * @author     Markus Lanthaler <mail@markus-lanthaler.com>
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Parser_JsonLd extends EasyRdf_Parser
 {
-
     /**
-     * Parse a JSON-LD document into an EasyRdf_Graph
-     *
-     * Attention: Since JSON-LD supports datasets, a document may contain
-     * multiple graphs and not just one. This parser returns only the
-     * default graph. An alternative would be to merge all graphs.
-     *
-     * @param
-     *            object EasyRdf_Graph $graph the graph to load the data into
-     * @param string $data
-     *            the RDF document data
-     * @param string $format
-     *            the format of the input data
-     * @param string $baseUri
-     *            the base URI of the data being parsed
-     * @return integer The number of triples added to the graph
-     */
+      * Parse a JSON-LD document into an EasyRdf_Graph
+      *
+      * Attention: Since JSON-LD supports datasets, a document may contain
+      * multiple graphs and not just one. This parser returns only the
+      * default graph. An alternative would be to merge all graphs.
+      *
+      * @param object EasyRdf_Graph $graph   the graph to load the data into
+      * @param string               $data    the RDF document data
+      * @param string               $format  the format of the input data
+      * @param string               $baseUri the base URI of the data being parsed
+      * @return integer             The number of triples added to the graph
+      */
     public function parse($graph, $data, $format, $baseUri)
     {
         parent::checkParseParams($graph, $data, $format, $baseUri);
-        
+
         if ($format != 'jsonld') {
-            throw new EasyRdf_Exception("EasyRdf_Parser_JsonLd does not support $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Parser_JsonLd does not support $format"
+            );
         }
-        
+
         try {
-            $quads = \ML\JsonLD\JsonLD::toRdf($data, array(
-                'base' => $baseUri
-            ));
+            $quads = \ML\JsonLD\JsonLD::toRdf($data, array('base' => $baseUri));
         } catch (\ML\JsonLD\Exception\JsonLdException $e) {
             throw new EasyRdf_Parser_Exception($e->getMessage());
         }
-        
+
         foreach ($quads as $quad) {
             // Ignore named graphs
             if (null !== $quad->getGraph()) {
                 continue;
             }
-            
+
             $subject = (string) $quad->getSubject();
             if ('_:' === substr($subject, 0, 2)) {
                 $subject = $this->remapBnode($subject);
             }
-            
+
             $predicate = (string) $quad->getProperty();
-            
+
             if ($quad->getObject() instanceof \ML\IRI\IRI) {
                 $object = array(
                     'type' => 'uri',
                     'value' => (string) $quad->getObject()
                 );
-                
+
                 if ('_:' === substr($object['value'], 0, 2)) {
                     $object = array(
                         'type' => 'bnode',
@@ -109,17 +104,17 @@ class EasyRdf_Parser_JsonLd extends EasyRdf_Parser
                     'type' => 'literal',
                     'value' => $quad->getObject()->getValue()
                 );
-                
+
                 if ($quad->getObject() instanceof \ML\JsonLD\LanguageTaggedString) {
                     $object['lang'] = $quad->getObject()->getLanguage();
                 } else {
                     $object['datatype'] = $quad->getObject()->getType();
                 }
             }
-            
+
             $this->addTriple($subject, $predicate, $object);
         }
-        
+
         return $this->tripleCount;
     }
 }

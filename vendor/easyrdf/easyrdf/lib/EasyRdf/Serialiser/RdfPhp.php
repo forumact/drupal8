@@ -39,35 +39,34 @@
  * Class to serialise an EasyRdf_Graph to RDF/PHP
  * with no external dependancies.
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Serialiser_RdfPhp extends EasyRdf_Serialiser
 {
-
     /**
      * Method to serialise an EasyRdf_Graph to RDF/PHP
      *
      * http://n2.talis.com/wiki/RDF_PHP_Specification
      * docs/appendix-a-rdf-formats-php.md
      *
-     * @param EasyRdf_Graph $graph
-     *            An EasyRdf_Graph object.
-     * @param string $format
-     *            The name of the format to convert to.
-     * @param array $options
+     * @param EasyRdf_Graph $graph   An EasyRdf_Graph object.
+     * @param string        $format  The name of the format to convert to.
+     * @param array         $options
      * @throws EasyRdf_Exception
      * @return string The RDF in the new desired format.
      */
     public function serialise($graph, $format, array $options = array())
     {
         parent::checkSerialiseParams($graph, $format);
-        
+
         if ($format != 'php') {
-            throw new EasyRdf_Exception("EasyRdf_Serialiser_RdfPhp does not support: $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Serialiser_RdfPhp does not support: $format"
+            );
         }
-        
+
         // Graph is already stored as RDF/PHP resource-centric array internally within the EasyRdf_Graph object
         return $graph->toRdfPhp();
     }

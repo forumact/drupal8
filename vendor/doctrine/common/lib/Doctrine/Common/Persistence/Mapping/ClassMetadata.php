@@ -16,19 +16,19 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 /**
  * Contract for a Doctrine persistence layer ClassMetadata class to implement.
  *
- * @link www.doctrine-project.org
- * @since 2.1
+ * @link   www.doctrine-project.org
+ * @since  2.1
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Jonathan Wage <jonwage@gmail.com>
  */
 interface ClassMetadata
 {
-
     /**
      * Gets the fully-qualified class name of this persistent class.
      *

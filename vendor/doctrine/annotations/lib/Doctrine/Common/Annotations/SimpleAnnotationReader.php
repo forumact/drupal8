@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Annotations;
 
 /**
@@ -24,15 +25,13 @@ namespace Doctrine\Common\Annotations;
  * This annotation reader is intended to be used in projects where you have
  * full-control over all annotations that are available.
  *
- * @since 2.2
+ * @since  2.2
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
  */
 class SimpleAnnotationReader implements Reader
 {
-
     /**
-     *
      * @var DocParser
      */
     private $parser;
@@ -61,35 +60,31 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassAnnotations(\ReflectionClass $class)
     {
-        return $this->parser->parse($class->getDocComment(), 'class ' . $class->getName());
+        return $this->parser->parse($class->getDocComment(), 'class '.$class->getName());
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
-        return $this->parser->parse($method->getDocComment(), 'method ' . $method->getDeclaringClass()->name . '::' . $method->getName() . '()');
+        return $this->parser->parse($method->getDocComment(), 'method '.$method->getDeclaringClass()->name.'::'.$method->getName().'()');
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
-        return $this->parser->parse($property->getDocComment(), 'property ' . $property->getDeclaringClass()->name . '::$' . $property->getName());
+        return $this->parser->parse($property->getDocComment(), 'property '.$property->getDeclaringClass()->name.'::$'.$property->getName());
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassAnnotation(\ReflectionClass $class, $annotationName)
     {
@@ -98,13 +93,12 @@ class SimpleAnnotationReader implements Reader
                 return $annot;
             }
         }
-        
+
         return null;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getMethodAnnotation(\ReflectionMethod $method, $annotationName)
     {
@@ -113,13 +107,12 @@ class SimpleAnnotationReader implements Reader
                 return $annot;
             }
         }
-        
+
         return null;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPropertyAnnotation(\ReflectionProperty $property, $annotationName)
     {
@@ -128,7 +121,7 @@ class SimpleAnnotationReader implements Reader
                 return $annot;
             }
         }
-        
+
         return null;
     }
 }

@@ -38,32 +38,24 @@
 /**
  * Parent class for the EasyRdf parsers
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Parser
 {
-
-    /**
-     * Mapping from source to graph bnode identifiers
-     */
+    /** Mapping from source to graph bnode identifiers */
     private $bnodeMap = array();
 
-    /**
-     * The current graph to insert triples into
-     */
+    /** The current graph to insert triples into */
     protected $graph = null;
 
-    /**
-     * The format of the document currently being parsed
-     */
+    /** The format of the document currently being parsed */
     protected $format = null;
 
-    /**
-     * The base URI for the document currently being parsed
-     */
+    /** The base URI for the document currently being parsed */
     protected $baseUri = null;
+
 
     protected $tripleCount = 0;
 
@@ -71,12 +63,11 @@ class EasyRdf_Parser
      * Create a new, unique bnode identifier from a source identifier.
      * If the source identifier has previously been seen, the
      * same new bnode identifier is returned.
-     *
      * @ignore
      */
     protected function remapBnode($name)
     {
-        if (! isset($this->bnodeMap[$name])) {
+        if (!isset($this->bnodeMap[$name])) {
             $this->bnodeMap[$name] = $this->graph->newBNodeId();
         }
         return $this->bnodeMap[$name];
@@ -84,7 +75,6 @@ class EasyRdf_Parser
 
     /**
      * Delete the bnode mapping - to be called at the start of a new parse
-     *
      * @ignore
      */
     protected function resetBnodeMap()
@@ -94,37 +84,45 @@ class EasyRdf_Parser
 
     /**
      * Check, cleanup parameters and prepare for parsing
-     *
      * @ignore
      */
     protected function checkParseParams($graph, $data, $format, $baseUri)
     {
-        if ($graph == null or ! is_object($graph) or ! ($graph instanceof EasyRdf_Graph)) {
-            throw new InvalidArgumentException("\$graph should be an EasyRdf_Graph object and cannot be null");
+        if ($graph == null or !is_object($graph) or
+            !($graph instanceof EasyRdf_Graph)) {
+            throw new InvalidArgumentException(
+                "\$graph should be an EasyRdf_Graph object and cannot be null"
+            );
         } else {
             $this->graph = $graph;
         }
-        
+
         if ($format == null or $format == '') {
-            throw new InvalidArgumentException("\$format cannot be null or empty");
+            throw new InvalidArgumentException(
+                "\$format cannot be null or empty"
+            );
         } elseif (is_object($format) and $format instanceof EasyRdf_Format) {
             $this->format = $format = $format->getName();
-        } elseif (! is_string($format)) {
-            throw new InvalidArgumentException("\$format should be a string or an EasyRdf_Format object");
+        } elseif (!is_string($format)) {
+            throw new InvalidArgumentException(
+                "\$format should be a string or an EasyRdf_Format object"
+            );
         } else {
             $this->format = $format;
         }
-        
+
         if ($baseUri) {
-            if (! is_string($baseUri)) {
-                throw new InvalidArgumentException("\$baseUri should be a string");
+            if (!is_string($baseUri)) {
+                throw new InvalidArgumentException(
+                    "\$baseUri should be a string"
+                );
             } else {
                 $this->baseUri = new EasyRdf_ParsedUri($baseUri);
             }
         } else {
             $this->baseUri = null;
         }
-        
+
         // Prepare for parsing
         $this->resetBnodeMap();
         $this->tripleCount = 0;
@@ -132,17 +130,17 @@ class EasyRdf_Parser
 
     /**
      * Sub-classes must follow this protocol
-     *
      * @ignore
      */
     public function parse($graph, $data, $format, $baseUri)
     {
-        throw new EasyRdf_Exception("This method should be overridden by sub-classes.");
+        throw new EasyRdf_Exception(
+            "This method should be overridden by sub-classes."
+        );
     }
 
     /**
      * Add a triple to the current graph, and keep count of the number of triples
-     *
      * @ignore
      */
     protected function addTriple($resource, $property, $value)

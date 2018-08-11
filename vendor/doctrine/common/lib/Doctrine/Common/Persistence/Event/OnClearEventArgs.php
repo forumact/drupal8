@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Event;
 
 use Doctrine\Common\EventArgs;
@@ -24,22 +25,19 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Provides event arguments for the onClear event.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Roman Borschel <roman@code-factory.de>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class OnClearEventArgs extends EventArgs
 {
-
     /**
-     *
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
     private $objectManager;
 
     /**
-     *
      * @var string|null
      */
     private $entityClass;
@@ -47,10 +45,8 @@ class OnClearEventArgs extends EventArgs
     /**
      * Constructor.
      *
-     * @param ObjectManager $objectManager
-     *            The object manager.
-     * @param string|null $entityClass
-     *            The optional entity class.
+     * @param ObjectManager $objectManager The object manager.
+     * @param string|null   $entityClass   The optional entity class.
      */
     public function __construct($objectManager, $entityClass = null)
     {

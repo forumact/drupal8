@@ -16,25 +16,24 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Cache;
 
 /**
  * APC cache provider.
  *
- * @link www.doctrine-project.org
+ * @link       www.doctrine-project.org
  * @deprecated since version 1.6, use ApcuCache instead
- * @since 2.0
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author Jonathan Wage <jonwage@gmail.com>
- * @author Roman Borschel <roman@code-factory.org>
- * @author David Abdemoulaie <dave@hobodave.com>
+ * @since      2.0
+ * @author     Benjamin Eberlei <kontakt@beberlei.de>
+ * @author     Guilherme Blanco <guilhermeblanco@hotmail.com>
+ * @author     Jonathan Wage <jonwage@gmail.com>
+ * @author     Roman Borschel <roman@code-factory.org>
+ * @author     David Abdemoulaie <dave@hobodave.com>
  */
 class ApcCache extends CacheProvider
 {
-
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetch($id)
@@ -43,7 +42,6 @@ class ApcCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doContains($id)
@@ -52,7 +50,6 @@ class ApcCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSave($id, $data, $lifeTime = 0)
@@ -61,7 +58,6 @@ class ApcCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doDelete($id)
@@ -71,7 +67,6 @@ class ApcCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFlush()
@@ -80,7 +75,6 @@ class ApcCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doFetchMultiple(array $keys)
@@ -89,38 +83,36 @@ class ApcCache extends CacheProvider
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doSaveMultiple(array $keysAndValues, $lifetime = 0)
     {
         $result = apc_store($keysAndValues, null, $lifetime);
-        
+
         return empty($result);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     protected function doGetStats()
     {
         $info = apc_cache_info('', true);
-        $sma = apc_sma_info();
-        
+        $sma  = apc_sma_info();
+
         // @TODO - Temporary fix @see https://github.com/krakjoe/apcu/pull/42
         if (PHP_VERSION_ID >= 50500) {
-            $info['num_hits'] = isset($info['num_hits']) ? $info['num_hits'] : $info['nhits'];
+            $info['num_hits']   = isset($info['num_hits'])   ? $info['num_hits']   : $info['nhits'];
             $info['num_misses'] = isset($info['num_misses']) ? $info['num_misses'] : $info['nmisses'];
             $info['start_time'] = isset($info['start_time']) ? $info['start_time'] : $info['stime'];
         }
-        
+
         return array(
-            Cache::STATS_HITS => $info['num_hits'],
-            Cache::STATS_MISSES => $info['num_misses'],
-            Cache::STATS_UPTIME => $info['start_time'],
-            Cache::STATS_MEMORY_USAGE => $info['mem_size'],
-            Cache::STATS_MEMORY_AVAILABLE => $sma['avail_mem']
+            Cache::STATS_HITS             => $info['num_hits'],
+            Cache::STATS_MISSES           => $info['num_misses'],
+            Cache::STATS_UPTIME           => $info['start_time'],
+            Cache::STATS_MEMORY_USAGE     => $info['mem_size'],
+            Cache::STATS_MEMORY_AVAILABLE => $sma['avail_mem'],
         );
     }
 }

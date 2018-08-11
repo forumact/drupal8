@@ -35,38 +35,37 @@
  * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 
+
 /**
  * Static class to set the HTTP client used by EasyRdf
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Http
 {
-
-    /**
-     * The default HTTP Client object
-     */
+    /** The default HTTP Client object */
     private static $defaultHttpClient = null;
 
-    /**
-     * Set the HTTP Client object used to fetch RDF data
+    /** Set the HTTP Client object used to fetch RDF data
      *
-     * @param EasyRdf_Http_Client|Zend_Http_Client $httpClient
-     *            The new HTTP client object
+     * @param  EasyRdf_Http_Client|Zend_Http_Client $httpClient The new HTTP client object
      * @return EasyRdf_Http_Client|Zend_Http_Client The new HTTP client object
      */
     public static function setDefaultHttpClient($httpClient)
     {
-        if (! is_object($httpClient) or ! ($httpClient instanceof Zend_Http_Client or $httpClient instanceof EasyRdf_Http_Client)) {
-            throw new InvalidArgumentException("\$httpClient should be an object of class Zend_Http_Client or EasyRdf_Http_Client");
+        if (!is_object($httpClient) or
+            !($httpClient instanceof Zend_Http_Client or
+              $httpClient instanceof EasyRdf_Http_Client)) {
+            throw new InvalidArgumentException(
+                "\$httpClient should be an object of class Zend_Http_Client or EasyRdf_Http_Client"
+            );
         }
         return self::$defaultHttpClient = $httpClient;
     }
 
-    /**
-     * Get the HTTP Client object used to fetch RDF data
+    /** Get the HTTP Client object used to fetch RDF data
      *
      * If no HTTP Client has previously been set, then a new
      * default (EasyRdf_Http_Client) client will be created.
@@ -75,7 +74,7 @@ class EasyRdf_Http
      */
     public static function getDefaultHttpClient()
     {
-        if (! isset(self::$defaultHttpClient)) {
+        if (!isset(self::$defaultHttpClient)) {
             self::$defaultHttpClient = new EasyRdf_Http_Client();
         }
         return self::$defaultHttpClient;

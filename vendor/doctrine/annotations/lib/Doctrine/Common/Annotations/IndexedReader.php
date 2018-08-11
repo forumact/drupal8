@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Annotations;
 
 /**
@@ -25,9 +26,7 @@ namespace Doctrine\Common\Annotations;
  */
 class IndexedReader implements Reader
 {
-
     /**
-     *
      * @var Reader
      */
     private $delegate;
@@ -43,8 +42,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassAnnotations(\ReflectionClass $class)
     {
@@ -52,13 +50,12 @@ class IndexedReader implements Reader
         foreach ($this->delegate->getClassAnnotations($class) as $annot) {
             $annotations[get_class($annot)] = $annot;
         }
-        
+
         return $annotations;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getClassAnnotation(\ReflectionClass $class, $annotation)
     {
@@ -66,8 +63,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
@@ -75,13 +71,12 @@ class IndexedReader implements Reader
         foreach ($this->delegate->getMethodAnnotations($method) as $annot) {
             $annotations[get_class($annot)] = $annot;
         }
-        
+
         return $annotations;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getMethodAnnotation(\ReflectionMethod $method, $annotation)
     {
@@ -89,8 +84,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
@@ -98,13 +92,12 @@ class IndexedReader implements Reader
         foreach ($this->delegate->getPropertyAnnotations($property) as $annot) {
             $annotations[get_class($annot)] = $annot;
         }
-        
+
         return $annotations;
     }
 
     /**
-     *
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPropertyAnnotation(\ReflectionProperty $property, $annotation)
     {
@@ -115,15 +108,12 @@ class IndexedReader implements Reader
      * Proxies all methods to the delegate.
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      *
      * @return mixed
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array(
-            $this->delegate,
-            $method
-        ), $args);
+        return call_user_func_array(array($this->delegate, $method), $args);
     }
 }

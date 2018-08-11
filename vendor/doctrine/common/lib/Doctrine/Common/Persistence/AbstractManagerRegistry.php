@@ -16,52 +16,46 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence;
 
 /**
  * Abstract implementation of the ManagerRegistry contract.
  *
- * @link www.doctrine-project.org
- * @since 2.2
+ * @link   www.doctrine-project.org
+ * @since  2.2
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Lukas Kahwe Smith <smith@pooteeweet.org>
  */
 abstract class AbstractManagerRegistry implements ManagerRegistry
 {
-
     /**
-     *
      * @var string
      */
     private $name;
 
     /**
-     *
      * @var array
      */
     private $connections;
 
     /**
-     *
      * @var array
      */
     private $managers;
 
     /**
-     *
      * @var string
      */
     private $defaultConnection;
 
     /**
-     *
      * @var string
      */
     private $defaultManager;
 
     /**
-     *
      * @var string
      */
     private $proxyInterfaceName;
@@ -70,8 +64,8 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
      * Constructor.
      *
      * @param string $name
-     * @param array $connections
-     * @param array $managers
+     * @param array  $connections
+     * @param array  $managers
      * @param string $defaultConnection
      * @param string $defaultManager
      * @param string $proxyInterfaceName
@@ -91,9 +85,8 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
      *
      * A service in this context is connection or a manager instance.
      *
-     * @param string $name
-     *            The name of the service.
-     *            
+     * @param string $name The name of the service.
+     *
      * @return object The instance of the given service.
      */
     abstract protected function getService($name);
@@ -103,9 +96,8 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
      *
      * A service in this context is connection or a manager instance.
      *
-     * @param string $name
-     *            The name of the service.
-     *            
+     * @param string $name The name of the service.
+     *
      * @return void
      */
     abstract protected function resetService($name);
@@ -121,7 +113,6 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getConnection($name = null)
@@ -129,16 +120,15 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
         if (null === $name) {
             $name = $this->defaultConnection;
         }
-        
-        if (! isset($this->connections[$name])) {
+
+        if (!isset($this->connections[$name])) {
             throw new \InvalidArgumentException(sprintf('Doctrine %s Connection named "%s" does not exist.', $this->name, $name));
         }
-        
+
         return $this->getService($this->connections[$name]);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getConnectionNames()
@@ -147,7 +137,6 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getConnections()
@@ -156,12 +145,11 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
         foreach ($this->connections as $name => $id) {
             $connections[$name] = $this->getService($id);
         }
-        
+
         return $connections;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getDefaultConnectionName()
@@ -170,7 +158,6 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getDefaultManagerName()
@@ -179,7 +166,6 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
     }
 
     /**
-     *
      * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
@@ -189,47 +175,45 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
         if (null === $name) {
             $name = $this->defaultManager;
         }
-        
-        if (! isset($this->managers[$name])) {
+
+        if (!isset($this->managers[$name])) {
             throw new \InvalidArgumentException(sprintf('Doctrine %s Manager named "%s" does not exist.', $this->name, $name));
         }
-        
+
         return $this->getService($this->managers[$name]);
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getManagerForClass($class)
     {
         // Check for namespace alias
         if (strpos($class, ':') !== false) {
-            list ($namespaceAlias, $simpleClassName) = explode(':', $class, 2);
+            list($namespaceAlias, $simpleClassName) = explode(':', $class, 2);
             $class = $this->getAliasNamespace($namespaceAlias) . '\\' . $simpleClassName;
         }
-        
+
         $proxyClass = new \ReflectionClass($class);
-        
+
         if ($proxyClass->implementsInterface($this->proxyInterfaceName)) {
             if (! $parentClass = $proxyClass->getParentClass()) {
                 return null;
             }
-            
+
             $class = $parentClass->getName();
         }
-        
+
         foreach ($this->managers as $id) {
             $manager = $this->getService($id);
-            
-            if (! $manager->getMetadataFactory()->isTransient($class)) {
+
+            if (!$manager->getMetadataFactory()->isTransient($class)) {
                 return $manager;
             }
         }
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getManagerNames()
@@ -238,7 +222,6 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getManagers()
@@ -247,12 +230,11 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
         foreach ($this->managers as $name => $id) {
             $dms[$name] = $this->getService($id);
         }
-        
+
         return $dms;
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function getRepository($persistentObjectName, $persistentManagerName = null)
@@ -261,7 +243,6 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
     }
 
     /**
-     *
      * {@inheritdoc}
      */
     public function resetManager($name = null)
@@ -269,15 +250,15 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
         if (null === $name) {
             $name = $this->defaultManager;
         }
-        
-        if (! isset($this->managers[$name])) {
+
+        if (!isset($this->managers[$name])) {
             throw new \InvalidArgumentException(sprintf('Doctrine %s Manager named "%s" does not exist.', $this->name, $name));
         }
-        
+
         // force the creation of a new document manager
         // if the current one is closed
         $this->resetService($this->managers[$name]);
-        
+
         return $this->getManager($name);
     }
 }

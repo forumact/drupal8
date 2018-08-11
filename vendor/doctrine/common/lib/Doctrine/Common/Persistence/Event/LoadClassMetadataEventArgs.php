@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Event;
 
 use Doctrine\Common\EventArgs;
@@ -26,19 +27,16 @@ use Doctrine\Common\Persistence\ObjectManager;
  * Class that holds event arguments for a loadMetadata event.
  *
  * @author Jonathan H. Wage <jonwage@gmail.com>
- * @since 2.2
+ * @since  2.2
  */
 class LoadClassMetadataEventArgs extends EventArgs
 {
-
     /**
-     *
      * @var ClassMetadata
      */
     private $classMetadata;
 
     /**
-     *
      * @var ObjectManager
      */
     private $objectManager;

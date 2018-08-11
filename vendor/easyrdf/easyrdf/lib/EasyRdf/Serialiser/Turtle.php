@@ -41,19 +41,18 @@
  *
  * http://www.w3.org/TR/turtle/
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
 {
-
     private $outputtedBnodes = array();
 
     /**
      * Given a IRI string, escape and enclose in angle brackets.
      *
-     * @param string $resourceIri
+     * @param  string $resourceIri
      * @return string
      */
     public static function escapeIri($resourceIri)
@@ -67,42 +66,27 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
      * Strings containing tabs, linefeeds or carriage returns will be
      * enclosed in three double quotes (""").
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public static function quotedString($value)
     {
         if (preg_match('/[\t\n\r]/', $value)) {
-            $escaped = str_replace(array(
-                '\\',
-                '"""'
-            ), array(
-                '\\\\',
-                '\\"""'
-            ), $value);
-            return '"""' . $escaped . '"""';
+            $escaped = str_replace(array('\\', '"""'), array('\\\\', '\\"""'), $value);
+            return '"""'.$escaped.'"""';
         } else {
-            $escaped = str_replace(array(
-                '\\',
-                '"'
-            ), array(
-                '\\\\',
-                '\\"'
-            ), $value);
-            return '"' . $escaped . '"';
+            $escaped = str_replace(array('\\', '"'), array('\\\\', '\\"'), $value);
+            return '"'.$escaped.'"';
         }
     }
 
     /**
      * Given a an EasyRdf_Resource or URI, convert it into a string, suitable to
-     * be written to a Turtle document.
-     * URIs will be shortened into CURIES
+     * be written to a Turtle document. URIs will be shortened into CURIES
      * where possible.
      *
-     * @param EasyRdf_Resource $resource
-     *            The resource to convert to a Turtle string
-     * @param boolean $createNamespace
-     *            If true, a new namespace may be created
+     * @param  EasyRdf_Resource $resource   The resource to convert to a Turtle string
+     * @param  boolean $createNamespace     If true, a new namespace may be created
      * @return string
      */
     public function serialiseResource($resource, $createNamespace = false)
@@ -111,34 +95,33 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
             if ($resource->isBNode()) {
                 return $resource->getUri();
             }
-            
+
             $resource = $resource->getUri();
         }
-        
+
         $short = EasyRdf_Namespace::shorten($resource, $createNamespace);
-        
+
         if ($short) {
             $this->addPrefix($short);
             return $short;
         }
-        
+
         return self::escapeIri($resource);
     }
 
     /**
      * Given an EasyRdf_Literal object, convert it into a string, suitable to
-     * be written to a Turtle document.
-     * Supports multiline literals and literals with
+     * be written to a Turtle document. Supports multiline literals and literals with
      * datatypes or languages.
      *
-     * @param EasyRdf_Literal $literal
+     * @param  EasyRdf_Literal $literal
      * @return string
      */
     public function serialiseLiteral($literal)
     {
         $value = strval($literal);
         $quoted = self::quotedString($value);
-        
+
         if ($datatype = $literal->getDatatypeUri()) {
             if ($datatype == 'http://www.w3.org/2001/XMLSchema#integer') {
                 return sprintf('%d', $value);
@@ -163,7 +146,7 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
      * Convert an EasyRdf object into a string suitable to
      * be written to a Turtle document.
      *
-     * @param EasyRdf_Resource|EasyRdf_Literal $object
+     * @param  EasyRdf_Resource|EasyRdf_Literal $object
      * @return string
      */
     public function serialiseObject($object)
@@ -173,13 +156,16 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
         } elseif ($object instanceof EasyRdf_Literal) {
             return $this->serialiseLiteral($object);
         } else {
-            throw new InvalidArgumentException("serialiseObject() requires \$object to be " . "of type EasyRdf_Resource or EasyRdf_Literal");
+            throw new InvalidArgumentException(
+                "serialiseObject() requires \$object to be ".
+                "of type EasyRdf_Resource or EasyRdf_Literal"
+            );
         }
     }
 
+
     /**
      * Protected method to serialise a RDF collection
-     *
      * @ignore
      */
     protected function serialiseCollection($node, $indent)
@@ -190,19 +176,19 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
             if ($id = $node->getBNodeId()) {
                 $this->outputtedBnodes[$id] = true;
             }
-            
+
             $value = $node->get('rdf:first');
             $node = $node->get('rdf:rest');
             if ($node and $node->hasProperty('rdf:first')) {
-                $count ++;
+                $count++;
             }
-            
+
             if ($value !== null) {
                 $serialised = $this->serialiseObject($value);
                 if ($count) {
                     $turtle .= "\n$indent  $serialised";
                 } else {
-                    $turtle .= " " . $serialised;
+                    $turtle .= " ".$serialised;
                 }
             }
         }
@@ -216,19 +202,18 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
 
     /**
      * Protected method to serialise the properties of a resource
-     *
      * @ignore
      */
     protected function serialiseProperties($res, $depth = 1)
     {
         $properties = $res->propertyUris();
-        $indent = str_repeat(' ', ($depth * 2) - 1);
-        
+        $indent = str_repeat(' ', ($depth*2)-1);
+
         $turtle = '';
         if (count($properties) > 1) {
             $turtle .= "\n$indent";
         }
-        
+
         $pCount = 0;
         foreach ($properties as $property) {
             if ($property === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') {
@@ -236,29 +221,29 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
             } else {
                 $pStr = $this->serialiseResource($property, true);
             }
-            
+
             if ($pCount) {
                 $turtle .= " ;\n$indent";
             }
-            
+
             $turtle .= ' ' . $pStr;
-            
+
             $oCount = 0;
             foreach ($res->all("<$property>") as $object) {
                 if ($oCount) {
                     $turtle .= ',';
                 }
-                
+
                 if ($object instanceof EasyRdf_Collection) {
                     $turtle .= ' ' . $this->serialiseCollection($object, $indent);
                 } elseif ($object instanceof EasyRdf_Resource and $object->isBNode()) {
                     $id = $object->getBNodeId();
                     $rpcount = $this->reversePropertyCount($object);
-                    if ($rpcount <= 1 and ! isset($this->outputtedBnodes[$id])) {
+                    if ($rpcount <= 1 and !isset($this->outputtedBnodes[$id])) {
                         // Nested unlabelled Blank Node
                         $this->outputtedBnodes[$id] = true;
                         $turtle .= ' [';
-                        $turtle .= $this->serialiseProperties($object, $depth + 1);
+                        $turtle .= $this->serialiseProperties($object, $depth+1);
                         $turtle .= ' ]';
                     } else {
                         // Multiple properties pointing to this blank node
@@ -267,25 +252,24 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
                 } else {
                     $turtle .= ' ' . $this->serialiseObject($object);
                 }
-                $oCount ++;
+                $oCount++;
             }
-            $pCount ++;
+            $pCount++;
         }
-        
+
         if ($depth == 1) {
             $turtle .= " .";
             if ($pCount > 1) {
                 $turtle .= "\n";
             }
         } elseif ($pCount > 1) {
-            $turtle .= "\n" . str_repeat(' ', (($depth - 1) * 2) - 1);
+            $turtle .= "\n" . str_repeat(' ', (($depth-1)*2)-1);
         }
-        
+
         return $turtle;
     }
 
     /**
-     *
      * @ignore
      */
     protected function serialisePrefixes()
@@ -299,7 +283,6 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
     }
 
     /**
-     *
      * @ignore
      */
     protected function serialiseSubjects(EasyRdf_Graph $graph, $filterType)
@@ -312,24 +295,24 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
             if (count($properties) == 0) {
                 continue;
             }
-            
+
             // Is this node of the right type?
             $thisType = $resource->isBNode() ? 'bnode' : 'uri';
             if ($thisType != $filterType) {
                 continue;
             }
-            
+
             if ($thisType == 'bnode') {
                 $id = $resource->getBNodeId();
-                
+
                 if (isset($this->outputtedBnodes[$id])) {
                     // Already been serialised
                     continue;
                 }
-                
+
                 $this->outputtedBnodes[$id] = true;
                 $rpcount = $this->reversePropertyCount($resource);
-                
+
                 if ($rpcount == 0) {
                     $turtle .= '[]';
                 } else {
@@ -338,7 +321,7 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
             } else {
                 $turtle .= $this->serialiseResource($resource);
             }
-            
+
             $turtle .= $this->serialiseProperties($resource);
             $turtle .= "\n";
         }
@@ -348,29 +331,29 @@ class EasyRdf_Serialiser_Turtle extends EasyRdf_Serialiser
     /**
      * Serialise an EasyRdf_Graph to Turtle.
      *
-     * @param EasyRdf_Graph $graph
-     *            An EasyRdf_Graph object.
-     * @param string $format
-     *            The name of the format to convert to.
-     * @param array $options
+     * @param EasyRdf_Graph $graph   An EasyRdf_Graph object.
+     * @param string        $format  The name of the format to convert to.
+     * @param array         $options
      * @throws EasyRdf_Exception
      * @return string The RDF in the new desired format.
      */
     public function serialise($graph, $format, array $options = array())
     {
         parent::checkSerialiseParams($graph, $format);
-        
+
         if ($format != 'turtle' and $format != 'n3') {
-            throw new EasyRdf_Exception("EasyRdf_Serialiser_Turtle does not support: $format");
+            throw new EasyRdf_Exception(
+                "EasyRdf_Serialiser_Turtle does not support: $format"
+            );
         }
-        
+
         $this->prefixes = array();
         $this->outputtedBnodes = array();
-        
+
         $turtle = '';
         $turtle .= $this->serialiseSubjects($graph, 'uri');
         $turtle .= $this->serialiseSubjects($graph, 'bnode');
-        
+
         if (count($this->prefixes)) {
             return $this->serialisePrefixes() . "\n" . $turtle;
         } else {

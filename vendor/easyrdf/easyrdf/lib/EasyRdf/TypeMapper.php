@@ -38,33 +38,30 @@
 /**
  * Class to map between RDF Types and PHP Classes
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_TypeMapper
 {
-
-    /**
-     * The type map registry
-     */
+    /** The type map registry */
     private static $map = array();
 
-    /**
-     * Get the registered class for an RDF type
+    /** Get the registered class for an RDF type
      *
      * If a type is not registered, then this method will return null.
      *
-     * @param string $type
-     *            The RDF type (e.g. foaf:Person)
-     * @return string The class name (e.g. Model_Foaf_Name)
+     * @param  string  $type   The RDF type (e.g. foaf:Person)
+     * @return string          The class name (e.g. Model_Foaf_Name)
      */
     public static function get($type)
     {
-        if (! is_string($type) or $type == null or $type == '') {
-            throw new InvalidArgumentException("\$type should be a string and cannot be null or empty");
+        if (!is_string($type) or $type == null or $type == '') {
+            throw new InvalidArgumentException(
+                "\$type should be a string and cannot be null or empty"
+            );
         }
-        
+
         $type = EasyRdf_Namespace::expand($type);
         if (array_key_exists($type, self::$map)) {
             return self::$map[$type];
@@ -73,41 +70,43 @@ class EasyRdf_TypeMapper
         }
     }
 
-    /**
-     * Register an RDF type with a PHP Class name
+    /** Register an RDF type with a PHP Class name
      *
-     * @param string $type
-     *            The RDF type (e.g. foaf:Person)
-     * @param string $class
-     *            The PHP class name (e.g. Model_Foaf_Name)
-     * @return string The PHP class name
+     * @param  string  $type   The RDF type (e.g. foaf:Person)
+     * @param  string  $class  The PHP class name (e.g. Model_Foaf_Name)
+     * @return string          The PHP class name
      */
     public static function set($type, $class)
     {
-        if (! is_string($type) or $type == null or $type == '') {
-            throw new InvalidArgumentException("\$type should be a string and cannot be null or empty");
+        if (!is_string($type) or $type == null or $type == '') {
+            throw new InvalidArgumentException(
+                "\$type should be a string and cannot be null or empty"
+            );
         }
-        
-        if (! is_string($class) or $class == null or $class == '') {
-            throw new InvalidArgumentException("\$class should be a string and cannot be null or empty");
+
+        if (!is_string($class) or $class == null or $class == '') {
+            throw new InvalidArgumentException(
+                "\$class should be a string and cannot be null or empty"
+            );
         }
-        
+
         $type = EasyRdf_Namespace::expand($type);
         return self::$map[$type] = $class;
     }
 
     /**
-     * Delete an existing RDF type mapping.
-     *
-     * @param string $type
-     *            The RDF type (e.g. foaf:Person)
-     */
+      * Delete an existing RDF type mapping.
+      *
+      * @param  string  $type   The RDF type (e.g. foaf:Person)
+      */
     public static function delete($type)
     {
-        if (! is_string($type) or $type == null or $type == '') {
-            throw new InvalidArgumentException("\$type should be a string and cannot be null or empty");
+        if (!is_string($type) or $type == null or $type == '') {
+            throw new InvalidArgumentException(
+                "\$type should be a string and cannot be null or empty"
+            );
         }
-        
+
         $type = EasyRdf_Namespace::expand($type);
         if (isset(self::$map[$type])) {
             unset(self::$map[$type]);
@@ -115,9 +114,10 @@ class EasyRdf_TypeMapper
     }
 }
 
+
 /*
- * Register default set of mapped types
- */
+   Register default set of mapped types
+*/
 
 EasyRdf_TypeMapper::set('rdf:Alt', 'EasyRdf_Container');
 EasyRdf_TypeMapper::set('rdf:Bag', 'EasyRdf_Container');

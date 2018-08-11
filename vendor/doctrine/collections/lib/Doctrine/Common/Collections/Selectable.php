@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections;
 
 /**
@@ -31,11 +32,10 @@ namespace Doctrine\Common\Collections;
  * EntityManager or Repositories.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.3
+ * @since  2.3
  */
 interface Selectable
 {
-
     /**
      * Selects all elements from a selectable that match the expression and
      * returns a new collection containing these elements.

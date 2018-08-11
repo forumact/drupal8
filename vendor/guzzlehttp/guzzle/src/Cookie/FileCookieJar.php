@@ -6,7 +6,6 @@ namespace GuzzleHttp\Cookie;
  */
 class FileCookieJar extends CookieJar
 {
-
     /** @var string filename */
     private $filename;
 
@@ -16,19 +15,17 @@ class FileCookieJar extends CookieJar
     /**
      * Create a new FileCookieJar object
      *
-     * @param string $cookieFile
-     *            File to store the cookie data
-     * @param bool $storeSessionCookies
-     *            Set to true to store session cookies
-     *            in the cookie jar.
-     *            
+     * @param string $cookieFile        File to store the cookie data
+     * @param bool $storeSessionCookies Set to true to store session cookies
+     *                                  in the cookie jar.
+     *
      * @throws \RuntimeException if the file cannot be found or created
      */
     public function __construct($cookieFile, $storeSessionCookies = false)
     {
         $this->filename = $cookieFile;
         $this->storeSessionCookies = $storeSessionCookies;
-        
+
         if (file_exists($cookieFile)) {
             $this->load($cookieFile);
         }
@@ -45,8 +42,7 @@ class FileCookieJar extends CookieJar
     /**
      * Saves the cookies to a file.
      *
-     * @param string $filename
-     *            File to save
+     * @param string $filename File to save
      * @throws \RuntimeException if the file cannot be found or created
      */
     public function save($filename)
@@ -58,7 +54,7 @@ class FileCookieJar extends CookieJar
                 $json[] = $cookie->toArray();
             }
         }
-        
+
         $jsonStr = \GuzzleHttp\json_encode($json);
         if (false === file_put_contents($filename, $jsonStr)) {
             throw new \RuntimeException("Unable to save file {$filename}");
@@ -70,8 +66,7 @@ class FileCookieJar extends CookieJar
      *
      * Old cookies are kept unless overwritten by newly loaded ones.
      *
-     * @param string $filename
-     *            Cookie file to load.
+     * @param string $filename Cookie file to load.
      * @throws \RuntimeException if the file cannot be loaded.
      */
     public function load($filename)
@@ -82,7 +77,7 @@ class FileCookieJar extends CookieJar
         } elseif ($json === '') {
             return;
         }
-        
+
         $data = \GuzzleHttp\json_decode($json, true);
         if (is_array($data)) {
             foreach (json_decode($json, true) as $cookie) {

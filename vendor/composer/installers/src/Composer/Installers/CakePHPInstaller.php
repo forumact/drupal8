@@ -5,9 +5,8 @@ use Composer\DependencyResolver\Pool;
 
 class CakePHPInstaller extends BaseInstaller
 {
-
     protected $locations = array(
-        'plugin' => 'Plugin/{$name}/'
+        'plugin' => 'Plugin/{$name}/',
     );
 
     /**
@@ -18,18 +17,15 @@ class CakePHPInstaller extends BaseInstaller
         if ($this->matchesCakeVersion('>=', '3.0.0')) {
             return $vars;
         }
-        
+
         $nameParts = explode('/', $vars['name']);
         foreach ($nameParts as &$value) {
             $value = strtolower(preg_replace('/(?<=\\w)([A-Z])/', '_\\1', $value));
-            $value = str_replace(array(
-                '-',
-                '_'
-            ), ' ', $value);
+            $value = str_replace(array('-', '_'), ' ', $value);
             $value = str_replace(' ', '', ucwords($value));
         }
         $vars['name'] = implode('/', $nameParts);
-        
+
         return $vars;
     }
 
@@ -39,7 +35,7 @@ class CakePHPInstaller extends BaseInstaller
     public function getLocations()
     {
         if ($this->matchesCakeVersion('>=', '3.0.0')) {
-            $this->locations['plugin'] = $this->composer->getConfig()->get('vendor-dir') . '/{$vendor}/{$name}/';
+            $this->locations['plugin'] =  $this->composer->getConfig()->get('vendor-dir') . '/{$vendor}/{$name}/';
         }
         return $this->locations;
     }
@@ -60,16 +56,16 @@ class CakePHPInstaller extends BaseInstaller
             $multiClass = 'Composer\Package\LinkConstraint\MultiConstraint';
             $constraintClass = 'Composer\Package\LinkConstraint\VersionConstraint';
         }
-        
+
         $repositoryManager = $this->composer->getRepositoryManager();
         if ($repositoryManager) {
             $repos = $repositoryManager->getLocalRepository();
-            if (! $repos) {
+            if (!$repos) {
                 return false;
             }
             $cake3 = new $multiClass(array(
                 new $constraintClass($matcher, $version),
-                new $constraintClass('!=', '9999999-dev')
+                new $constraintClass('!=', '9999999-dev'),
             ));
             $pool = new Pool('dev');
             $pool->addRepository($repos);

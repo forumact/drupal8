@@ -16,6 +16,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Collections\Expr;
 
 /**
@@ -26,7 +27,6 @@ namespace Doctrine\Common\Collections\Expr;
  */
 abstract class ExpressionVisitor
 {
-
     /**
      * Converts a comparison expression into the target query language output.
      *
@@ -68,13 +68,13 @@ abstract class ExpressionVisitor
         switch (true) {
             case ($expr instanceof Comparison):
                 return $this->walkComparison($expr);
-            
+
             case ($expr instanceof Value):
                 return $this->walkValue($expr);
-            
+
             case ($expr instanceof CompositeExpression):
                 return $this->walkCompositeExpression($expr);
-            
+
             default:
                 throw new \RuntimeException("Unknown Expression " . get_class($expr));
         }

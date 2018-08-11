@@ -8,31 +8,28 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class MediaWikiInstallerTest extends BaseTestCase
 {
-
     /**
-     *
      * @var MediaWikiInstaller
      */
     private $installer;
 
     public function setUp()
     {
-        $this->installer = new MediaWikiInstaller(new Package('NyanCat', '4.2', '4.2'), new Composer());
+        $this->installer = new MediaWikiInstaller(
+            new Package('NyanCat', '4.2', '4.2'),
+            new Composer()
+        );
     }
 
     /**
-     *
      * @dataProvider packageNameInflectionProvider
      */
     public function testInflectPackageVars($type, $name, $expected)
     {
-        $this->assertEquals($this->installer->inflectPackageVars(array(
-            'name' => $name,
-            'type' => $type
-        )), array(
-            'name' => $expected,
-            'type' => $type
-        ));
+        $this->assertEquals(
+            $this->installer->inflectPackageVars(array('name' => $name, 'type'=>$type)),
+            array('name' => $expected, 'type'=>$type)
+        );
     }
 
     public function packageNameInflectionProvider()
@@ -41,30 +38,30 @@ class MediaWikiInstallerTest extends BaseTestCase
             array(
                 'mediawiki-extension',
                 'sub-page-list',
-                'SubPageList'
+                'SubPageList',
             ),
             array(
                 'mediawiki-extension',
                 'sub-page-list-extension',
-                'SubPageList'
+                'SubPageList',
             ),
             array(
                 'mediawiki-extension',
                 'semantic-mediawiki',
-                'SemanticMediawiki'
+                'SemanticMediawiki',
             ),
             // tests that exactly one '-skin' is cut off, and that skins do not get ucwords treatment like extensions
             array(
                 'mediawiki-skin',
                 'some-skin-skin',
-                'some-skin'
+                'some-skin',
             ),
             // tests that names without '-skin' suffix stay valid
             array(
                 'mediawiki-skin',
                 'someotherskin',
-                'someotherskin'
-            )
+                'someotherskin',
+            ),
         );
     }
 }

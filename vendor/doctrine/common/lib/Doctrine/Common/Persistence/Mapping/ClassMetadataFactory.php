@@ -16,19 +16,19 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
+
 namespace Doctrine\Common\Persistence\Mapping;
 
 /**
  * Contract for a Doctrine persistence layer ClassMetadata class to implement.
  *
- * @link www.doctrine-project.org
- * @since 2.1
+ * @link   www.doctrine-project.org
+ * @since  2.1
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Jonathan Wage <jonwage@gmail.com>
  */
 interface ClassMetadataFactory
 {
-
     /**
      * Forces the factory to load the metadata of all classes known to the underlying
      * mapping driver.
@@ -40,9 +40,8 @@ interface ClassMetadataFactory
     /**
      * Gets the class metadata descriptor for a class.
      *
-     * @param string $className
-     *            The name of the class.
-     *            
+     * @param string $className The name of the class.
+     *
      * @return ClassMetadata
      */
     public function getMetadataFor($className);

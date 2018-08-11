@@ -38,46 +38,38 @@
 /**
  * Class for making SPARQL queries using the SPARQL 1.1 Protocol
  *
- * @package EasyRdf
- * @copyright Copyright (c) 2009-2013 Nicholas J Humfrey
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * @package    EasyRdf
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
+ * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Sparql_Client
 {
-
-    /**
-     * The query/read address of the SPARQL Endpoint
-     */
+    /** The query/read address of the SPARQL Endpoint */
     private $queryUri = null;
 
     private $queryUri_has_params = false;
 
-    /**
-     * The update/write address of the SPARQL Endpoint
-     */
+    /** The update/write address of the SPARQL Endpoint */
     private $updateUri = null;
 
-    /**
-     * Create a new SPARQL endpoint client
+    /** Create a new SPARQL endpoint client
      *
      * If the query and update endpoints are the same, then you
      * only need to give a single URI.
      *
-     * @param string $queryUri
-     *            The address of the SPARQL Query Endpoint
-     * @param string $updateUri
-     *            Optional address of the SPARQL Update Endpoint
+     * @param string $queryUri The address of the SPARQL Query Endpoint
+     * @param string $updateUri Optional address of the SPARQL Update Endpoint
      */
     public function __construct($queryUri, $updateUri = null)
     {
         $this->queryUri = $queryUri;
-        
+
         if (strlen(parse_url($queryUri, PHP_URL_QUERY)) > 0) {
             $this->queryUri_has_params = true;
         } else {
             $this->queryUri_has_params = false;
         }
-        
+
         if ($updateUri) {
             $this->updateUri = $updateUri;
         } else {
@@ -85,8 +77,7 @@ class EasyRdf_Sparql_Client
         }
     }
 
-    /**
-     * Get the URI of the SPARQL query endpoint
+    /** Get the URI of the SPARQL query endpoint
      *
      * @return string The query URI of the SPARQL endpoint
      */
@@ -95,8 +86,7 @@ class EasyRdf_Sparql_Client
         return $this->queryUri;
     }
 
-    /**
-     * Get the URI of the SPARQL update endpoint
+    /** Get the URI of the SPARQL update endpoint
      *
      * @return string The query URI of the SPARQL endpoint
      */
@@ -106,7 +96,6 @@ class EasyRdf_Sparql_Client
     }
 
     /**
-     *
      * @depredated
      * @ignore
      */
@@ -115,8 +104,7 @@ class EasyRdf_Sparql_Client
         return $this->queryUri;
     }
 
-    /**
-     * Make a query to the SPARQL endpoint
+    /** Make a query to the SPARQL endpoint
      *
      * SELECT and ASK queries will return an object of type
      * EasyRdf_Sparql_Result.
@@ -124,8 +112,7 @@ class EasyRdf_Sparql_Client
      * CONSTRUCT and DESCRIBE queries will return an object
      * of type EasyRdf_Graph.
      *
-     * @param string $query
-     *            The query string to be executed
+     * @param string $query The query string to be executed
      * @return object EasyRdf_Sparql_Result|EasyRdf_Graph Result of the query.
      */
     public function query($query)
@@ -133,47 +120,43 @@ class EasyRdf_Sparql_Client
         return $this->request('query', $query);
     }
 
-    /**
-     * Count the number of triples in a SPARQL 1.1 endpoint
+    /** Count the number of triples in a SPARQL 1.1 endpoint
      *
      * Performs a SELECT query to estriblish the total number of triples.
      *
      * Counts total number of triples by default but a conditional triple pattern
      * can be given to count of a subset of all triples.
      *
-     * @param string $condition
-     *            Triple-pattern condition for the count query
+     * @param string $condition Triple-pattern condition for the count query
      * @return integer The number of triples
      */
     public function countTriples($condition = '?s ?p ?o')
     {
         // SELECT (COUNT(*) AS ?count)
         // WHERE {
-        // {?s ?p ?o}
-        // UNION
-        // {GRAPH ?g {?s ?p ?o}}
+        //   {?s ?p ?o}
+        //   UNION
+        //   {GRAPH ?g {?s ?p ?o}}
         // }
-        $result = $this->query('SELECT (COUNT(*) AS ?count) {' . $condition . '}');
+        $result = $this->query('SELECT (COUNT(*) AS ?count) {'.$condition.'}');
         return $result[0]->count->getValue();
     }
 
-    /**
-     * Get a list of named graphs from a SPARQL 1.1 endpoint
+    /** Get a list of named graphs from a SPARQL 1.1 endpoint
      *
      * Performs a SELECT query to get a list of the named graphs
      *
-     * @param string $limit
-     *            Optional limit to the number of results
+     * @param string $limit Optional limit to the number of results
      * @return array Array of EasyRdf_Resource objects for each named graph
      */
     public function listNamedGraphs($limit = null)
     {
         $query = "SELECT DISTINCT ?g WHERE {GRAPH ?g {?s ?p ?o}}";
-        if (! is_null($limit)) {
-            $query .= " LIMIT " . (int) $limit;
+        if (!is_null($limit)) {
+            $query .= " LIMIT ".(int)$limit;
         }
         $result = $this->query($query);
-        
+
         // Convert the result object into an array of resources
         $graphs = array();
         foreach ($result as $row) {
@@ -182,15 +165,13 @@ class EasyRdf_Sparql_Client
         return $graphs;
     }
 
-    /**
-     * Make an update request to the SPARQL endpoint
+    /** Make an update request to the SPARQL endpoint
      *
      * Successful responses will return the HTTP response object
      *
      * Unsuccessful responses will throw an exception
      *
-     * @param string $query
-     *            The update query string to be executed
+     * @param string $query The update query string to be executed
      * @return object EasyRdf_Http_Response HTTP response
      */
     public function update($query)
@@ -200,7 +181,7 @@ class EasyRdf_Sparql_Client
 
     public function insert($data, $graphUri = null)
     {
-        // $this->updateData('INSET',
+        #$this->updateData('INSET',
         $query = 'INSERT DATA {';
         if ($graphUri) {
             $query .= "GRAPH <$graphUri> {";
@@ -251,21 +232,24 @@ class EasyRdf_Sparql_Client
         // Check for undefined prefixes
         $prefixes = '';
         foreach (EasyRdf_Namespace::namespaces() as $prefix => $uri) {
-            if (strpos($query, "$prefix:") !== false and strpos($query, "PREFIX $prefix:") === false) {
-                $prefixes .= "PREFIX $prefix: <$uri>\n";
+            if (strpos($query, "$prefix:") !== false and
+                strpos($query, "PREFIX $prefix:") === false) {
+                $prefixes .=  "PREFIX $prefix: <$uri>\n";
             }
         }
-        
+
         $client = EasyRdf_Http::getDefaultHttpClient();
         $client->resetParameters();
-        
+
         // Tell the server which response formats we can parse
-        $accept = EasyRdf_Format::getHttpAcceptHeader(array(
-            'application/sparql-results+json' => 1.0,
-            'application/sparql-results+xml' => 0.8
-        ));
+        $accept = EasyRdf_Format::getHttpAcceptHeader(
+            array(
+              'application/sparql-results+json' => 1.0,
+              'application/sparql-results+xml' => 0.8
+            )
+        );
         $client->setHeaders('Accept', $accept);
-        
+
         if ($type == 'update') {
             $client->setMethod('POST');
             $client->setUri($this->updateUri);
@@ -274,12 +258,12 @@ class EasyRdf_Sparql_Client
         } elseif ($type == 'query') {
             // Use GET if the query is less than 2kB
             // 2046 = 2kB minus 1 for '?' and 1 for NULL-terminated string on server
-            $encodedQuery = 'query=' . urlencode($prefixes . $query);
+            $encodedQuery = 'query='.urlencode($prefixes . $query);
             if (strlen($encodedQuery) + strlen($this->queryUri) <= 2046) {
                 $delimiter = $this->queryUri_has_params ? '&' : '?';
-                
+
                 $client->setMethod('GET');
-                $client->setUri($this->queryUri . $delimiter . $encodedQuery);
+                $client->setUri($this->queryUri.$delimiter.$encodedQuery);
             } else {
                 // Fall back to POST instead (which is un-cacheable)
                 $client->setMethod('POST');
@@ -288,20 +272,24 @@ class EasyRdf_Sparql_Client
                 $client->setHeaders('Content-Type', 'application/x-www-form-urlencoded');
             }
         }
-        
+
         $response = $client->request();
         if ($response->getStatus() == 204) {
             // No content
             return $response;
         } elseif ($response->isSuccessful()) {
-            list ($type, $params) = EasyRdf_Utils::parseMimeType($response->getHeader('Content-Type'));
+            list($type, $params) = EasyRdf_Utils::parseMimeType(
+                $response->getHeader('Content-Type')
+            );
             if (strpos($type, 'application/sparql-results') === 0) {
                 return new EasyRdf_Sparql_Result($response->getBody(), $type);
             } else {
                 return new EasyRdf_Graph($this->queryUri, $response->getBody(), $type);
             }
         } else {
-            throw new EasyRdf_Exception("HTTP request for SPARQL query failed: " . $response->getBody());
+            throw new EasyRdf_Exception(
+                "HTTP request for SPARQL query failed: ".$response->getBody()
+            );
         }
     }
 
@@ -310,10 +298,12 @@ class EasyRdf_Sparql_Client
         if (is_string($data)) {
             return $data;
         } elseif (is_object($data) and $data instanceof EasyRdf_Graph) {
-            // FIXME: insert Turtle when there is a way of seperateing out the prefixes
+            # FIXME: insert Turtle when there is a way of seperateing out the prefixes
             return $data->serialise('ntriples');
         } else {
-            throw new EasyRdf_Exception("Don't know how to convert to triples for SPARQL query: " . $response->getBody());
+            throw new EasyRdf_Exception(
+                "Don't know how to convert to triples for SPARQL query: ".$response->getBody()
+            );
         }
     }
 }

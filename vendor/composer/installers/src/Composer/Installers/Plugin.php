@@ -1,4 +1,5 @@
 <?php
+
 namespace Composer\Installers;
 
 use Composer\Composer;
