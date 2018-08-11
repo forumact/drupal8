@@ -25,7 +25,7 @@ function block_demo_help($route_name, RouteMatchInterface $route_match) {
 }
 
 
-function learning_block_alter(&$definitions) {
+function block_demo_block_alter(&$definitions) {
   $definitions['custom_block']['admin_label'] = t('Custom Block Updates');
 }
 

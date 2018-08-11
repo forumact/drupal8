@@ -37,8 +37,8 @@ process:
   'comment_body/value': body
 migration_dependencies:
   required:
-    - beer_node
-    - beer_user
+    - custom_node
+    - custom_user
 dependencies:
   enforced:
     module:

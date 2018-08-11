@@ -89,7 +89,7 @@ class RenderExampleController extends ControllerBase {
     // properties; '#markup' and '#description'. This is the quickest way to
     // output a string of HTML.
     $build['simple'] = [
-      '#markup' => '<p>' . $this->t('This page contains examples of various content elements described using render arrays. Read the code and comments in \Drupal\render_example\Controller\RenderExampleController::arrays() for more information.') . '</p>',
+      '#markup' => '<p>' . $this->t('This page contains <b>examples</b> of various content elements described using render arrays. Read the code and comments in \Drupal\render_example\Controller\RenderExampleController::arrays() for more information.') . '</p>',
       '#description' => $this->t('Example of using #markup'),
     ];
 

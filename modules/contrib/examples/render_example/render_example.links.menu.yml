@@ -2,7 +2,7 @@ render_example.description:
   title: Render Example
   description: Examples of building and altering render arrays.
   route_name: render_example.description
-  expanded: TRUE
+  expanded: FALSE
 
 render_example.arrays:
   title: Building Render Arrays

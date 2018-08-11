@@ -1,0 +1,44 @@
+id: custom_menu
+label: Custom Menu migration
+migration_group: custom
+source:
+  plugin: custom_menu
+destination:
+  plugin: entity:menu_link_content
+  no_stub: true
+process:
+  bundle: menu_link_content
+  menu_name: menu_name
+  mlid: mlid
+  has_children: has_children
+  expanded: expanded
+  weight: weight
+  depth: depth
+  p1: p1
+  p2: p2
+  p3: p3
+  p4: p4
+  p5: p5
+  p6: p6
+  p7: p7
+  p8: p8
+  p9: p9
+  external:
+    plugin: default_value
+    default_value: 0
+  route_name: '@route/route_name'
+  route_parameters: '@route/route_parameters'
+  options: '@route/options'
+  parent:
+    plugin: menu_link_parent
+    source:
+      - plid
+      - '@menu_name'
+      - parent_name
+migration_dependencies:
+  required:
+    - custom_node
+dependencies:
+  enforced:
+    module:
+      - migratedata

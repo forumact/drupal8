@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -75,4 +77,52 @@ function learning_block_access(\Drupal\block\Entity\Block $block, $operation, \D
     //return \Drupal\Core\Access\AccessResult::forbidden();
   }
 
+}
+
+function learning_node_presave(EntityInterface $node) {
+ // echo '<pre>';
+  //echo $node_type = $node->getType();
+  //print_r($node->field_domain_access->getValue());
+  //die('dfd');
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function learning_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Change form id here
+  //kint($form);
+
+  $form['#validate'][] = 'domain_access_form_validate';
+  // Custom Submit function.
+  $form['actions']['submit']['#submit'][] = 'faq_ask_submit';
+}
+
+function domain_access_form_validate($form, FormStateInterface &$form_state) {
+  //echo '<pre>';
+  $values = $form_state->getValues();
+  $access_value = $form_state->getValues('arulraj');
+  $new_values = (is_array($access_value)) ? explode(',', $access_value) : '';
+  if (empty($new_values)) {
+    //$form_state->setErrorByName('arulraj', t('The Domain name field is required.'));
+  }
+  //print_r($values);
+  //echo $email = $form_state->getValue('arulraj');
+  //die;
+}
+
+function faq_ask_submit($form, FormStateInterface $form_state) {
+  $user = \Drupal::currentUser();
+  if ($user->hasPermission('ask question') && !$user->hasPermission('answer question')) {
+    $node_id = $form_state->getValue('nid');
+    $node = node_load($node_id);
+    if (is_object($node)) {
+      $access_value = $form_state->getValues('arulraj');
+      $new_value = explode(',', $access_value);
+      foreach ($new_value as $value) {
+        $node->field_code_used_by[] = ['target_id' => $user_id];
+      }
+      $node->save();
+    }
+  }
 }

@@ -796,7 +796,7 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 $databases['migrate']['default'] = array (
-  'database'  => 'sourcedatabase',
+  'database'  => 'drupal7',
   'username'  => 'root',
   'password'  => '',
   'host'      => '127.0.0.1',

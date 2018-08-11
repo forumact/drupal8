@@ -37,3 +37,10 @@ learning.servicecall:
     _title: 'Sample Service Call'
   requirements:
     _permission: 'access content'
+learning.autocomplete:
+  path: '/domain-autocomplete/{field_name}/{count}'
+  defaults:
+    _controller: '\Drupal\learning\Controller\LearningController::handleAutocomplete'
+    _format: json
+  requirements:
+    _access: 'TRUE'

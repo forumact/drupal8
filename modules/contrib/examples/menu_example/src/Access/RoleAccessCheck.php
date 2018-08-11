@@ -34,6 +34,7 @@ class RoleAccessCheck implements AccessInterface {
   public function access(AccountInterface $account) {
     // If the user is authenticated, return TRUE.
     return AccessResult::allowedIf($account->isAuthenticated());
+
   }
 
 }

@@ -1,0 +1,10 @@
+name: 'Drupal7 MigrateData'
+type: module
+description: 'Sample Module For migrating data from Drupal7 Sites'
+core: 8.x
+package: 'Migration'
+version: VERSION
+dependencies:
+  - drupal:migrate
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools

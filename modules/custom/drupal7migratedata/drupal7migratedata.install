@@ -1,0 +1,11 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function learning_uninstall()
+{
+    \Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_menu')->delete();
+	\Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_comment')->delete();
+	\Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_node')->delete();
+	\Drupal::configFactory()->getEditable('migrate_plus.migration_group.drupal7')->delete();
+}

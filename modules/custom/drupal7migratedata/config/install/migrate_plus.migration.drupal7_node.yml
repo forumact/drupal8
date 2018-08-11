@@ -1,0 +1,36 @@
+id: drupal7_node
+label: Drupal7 Nodes Migration
+migration_group: drupal7
+audit: true
+migration_tags:
+  - Drupal 7
+  - Content
+source:
+  plugin: drupal7_node
+process:
+  nid: tnid
+  vid: vid
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: "und"
+  title: title
+  type: type
+  uid: node_uid
+  status: status
+  created: created
+  changed: changed
+  promote: promote
+  sticky: sticky
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+destination:
+  plugin: entity:node
+migration_dependencies:
+  required:
+    - drupal7_user
+dependencies:
+  enforced:
+    module:
+      - drupal7migratedata
