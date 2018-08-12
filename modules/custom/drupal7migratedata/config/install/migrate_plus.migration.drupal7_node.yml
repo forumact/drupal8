@@ -7,6 +7,8 @@ migration_tags:
   - Content
 source:
   plugin: drupal7_node
+destination:
+  plugin: entity:node
 process:
   nid: tnid
   vid: vid
@@ -20,13 +22,11 @@ process:
   status: status
   created: created
   changed: changed
-  promote: promote
+    : promote
   sticky: sticky
   revision_uid: revision_uid
   revision_log: log
   revision_timestamp: timestamp
-destination:
-  plugin: entity:node
 migration_dependencies:
   required:
     - drupal7_user

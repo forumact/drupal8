@@ -11,7 +11,7 @@ source:
     bundle: menu_link_content
 process:
   id: mlid
-  bundle: 'constants/bundle'
+  bundle: menu_link_content
   title: link_title
   description: description
   menu_name:

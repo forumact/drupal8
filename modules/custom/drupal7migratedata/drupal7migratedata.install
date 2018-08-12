@@ -2,10 +2,23 @@
 /**
  * Implements hook_uninstall().
  */
-function learning_uninstall()
-{
-    \Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_menu')->delete();
-	\Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_comment')->delete();
-	\Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_node')->delete();
-	\Drupal::configFactory()->getEditable('migrate_plus.migration_group.drupal7')->delete();
+function learning_uninstall() {
+  \Drupal::configFactory()
+    ->getEditable('migrate_plus.migration.drupal7_menu_links')
+    ->delete();
+  \Drupal::configFactory()
+    ->getEditable('migrate_plus.migration.drupal7_menu')
+    ->delete();
+  \Drupal::configFactory()
+    ->getEditable('migrate_plus.migration.drupal7_node_revision')
+    ->delete();
+  \Drupal::configFactory()
+    ->getEditable('migrate_plus.migration.drupal7_node')
+    ->delete();
+  \Drupal::configFactory()
+    ->getEditable('migrate_plus.migration.drupal7_user_role');
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.drupal7_user');
+  \Drupal::configFactory()
+    ->getEditable('migrate_plus.migration_group.drupal7')
+    ->delete();
 }

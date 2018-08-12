@@ -24,6 +24,7 @@ class Node extends SqlBase {
     $query = $this->select('node_revision', 'nr')
       ->fields('n', [
         'nid',
+        'vid',
         'type',
         'language',
         'status',
@@ -40,11 +41,11 @@ class Node extends SqlBase {
         'log',
         'timestamp',
       ]);
-	$query->addExpression('max(nr.vid)', 'vid');
+	//$query->addExpression('max(nr.vid)', 'vid');
     $query->addField('n', 'uid', 'node_uid');
     $query->addField('nr', 'uid', 'revision_uid');
     $query->innerJoin('node', 'n', 'n.nid = nr.nid');
-	$query->groupBy('nr.nid');
+	//$query->groupBy('n.nid');
     if (isset($this->configuration['node_type'])) {
       $query->condition('n.type', $this->configuration['node_type']);
     }      
