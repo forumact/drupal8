@@ -62,7 +62,7 @@ class Node extends SqlBase {
       $row->setSourceProperty($field, $this->getFieldValues('node', $field, $nid, $vid));
     }*/
 
-    $row->setSourceProperty('field_for_migration_test', $row->getSourceProperty('nid'));
+    $row->setDestinationProperty('field_for_migration_test', $row->getSourceProperty('nid'));
     // Make sure we always have a translation set.
     if ($row->getSourceProperty('tnid') == 0) {
       $row->setSourceProperty('tnid', $row->getSourceProperty('nid'));
@@ -89,6 +89,7 @@ class Node extends SqlBase {
       'language' => $this->t('Language (fr, en, ...)'),
       'tnid' => $this->t('The translation set id for this node'),
       'timestamp' => $this->t('The timestamp the latest revision of this node was created.'),
+	  'field_for_migration_test' => $this->t('Test filed'),
     ];
     return $fields;
   }
