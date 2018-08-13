@@ -22,7 +22,7 @@ process:
   status: status
   created: created
   changed: changed
-    : promote
+  promote: promote
   sticky: sticky
   revision_uid: revision_uid
   revision_log: log

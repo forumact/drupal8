@@ -1,0 +1,19 @@
+id: drupal7_domain
+label: Ddrupal7 Domain Records
+migration_group: drupal7
+migration_tags:
+  - Drupal 7
+source:
+  plugin: drupal7_domain
+process:
+  id: machine_name
+  name: sitename
+  hostname: subdomain
+  weight: weight
+  is_default: is_default
+  scheme: scheme
+  path: subdomain
+  status: valid
+destination:
+  plugin: entity:domain
+  destination_module: domain

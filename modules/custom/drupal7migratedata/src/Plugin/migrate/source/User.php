@@ -54,6 +54,7 @@ class User extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+	//drush_print_r($row);
     $roles = $this->select('users_roles', 'ur')
       ->fields('ur', ['rid'])
       ->condition('ur.uid', $row->getSourceProperty('uid'))
