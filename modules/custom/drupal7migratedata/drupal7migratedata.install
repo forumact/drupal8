@@ -5,6 +5,7 @@
 function learning_uninstall() {
   $configs  = [    
     'migrate_plus.migration.drupal7_domain',
+	'migrate_plus.migration.drupal7_url_alias',
     'migrate_plus.migration.drupal7_menu_links',
     'migrate_plus.migration.drupal7_menu',
     'migrate_plus.migration.drupal7_node_revision',
