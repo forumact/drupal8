@@ -36,3 +36,6 @@ process:
       migration: d7_node_translation
 destination:
   plugin: url_alias
+migration_dependencies:
+  required:
+    - drupal7_node
